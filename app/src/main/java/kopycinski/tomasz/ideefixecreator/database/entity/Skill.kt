@@ -5,6 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Skill(
+    val attributeId: Long,
     val name: String,
     val description: String,
     var level: Int = 8,

@@ -5,6 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Attribute(
+    val characterSheetId: Long,
     val name: String,
     val description: String,
     var level: Int = 8,

@@ -7,8 +7,8 @@ import androidx.room.PrimaryKey
 data class Skill(
     val name: String,
     val description: String,
-    val level: Int = 8,
-    val upgradeCost: Int = 1,
+    var level: Int = 8,
+    var upgradeCost: Int = 1,
 
     @PrimaryKey(autoGenerate = true) val skillId: Long = 0
 )

@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 data class Attribute(
     val name: String,
     val description: String,
-    val level: Int = 8,
+    var level: Int = 8,
 
     @PrimaryKey(autoGenerate = true) val attributeId: Long = 0
 )

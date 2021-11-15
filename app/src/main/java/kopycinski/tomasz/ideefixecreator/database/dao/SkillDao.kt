@@ -1,9 +1,6 @@
 package kopycinski.tomasz.ideefixecreator.database.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import kopycinski.tomasz.ideefixecreator.database.entity.Skill
 import kopycinski.tomasz.ideefixecreator.database.entity.SkillWithSpecializations
 import kotlinx.coroutines.flow.Flow
@@ -22,6 +19,7 @@ interface SkillDao {
     @Query("SELECT * FROM skill WHERE attributeId=:id")
     fun getAllByAttributeId(id: Long): Flow<List<Skill>>
 
+    @Transaction
     @Query("SELECT * FROM skill WHERE attributeId=:id")
     fun getAllWithSpecializationsByAttributeId(id: Long): Flow<List<SkillWithSpecializations>>
 }

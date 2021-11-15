@@ -3,6 +3,7 @@
     package="kopycinski.tomasz.ideefixecreator">
 
     <application
+        android:name=".di.HiltApplication"
         android:allowBackup="true"
         android:fullBackupOnly="true"
         android:icon="@mipmap/ic_launcher"

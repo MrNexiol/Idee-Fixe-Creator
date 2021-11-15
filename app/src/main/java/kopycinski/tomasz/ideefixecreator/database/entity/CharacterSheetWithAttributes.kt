@@ -7,7 +7,7 @@ data class CharacterSheetWithAttributes(
     @Embedded val characterSheet: CharacterSheet,
     @Relation(
         parentColumn = "characterSheetId",
-        entityColumn = "attributeId"
+        entityColumn = "characterSheetId"
     )
     val attributes: List<Attribute>
 )

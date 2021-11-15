@@ -7,7 +7,7 @@ data class SkillWithSpecializations(
     @Embedded val skill: Skill,
     @Relation(
         parentColumn = "skillId",
-        entityColumn = "specializationId"
+        entityColumn = "skillId"
     )
     val specializations: List<Specialization>
 )

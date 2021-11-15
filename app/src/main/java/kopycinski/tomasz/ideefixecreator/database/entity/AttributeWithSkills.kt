@@ -7,7 +7,7 @@ data class AttributeWithSkills(
     @Embedded val attribute: Attribute,
     @Relation(
         parentColumn = "attributeId",
-        entityColumn = "skillId"
+        entityColumn = "attributeId"
     )
     val skills: List<Skill>
 )

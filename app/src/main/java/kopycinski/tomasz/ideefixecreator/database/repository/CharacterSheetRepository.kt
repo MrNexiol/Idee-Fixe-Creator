@@ -1,4 +1,4 @@
-package kopycinski.tomasz.ideefixecreator.arch
+package kopycinski.tomasz.ideefixecreator.database.repository
 
 import kopycinski.tomasz.ideefixecreator.database.dao.CharacterSheetDao
 import kopycinski.tomasz.ideefixecreator.database.entity.CharacterSheet

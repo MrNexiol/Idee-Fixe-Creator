@@ -11,7 +11,7 @@ import kopycinski.tomasz.ideefixecreator.database.dao.*
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class HiltModule {
+object HiltModule {
     @Provides
     fun provideCharacterSheetDao(appDatabase: AppDatabase): CharacterSheetDao =
         appDatabase.characterSheetDao()

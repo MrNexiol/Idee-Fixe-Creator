@@ -15,16 +15,16 @@ fun Navigation() {
     
     NavHost(navController = navController, startDestination = Screen.MainScreen.route ) {
         composable(route = Screen.MainScreen.route) {
-            MainScreen()
+            MainScreen(navController)
         }
         composable(route = Screen.CharacterListScreen.route) {
-            CharacterListScreen()
+            CharacterListScreen(navController)
         }
         composable(route = Screen.CharacterCreateScreen.route) {
-            CharacterCreateScreen()
+            CharacterCreateScreen(navController)
         }
         composable(route = Screen.CharacterEditScreen.route) {
-            CharacterEditScreen()
+            CharacterEditScreen(navController)
         }
     }
 }

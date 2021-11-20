@@ -1,4 +1,4 @@
-package kopycinski.tomasz.ideefixecreator
+package kopycinski.tomasz.ideefixecreator.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

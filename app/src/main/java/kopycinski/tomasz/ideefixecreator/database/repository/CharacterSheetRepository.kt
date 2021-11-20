@@ -16,4 +16,7 @@ class CharacterSheetRepository @Inject constructor(
 
     fun getCharacterSheet(id: Long): Flow<CharacterSheet> =
         characterSheetDao.getOne(id)
+
+    fun getAll(): Flow<List<CharacterSheet>> =
+        characterSheetDao.getAll()
 }

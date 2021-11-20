@@ -4,4 +4,5 @@
     <string name="character_list_screen" translatable="false">character_list_screen</string>
     <string name="character_create_screen" translatable="false">character_create_screen</string>
     <string name="character_edit_screen" translatable="false">character_edit_screen</string>
+    <string name="character_show_screen" translatable="false">character_show_screen</string>
 </resources>

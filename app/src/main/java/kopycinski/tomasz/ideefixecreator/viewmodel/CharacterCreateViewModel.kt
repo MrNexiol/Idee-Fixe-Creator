@@ -8,6 +8,4 @@ import javax.inject.Inject
 @HiltViewModel
 class CharacterCreateViewModel @Inject constructor(
     private val characterSheetRepository: CharacterSheetRepository
-) : ViewModel() {
-
-}
+) : ViewModel()

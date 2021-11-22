@@ -9,6 +9,7 @@ data class CharacterSheet(
     var surname: String = "",
     var age: Int = 21,
     var gender: String = "",
+    var nationality: String = "",
     var notes: String = "",
     var cash: Float = 0f,
     var accountMoney: Float = 0f,
@@ -17,7 +18,15 @@ data class CharacterSheet(
 
     @PrimaryKey(autoGenerate = true) val characterSheetId: Long = 0
 ) {
-    fun fullName(): String {
-        return "$name $surname"
+    override fun toString(): String {
+        return "$name $surname ($age)"
+    }
+
+    fun secondaryData(): String {
+        return "$gender, $nationality"
+    }
+
+    fun experienceString(): String {
+        return "$experience PP"
     }
 }

@@ -24,7 +24,9 @@ fun CharacterCreateScreen(
             Button(onClick = { viewModel.insertCharacterSheet(
                 CharacterSheet(
                     name = "Siergiej",
-                    surname = "Repnin"
+                    surname = "Repnin",
+                    gender = "Mężczyzna",
+                    nationality = "Rosjanin"
                 ))
             }) {
                 Text(text = "Save")

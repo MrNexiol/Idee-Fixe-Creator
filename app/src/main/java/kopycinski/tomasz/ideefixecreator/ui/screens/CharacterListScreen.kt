@@ -12,9 +12,12 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import kopycinski.tomasz.ideefixecreator.database.entity.CharacterSheet
@@ -65,20 +68,36 @@ fun CharacterListItem(
 ) {
     Card(modifier = Modifier
         .fillMaxWidth()
-        .padding(bottom = 4.dp)
+        .padding(bottom = 8.dp)
         .clickable { navController.navigate(Screen.CharacterShowScreen.route) },
         elevation = 4.dp,
         shape = MaterialTheme.shapes.small
     ) {
-        Row(Modifier.padding(8.dp)) {
+        Row(
+            modifier = Modifier.padding(8.dp).padding(end = 8.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
             Box(
                 Modifier
                     .size(40.dp)
-                    .background(Color.Gray))
-            Column {
-                Text(text = characterSheet.fullName())
+                    .background(Color.Gray)
+            )
+            Column(
+                modifier = Modifier.weight(1f).padding(start = 8.dp),
+                verticalArrangement = Arrangement.Top
+            ) {
+                Text(
+                    text = characterSheet.toString(),
+                    fontWeight = FontWeight.Bold
+                )
+                Text(
+                    text = characterSheet.secondaryData()
+                )
             }
-            Text(text = characterSheet.experience.toString())
+            Text(
+                text = characterSheet.experienceString(),
+                fontSize = 30.sp
+            )
         }
     }
 }

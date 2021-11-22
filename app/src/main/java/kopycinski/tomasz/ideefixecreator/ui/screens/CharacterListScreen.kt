@@ -69,7 +69,7 @@ fun CharacterListItem(
     Card(modifier = Modifier
         .fillMaxWidth()
         .padding(bottom = 8.dp)
-        .clickable { navController.navigate(Screen.CharacterShowScreen.route) },
+        .clickable { navController.navigate(Screen.CharacterShowScreen.createRoute(characterSheet.characterSheetId)) },
         elevation = 4.dp,
         shape = MaterialTheme.shapes.small
     ) {

@@ -21,7 +21,12 @@ fun CharacterCreateScreen(
             Button(onClick = { navController.navigate(Screen.CharacterListScreen.route) }) {
                 Text(text = "Navigate")
             }
-            Button(onClick = { viewModel.insertCharacterSheet(CharacterSheet(name = "Siergiej", surname = "Repnin")) }) {
+            Button(onClick = { viewModel.insertCharacterSheet(
+                CharacterSheet(
+                    name = "Siergiej",
+                    surname = "Repnin"
+                ))
+            }) {
                 Text(text = "Save")
             }
         }

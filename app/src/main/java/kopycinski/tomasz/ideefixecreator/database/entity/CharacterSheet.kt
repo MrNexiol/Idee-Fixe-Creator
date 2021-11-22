@@ -13,6 +13,7 @@ data class CharacterSheet(
     var cash: Float = 0f,
     var accountMoney: Float = 0f,
     var barter: Float = 0f,
+    var experience: Int = 0,
 
     @PrimaryKey(autoGenerate = true) val characterSheetId: Long = 0
 )

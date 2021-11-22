@@ -18,7 +18,9 @@ fun Navigation() {
         }
         composable(
             route = Screen.CharacterShowScreen.route,
-            arguments = listOf(navArgument("characterSheetId") { type = NavType.LongType })
+            arguments = listOf(
+                navArgument("characterSheetId") { type = NavType.LongType }
+            )
         ) { backStackEntry ->
             val characterSheetId = backStackEntry.arguments?.getLong("characterSheetId")
             requireNotNull(characterSheetId) { "characterSheetId parameter not found" }

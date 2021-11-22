@@ -16,4 +16,8 @@ data class CharacterSheet(
     var experience: Int = 0,
 
     @PrimaryKey(autoGenerate = true) val characterSheetId: Long = 0
-)
+) {
+    fun fullName(): String {
+        return "$name $surname"
+    }
+}

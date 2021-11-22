@@ -75,8 +75,8 @@ fun CharacterListItem(
                 Modifier
                     .size(40.dp)
                     .background(Color.Gray))
-            Column() {
-                Text(text = characterSheet.name)
+            Column {
+                Text(text = characterSheet.fullName())
             }
             Text(text = characterSheet.experience.toString())
         }

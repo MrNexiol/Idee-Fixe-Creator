@@ -13,7 +13,7 @@ class CharacterSheetRepository @Inject constructor(
         characterSheetDao.insertOne(characterSheet)
 
     suspend fun updateCharacterSheet(characterSheet: CharacterSheet) =
-        characterSheetDao.updateAll(characterSheet)
+        characterSheetDao.updateOne(characterSheet)
 
     fun getCharacterSheet(id: Long): Flow<CharacterSheet> =
         characterSheetDao.getOne(id)

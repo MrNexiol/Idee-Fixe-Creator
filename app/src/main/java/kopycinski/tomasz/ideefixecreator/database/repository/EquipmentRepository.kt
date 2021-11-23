@@ -9,10 +9,10 @@ class EquipmentRepository @Inject constructor(
     private val equipmentDao: EquipmentDao
 ) {
     suspend fun insertEquipment(equipment: Equipment) =
-        equipmentDao.insertAll(equipment)
+        equipmentDao.insertOne(equipment)
 
     suspend fun updateEquipment(equipment: Equipment) =
-        equipmentDao.updateAll(equipment)
+        equipmentDao.updateOne(equipment)
 
     fun getAll(): Flow<List<Equipment>> =
         equipmentDao.getAll()

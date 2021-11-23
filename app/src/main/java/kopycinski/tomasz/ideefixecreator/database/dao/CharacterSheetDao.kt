@@ -1,33 +1,26 @@
 package kopycinski.tomasz.ideefixecreator.database.dao
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Query
+import androidx.room.Transaction
 import kopycinski.tomasz.ideefixecreator.database.entity.CharacterSheet
 import kopycinski.tomasz.ideefixecreator.database.entity.CharacterSheetWithAttributes
 import kopycinski.tomasz.ideefixecreator.database.entity.CharacterSheetWithStats
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface CharacterSheetDao {
-    @Insert
-    suspend fun insertOne(characterSheet: CharacterSheet): Long
-
-    @Insert
-    suspend fun insertAll(characterSheets: List<CharacterSheet>)
-
-    @Update
-    suspend fun updateAll(vararg characterSheets: CharacterSheet)
-
+abstract class CharacterSheetDao : BaseDao<CharacterSheet> {
     @Query("SELECT * FROM charactersheet")
-    fun getAll(): Flow<List<CharacterSheet>>
+    abstract fun getAll(): Flow<List<CharacterSheet>>
 
     @Transaction
     @Query("SELECT * FROM charactersheet")
-    fun getAllWithAttributes(): Flow<List<CharacterSheetWithAttributes>>
+    abstract fun getAllWithAttributes(): Flow<List<CharacterSheetWithAttributes>>
 
     @Query("SELECT * FROM charactersheet WHERE characterSheetId=:id LIMIT 1")
-    fun getOne(id: Long): Flow<CharacterSheet>
+    abstract fun getOne(id: Long): Flow<CharacterSheet>
 
     @Transaction
     @Query("SELECT * FROM charactersheet WHERE characterSheetId=:id LIMIT 1")
-    fun getWithStats(id: Long): Flow<CharacterSheetWithStats>
+    abstract fun getWithStats(id: Long): Flow<CharacterSheetWithStats>
 }

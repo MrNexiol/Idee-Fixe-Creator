@@ -9,10 +9,10 @@ class AdvantageRepository @Inject constructor(
     private val advantageDao: AdvantageDao
 ) {
     suspend fun insertAdvantage(advantage: Advantage) =
-        advantageDao.insertAll(advantage)
+        advantageDao.insertOne(advantage)
 
     suspend fun updateAdvantage(advantage: Advantage) =
-        advantageDao.updateAll(advantage)
+        advantageDao.updateOne(advantage)
 
     fun getAdvantages(): Flow<List<Advantage>> =
         advantageDao.getAll()

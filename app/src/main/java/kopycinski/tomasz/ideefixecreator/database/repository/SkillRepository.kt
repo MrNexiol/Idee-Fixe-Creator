@@ -9,10 +9,10 @@ class SkillRepository @Inject constructor(
     private val skillDao: SkillDao
 ) {
     suspend fun insertSkill(skill: Skill) =
-        skillDao.insertAll(skill)
+        skillDao.insertOne(skill)
 
     suspend fun updateSkill(skill: Skill) =
-        skillDao.updateAll(skill)
+        skillDao.updateOne(skill)
 
     fun getAll(): Flow<List<Skill>> =
         skillDao.getAll()

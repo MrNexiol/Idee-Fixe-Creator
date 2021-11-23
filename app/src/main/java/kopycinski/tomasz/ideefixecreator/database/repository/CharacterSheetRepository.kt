@@ -10,7 +10,7 @@ class CharacterSheetRepository @Inject constructor(
     private val characterSheetDao: CharacterSheetDao
 ) {
     suspend fun insertCharacterSheet(characterSheet: CharacterSheet) =
-        characterSheetDao.insertAll(characterSheet)
+        characterSheetDao.insertOne(characterSheet)
 
     suspend fun updateCharacterSheet(characterSheet: CharacterSheet) =
         characterSheetDao.updateAll(characterSheet)

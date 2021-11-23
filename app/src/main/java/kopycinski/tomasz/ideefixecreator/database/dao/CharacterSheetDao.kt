@@ -9,7 +9,10 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface CharacterSheetDao {
     @Insert
-    suspend fun insertAll(vararg characterSheets: CharacterSheet)
+    suspend fun insertOne(characterSheet: CharacterSheet): Long
+
+    @Insert
+    suspend fun insertAll(characterSheets: List<CharacterSheet>)
 
     @Update
     suspend fun updateAll(vararg characterSheets: CharacterSheet)

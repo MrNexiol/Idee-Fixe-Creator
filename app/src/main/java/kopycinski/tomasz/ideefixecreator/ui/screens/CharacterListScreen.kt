@@ -66,15 +66,24 @@ fun CharacterListItem(
     characterSheet: CharacterSheet,
     navController: NavController
 ) {
-    Card(modifier = Modifier
-        .fillMaxWidth()
-        .padding(bottom = 8.dp)
-        .clickable { navController.navigate(Screen.CharacterShowScreen.createRoute(characterSheet.characterSheetId)) },
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 8.dp)
+            .clickable {
+                navController.navigate(
+                    Screen.CharacterShowScreen.createRoute(
+                        characterSheet.characterSheetId
+                    )
+                )
+            },
         elevation = 4.dp,
         shape = MaterialTheme.shapes.small
     ) {
         Row(
-            modifier = Modifier.padding(8.dp).padding(end = 8.dp),
+            modifier = Modifier
+                .padding(8.dp)
+                .padding(end = 8.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Box(
@@ -83,7 +92,9 @@ fun CharacterListItem(
                     .background(Color.Gray)
             )
             Column(
-                modifier = Modifier.weight(1f).padding(start = 8.dp),
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(start = 8.dp),
                 verticalArrangement = Arrangement.Top
             ) {
                 Text(

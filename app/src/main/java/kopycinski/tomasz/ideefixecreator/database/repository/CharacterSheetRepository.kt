@@ -27,6 +27,9 @@ class CharacterSheetRepository @Inject constructor(
     private fun getCharacterSheet(id: Long): Flow<CharacterSheet> =
         characterSheetDao.getOne(id)
 
+    fun getUnfinished(): Flow<CharacterSheet> =
+        characterSheetDao.getUnfinished()
+
     fun getCharacterSheetWithStats(id: Long): Flow<CharacterSheetWithStats> =
         characterSheetDao.getWithStats(id)
 

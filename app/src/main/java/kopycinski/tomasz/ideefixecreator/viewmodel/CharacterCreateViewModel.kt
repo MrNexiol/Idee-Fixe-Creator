@@ -31,9 +31,9 @@ class CharacterCreateViewModel @Inject constructor(
         }
     }
 
-    fun insertCharacterSheet(characterSheet: CharacterSheet) {
+    fun updateCharacterSheet(characterSheet: CharacterSheet) {
         viewModelScope.launch {
-            characterSheetRepository.insertCharacterSheet(characterSheet)
+            characterSheetRepository.updateCharacterSheet(characterSheet)
         }
     }
 }

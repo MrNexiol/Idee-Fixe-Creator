@@ -11,8 +11,8 @@ import kopycinski.tomasz.ideefixecreator.ui.screens.*
 @Composable
 fun Navigation() {
     val navController = rememberNavController()
-    
-    NavHost(navController = navController, startDestination = Screen.MainScreen.route ) {
+
+    NavHost(navController = navController, startDestination = Screen.MainScreen.route) {
         composable(route = Screen.MainScreen.route) {
             MainScreen(navController)
         }
@@ -33,7 +33,7 @@ fun Navigation() {
             route = Screen.CharacterCreateScreen.route,
             arguments = listOf(navArgument("characterSheetId") { defaultValue = -1L })
         ) { backStackEntry ->
-            CharacterCreateScreen(navController, backStackEntry.arguments!!.getLong("characterSheetId"))
+            CharacterCreateScreen(backStackEntry.arguments!!.getLong("characterSheetId"))
         }
         composable(route = Screen.CharacterEditScreen.route) {
             CharacterEditScreen(navController)

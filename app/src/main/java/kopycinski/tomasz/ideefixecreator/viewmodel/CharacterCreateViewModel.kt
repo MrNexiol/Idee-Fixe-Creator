@@ -6,7 +6,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kopycinski.tomasz.ideefixecreator.database.entity.CharacterSheet
 import kopycinski.tomasz.ideefixecreator.database.repository.CharacterSheetRepository
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -16,17 +16,17 @@ class CharacterCreateViewModel @Inject constructor(
     private val characterSheetRepository: CharacterSheetRepository
 ) : ViewModel() {
 
-    init {
-        getCharacterSheet(1)
-    }
-
+    private var didLoad = false
     private val _characterSheet = MutableStateFlow(CharacterSheet())
-    val characterSheet: StateFlow<CharacterSheet> = _characterSheet
+    val characterSheet = _characterSheet.asStateFlow()
 
-    private fun getCharacterSheet(id: Long = -1) {
-        viewModelScope.launch {
-            characterSheetRepository.getOrCreateCharacter(id).collect { characterSheet ->
-                _characterSheet.value = characterSheet
+    fun getCharacterSheet(id: Long) {
+        if (!didLoad) {
+            viewModelScope.launch {
+                characterSheetRepository.getOrCreateCharacter(id).collect { characterSheet ->
+                    didLoad = true
+                    _characterSheet.value = characterSheet
+                }
             }
         }
     }

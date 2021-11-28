@@ -9,7 +9,7 @@ import javax.inject.Inject
 class CharacterSheetRepository @Inject constructor(
     private val characterSheetDao: CharacterSheetDao
 ) {
-    suspend fun getOrCreateCharacter(id: Long = -1) : Flow<CharacterSheet> {
+    suspend fun getOrCreateCharacter(id: Long) : Flow<CharacterSheet> {
         return if (id != -1L) {
             getCharacterSheet(id)
         } else {
@@ -24,7 +24,7 @@ class CharacterSheetRepository @Inject constructor(
     suspend fun updateCharacterSheet(characterSheet: CharacterSheet) =
         characterSheetDao.updateOne(characterSheet)
 
-    fun getCharacterSheet(id: Long): Flow<CharacterSheet> =
+    private fun getCharacterSheet(id: Long): Flow<CharacterSheet> =
         characterSheetDao.getOne(id)
 
     fun getCharacterSheetWithStats(id: Long): Flow<CharacterSheetWithStats> =

@@ -24,6 +24,9 @@ class CharacterSheetRepository @Inject constructor(
     suspend fun updateCharacterSheet(characterSheet: CharacterSheet) =
         characterSheetDao.updateOne(characterSheet)
 
+    suspend fun deleteCharacterSheet(characterSheet: CharacterSheet) =
+        characterSheetDao.deleteOne(characterSheet)
+
     private fun getCharacterSheet(id: Long): Flow<CharacterSheet> =
         characterSheetDao.getOne(id)
 

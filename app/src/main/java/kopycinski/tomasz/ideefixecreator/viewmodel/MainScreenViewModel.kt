@@ -23,4 +23,12 @@ class MainScreenViewModel @Inject constructor(
             }
         }
     }
+
+    fun removeCharacterSheet() {
+        characterSheet?.let {
+            viewModelScope.launch {
+                characterSheetRepository.deleteCharacterSheet(it)
+            }
+        }
+    }
 }

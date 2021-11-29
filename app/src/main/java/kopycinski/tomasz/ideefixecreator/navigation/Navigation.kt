@@ -7,6 +7,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import kopycinski.tomasz.ideefixecreator.ui.screens.*
+import kopycinski.tomasz.ideefixecreator.ui.screens.charactercreatescreen.CharacterCreateScreen
 
 @Composable
 fun Navigation() {

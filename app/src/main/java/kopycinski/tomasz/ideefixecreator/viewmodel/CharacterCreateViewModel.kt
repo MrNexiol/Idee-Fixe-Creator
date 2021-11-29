@@ -3,6 +3,7 @@ package kopycinski.tomasz.ideefixecreator.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kopycinski.tomasz.ideefixecreator.database.entity.Attribute
 import kopycinski.tomasz.ideefixecreator.database.entity.CharacterSheet
 import kopycinski.tomasz.ideefixecreator.database.repository.CharacterSheetRepository
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,14 +19,17 @@ class CharacterCreateViewModel @Inject constructor(
 
     private var didLoad = false
     private val _characterSheet = MutableStateFlow(CharacterSheet())
+    private val _attributes = MutableStateFlow(listOf<Attribute>())
     val characterSheet = _characterSheet.asStateFlow()
+    val attributes = _attributes.asStateFlow()
 
     fun getCharacterSheet() {
         if (!didLoad) {
             viewModelScope.launch {
-                characterSheetRepository.createCharacter().collect { characterSheet ->
+                characterSheetRepository.createCharacter().collect { characterSheetWithAttributes ->
                     didLoad = true
-                    _characterSheet.value = characterSheet
+                    _characterSheet.value = characterSheetWithAttributes.characterSheet
+                    _attributes.value = characterSheetWithAttributes.attributes
                 }
             }
         }

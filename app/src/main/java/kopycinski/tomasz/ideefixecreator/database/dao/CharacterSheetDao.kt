@@ -22,5 +22,9 @@ abstract class CharacterSheetDao : BaseDao<CharacterSheet> {
 
     @Transaction
     @Query("SELECT * FROM charactersheet WHERE characterSheetId=:id LIMIT 1")
+    abstract fun getOneWithAttributes(id: Long): Flow<CharacterSheetWithAttributes>
+
+    @Transaction
+    @Query("SELECT * FROM charactersheet WHERE characterSheetId=:id LIMIT 1")
     abstract fun getWithStats(id: Long): Flow<CharacterSheetWithStats>
 }

@@ -40,7 +40,7 @@ fun CharacterCreateScreen(
                 }
                 when (state) {
                     INFO_TAB -> {
-                        Form(
+                        InfoForm(
                             Modifier
                                 .padding(contentPadding)
                                 .padding(8.dp),
@@ -48,10 +48,10 @@ fun CharacterCreateScreen(
                         )
                     }
                     ATTRIBUTES_TAB -> {
-                        Text(text = "Elo")
+                        AttributesForm(viewModel = viewModel)
                     }
                     SKILL_TAB -> {
-                        Text(text = "Siemanko")
+                        SkillsForm(viewModel = viewModel)
                     }
                     else -> {}
                 }
@@ -61,7 +61,7 @@ fun CharacterCreateScreen(
 }
 
 @Composable
-fun Form(
+fun InfoForm(
     modifier: Modifier = Modifier,
     viewModel: CharacterCreateViewModel
 ) {
@@ -109,4 +109,20 @@ fun Form(
             }
         )
     }
+}
+
+@Composable
+fun AttributesForm(
+    modifier: Modifier = Modifier,
+    viewModel: CharacterCreateViewModel
+) {
+
+}
+
+@Composable
+fun SkillsForm(
+    modifier: Modifier = Modifier,
+    viewModel: CharacterCreateViewModel
+) {
+
 }

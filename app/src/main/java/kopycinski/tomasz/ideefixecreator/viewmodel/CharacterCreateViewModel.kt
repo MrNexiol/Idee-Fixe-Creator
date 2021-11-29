@@ -20,10 +20,10 @@ class CharacterCreateViewModel @Inject constructor(
     private val _characterSheet = MutableStateFlow(CharacterSheet())
     val characterSheet = _characterSheet.asStateFlow()
 
-    fun getCharacterSheet(id: Long) {
+    fun getCharacterSheet() {
         if (!didLoad) {
             viewModelScope.launch {
-                characterSheetRepository.getOrCreateCharacter(id).collect { characterSheet ->
+                characterSheetRepository.createCharacter().collect { characterSheet ->
                     didLoad = true
                     _characterSheet.value = characterSheet
                 }

@@ -29,11 +29,8 @@ fun Navigation() {
         composable(route = Screen.CharacterListScreen.route) {
             CharacterListScreen(navController)
         }
-        composable(
-            route = Screen.CharacterCreateScreen.route,
-            arguments = listOf(navArgument("characterSheetId") { defaultValue = -1L })
-        ) { backStackEntry ->
-            CharacterCreateScreen(backStackEntry.arguments!!.getLong("characterSheetId"))
+        composable(route = Screen.CharacterCreateScreen.route) {
+            CharacterCreateScreen()
         }
         composable(route = Screen.CharacterEditScreen.route) {
             CharacterEditScreen(navController)

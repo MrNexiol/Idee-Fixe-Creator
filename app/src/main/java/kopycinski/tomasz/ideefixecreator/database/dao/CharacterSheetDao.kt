@@ -13,9 +13,6 @@ abstract class CharacterSheetDao : BaseDao<CharacterSheet> {
     @Query("SELECT * FROM charactersheet")
     abstract fun getAll(): Flow<List<CharacterSheet>>
 
-    @Query("SELECT * FROM charactersheet WHERE completed=0 LIMIT 1")
-    abstract fun getUnfinished(): Flow<CharacterSheet>
-
     @Transaction
     @Query("SELECT * FROM charactersheet")
     abstract fun getAllWithAttributes(): Flow<List<CharacterSheetWithAttributes>>

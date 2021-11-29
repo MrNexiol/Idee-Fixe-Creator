@@ -15,7 +15,6 @@ data class CharacterSheet(
     var accountMoney: Float = 0f,
     var barter: Float = 0f,
     var experience: Int = 0,
-    var completed: Boolean = false,
 
     @PrimaryKey(autoGenerate = true) val characterSheetId: Long = 0
 ) {

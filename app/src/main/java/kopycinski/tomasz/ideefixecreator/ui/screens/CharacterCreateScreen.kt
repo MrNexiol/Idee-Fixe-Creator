@@ -15,11 +15,10 @@ import kopycinski.tomasz.ideefixecreator.viewmodel.CharacterCreateViewModel
 
 @Composable
 fun CharacterCreateScreen(
-    characterSheetId: Long,
     viewModel: CharacterCreateViewModel = hiltViewModel()
 ) {
     LaunchedEffect(false) {
-        viewModel.getCharacterSheet(characterSheetId)
+        viewModel.getCharacterSheet()
     }
 
     IdeeFixeCreatorTheme {

@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kopycinski.tomasz.ideefixecreator.database.entity.Attribute
 import kopycinski.tomasz.ideefixecreator.database.entity.CharacterSheet
+import kopycinski.tomasz.ideefixecreator.database.entity.Skill
 import kopycinski.tomasz.ideefixecreator.database.repository.AttributeRepository
 import kopycinski.tomasz.ideefixecreator.database.repository.CharacterSheetRepository
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,20 +20,37 @@ class CharacterCreateViewModel @Inject constructor(
     private val attributeRepository: AttributeRepository
 ) : ViewModel() {
 
-    private var didLoad = false
+    private var didLoadCharacter = false
+    private var didLoadAttributes = false
+    private var didLoadSkills = false
     private val _characterSheet = MutableStateFlow(CharacterSheet())
     private val _attributes = MutableStateFlow(listOf<Attribute>())
+    private val _skills = MutableStateFlow(listOf<Skill>())
     val characterSheet = _characterSheet.asStateFlow()
     val attributes = _attributes.asStateFlow()
+    val skills = _skills.asStateFlow()
 
-    fun getCharacterSheet() {
-        if (!didLoad) {
-            viewModelScope.launch {
-                characterSheetRepository.createCharacter().collect { characterSheetWithAttributes ->
-                    didLoad = true
-                    _characterSheet.value = characterSheetWithAttributes.characterSheet
-                    _attributes.value = characterSheetWithAttributes.attributes
-                }
+    fun loadData() {
+        viewModelScope.launch {
+            getCharacter()
+        }
+    }
+
+    private suspend fun getCharacter() {
+        if (!didLoadCharacter) {
+            characterSheetRepository.createCharacter().collect() {
+                didLoadCharacter = true
+                _characterSheet.value = it
+                getAttributes(it.characterSheetId)
+            }
+        }
+    }
+
+    private suspend fun getAttributes(characterSheetId: Long) {
+        if (!didLoadAttributes) {
+            attributeRepository.createAttributes(characterSheetId).collect {
+                didLoadAttributes = true
+                _attributes.value = it
             }
         }
     }

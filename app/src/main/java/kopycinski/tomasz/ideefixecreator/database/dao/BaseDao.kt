@@ -9,7 +9,7 @@ interface BaseDao<T> {
     suspend fun insertOne(obj: T): Long
 
     @Insert
-    suspend fun insertMany(objects: List<T>)
+    suspend fun insertMany(objects: List<T>): List<Long>
 
     @Update
     suspend fun updateOne(obj: T)

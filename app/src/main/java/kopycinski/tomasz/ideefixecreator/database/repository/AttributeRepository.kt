@@ -8,6 +8,11 @@ import javax.inject.Inject
 class AttributeRepository @Inject constructor(
     private val attributeDao: AttributeDao
 ) {
+    suspend fun createAttributes(characterSheetId: Long): Flow<List<Attribute>> {
+        attributeDao.insertMany(Attribute.attributeList(characterSheetId))
+        return getAttributesById(characterSheetId)
+    }
+
     suspend fun insertAttribute(attribute: Attribute) =
         attributeDao.insertOne(attribute)
 
@@ -17,6 +22,6 @@ class AttributeRepository @Inject constructor(
     fun getAttributes(): Flow<List<Attribute>> =
         attributeDao.getAll()
 
-    fun getAttributesById(id: Long): Flow<List<Attribute>> =
+    private fun getAttributesById(id: Long): Flow<List<Attribute>> =
         attributeDao.getAllByCharacterSheetId(id)
 }

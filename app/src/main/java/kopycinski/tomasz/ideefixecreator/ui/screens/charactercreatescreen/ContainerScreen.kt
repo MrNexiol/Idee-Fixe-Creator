@@ -22,7 +22,7 @@ fun CharacterCreateScreen(
     val titles = listOf("Info", "Attributes", "Skills")
     
     LaunchedEffect(false) {
-        viewModel.getCharacterSheet()
+        viewModel.loadData()
     }
 
     IdeeFixeCreatorTheme {

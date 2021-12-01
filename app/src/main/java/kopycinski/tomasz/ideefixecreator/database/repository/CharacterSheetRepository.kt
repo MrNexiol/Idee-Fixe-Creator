@@ -1,22 +1,17 @@
 package kopycinski.tomasz.ideefixecreator.database.repository
 
-import kopycinski.tomasz.ideefixecreator.database.dao.AttributeDao
 import kopycinski.tomasz.ideefixecreator.database.dao.CharacterSheetDao
-import kopycinski.tomasz.ideefixecreator.database.entity.Attribute
-import kopycinski.tomasz.ideefixecreator.database.entity.CharacterSheet
-import kopycinski.tomasz.ideefixecreator.database.entity.CharacterSheetWithAttributes
-import kopycinski.tomasz.ideefixecreator.database.entity.CharacterSheetWithStats
+import kopycinski.tomasz.ideefixecreator.database.entity.*
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class CharacterSheetRepository @Inject constructor(
-    private val characterSheetDao: CharacterSheetDao,
-    private val attributeDao: AttributeDao
+    private val characterSheetDao: CharacterSheetDao
 ) {
-    suspend fun createCharacter() : Flow<CharacterSheetWithAttributes> {
-        val cid = characterSheetDao.insertOne(CharacterSheet())
-        attributeDao.insertMany(Attribute.attributeList(cid))
-        return getCharacterSheetWithAttributes(cid)
+    suspend fun createCharacter() : Flow<CharacterSheet> {
+        characterSheetDao.insertOne(CharacterSheet()).let { characterSheetId ->
+            return getCharacterSheet(characterSheetId)
+        }
     }
 
     suspend fun insertCharacterSheet(characterSheet: CharacterSheet) =

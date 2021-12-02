@@ -16,6 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import kopycinski.tomasz.ideefixecreator.database.entity.Attribute
 import kopycinski.tomasz.ideefixecreator.database.entity.AttributeWithSkillsAndSpecializations
+import kopycinski.tomasz.ideefixecreator.database.entity.Skill
 import kopycinski.tomasz.ideefixecreator.database.entity.SkillWithSpecializations
 import kopycinski.tomasz.ideefixecreator.viewmodel.CharacterCreateViewModel
 
@@ -30,7 +31,8 @@ fun AttributeTabContent(
         attributes.forEach { attribute ->
             AttributeGroup(
                 attributeWithSkills = attribute,
-                onChange = { viewModel.updateAttribute(it) },
+                onChangeAttribute = { viewModel.updateAttribute(it) },
+                onChangeSkill = { viewModel.updateSkill(it) },
                 onExpand = { viewModel.onExpand(attribute.attribute.attributeId) },
                 expanded = attribute.attribute.attributeId == viewModel.expandedAttributeId.value
             )
@@ -41,32 +43,63 @@ fun AttributeTabContent(
 @Composable
 fun AttributeGroup(
     attributeWithSkills: AttributeWithSkillsAndSpecializations,
-    onChange: (Attribute) -> Unit,
+    onChangeAttribute: (Attribute) -> Unit,
+    onChangeSkill: (Skill) -> Unit,
     onExpand: () -> Unit,
     expanded: Boolean
 ) {
     Column {
         AttributeHeader(
             attribute = attributeWithSkills.attribute,
-            onChange = onChange,
+            onChange = onChangeAttribute,
             onExpand = onExpand,
             expanded = expanded
         )
         if (expanded) {
             SkillList(
-                attributeWithSkills.skills
+                attributeWithSkills.skills,
+                onChangeSkill = onChangeSkill
             )
         }
     }
 }
 
 @Composable
-fun SkillList(
-    skillsWithSpecializations: List<SkillWithSpecializations>
+fun SkillView(
+    skill: Skill,
+    onChangeSkill: (Skill) -> Unit
 ) {
-    Column {
-        skillsWithSpecializations.forEach { 
-            Text(text = it.skill.name)
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier
+            .padding(start = 16.dp)
+            .clip(CutCornerShape(4.dp, 0.dp, 4.dp, 0.dp))
+            .background(Color.DarkGray)
+            .padding(4.dp)
+    ) {
+        Text(text = skill.name, Modifier.weight(1F))
+        Button(onClick = { onChangeSkill(skill.copy(level = skill.level - 1)) }) {
+            Text(text = "-")
+        }
+        Text(text = skill.level.toString())
+        Button(onClick = { onChangeSkill(skill.copy(level = skill.level + 1)) }) {
+            Text(text = "+")
+        }
+    }
+}
+
+@Composable
+fun SkillList(
+    skillsWithSpecializations: List<SkillWithSpecializations>,
+    onChangeSkill: (Skill) -> Unit
+) {
+    Column(
+        Modifier.padding(bottom = 8.dp)
+    ) {
+        skillsWithSpecializations.forEach {
+            SkillView(
+                skill = it.skill,
+                onChangeSkill = onChangeSkill)
         }
     }
 }

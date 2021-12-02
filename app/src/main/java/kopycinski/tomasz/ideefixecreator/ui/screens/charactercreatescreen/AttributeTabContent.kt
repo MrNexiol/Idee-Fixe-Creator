@@ -27,7 +27,7 @@ fun AttributeTabContent(
 
     Column(modifier = modifier) {
         attributes.forEach { attribute ->
-            Attribute(
+            AttributeGroup(
                 attribute = attribute,
                 onChange = { viewModel.updateAttribute(it) },
                 onExpand = { viewModel.onExpand(attribute.attributeId) },
@@ -38,7 +38,34 @@ fun AttributeTabContent(
 }
 
 @Composable
-fun Attribute(
+fun AttributeGroup(
+    attribute: Attribute,
+    onChange: (Attribute) -> Unit,
+    onExpand: () -> Unit,
+    expanded: Boolean
+) {
+    Column {
+        AttributeHeader(
+            attribute = attribute,
+            onChange = onChange,
+            onExpand = onExpand,
+            expanded = expanded
+        )
+        if (expanded) {
+            SkillList()
+        }
+    }
+}
+
+@Composable
+fun SkillList() {
+    Column {
+        Text(text = "Elo")
+    }
+}
+
+@Composable
+fun AttributeHeader(
     attribute: Attribute,
     onChange: (Attribute) -> Unit,
     onExpand: () -> Unit,
@@ -70,20 +97,21 @@ fun Attribute(
             }
         }
         if (expanded) {
-            Row(Modifier.padding(8.dp)) {
-                Text(text = attribute.description)
-            }
+            Text(
+                modifier = Modifier.padding(8.dp),
+                text = attribute.description
+            )
         }
     }
 }
 
 @Composable
 @Preview
-fun AttributePreview() {
-    Attribute(
+fun AttributeGroupPreview() {
+    AttributeGroup(
         attribute = Attribute(0, "test", "desc"),
         onChange = {},
         onExpand = {},
-        expanded = false
+        expanded = true
     )
 }

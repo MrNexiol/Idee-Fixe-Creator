@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kopycinski.tomasz.ideefixecreator.database.entity.Attribute
+import kopycinski.tomasz.ideefixecreator.database.entity.AttributeWithSkillsAndSpecializations
 import kopycinski.tomasz.ideefixecreator.database.entity.CharacterSheet
 import kopycinski.tomasz.ideefixecreator.database.repository.AttributeRepository
 import kopycinski.tomasz.ideefixecreator.database.repository.CharacterSheetRepository
@@ -22,7 +23,7 @@ class CharacterCreateViewModel @Inject constructor(
 
     private var didLoadCharacter = false
     private val _characterSheet = MutableStateFlow(CharacterSheet())
-    private val _attributes = MutableStateFlow(listOf<Attribute>())
+    private val _attributes = MutableStateFlow(listOf<AttributeWithSkillsAndSpecializations>())
 
     val expandedAttributeId = mutableStateOf(-1L)
     val characterSheet = _characterSheet.asStateFlow()
@@ -39,11 +40,7 @@ class CharacterCreateViewModel @Inject constructor(
             characterSheetRepository.createCharacter().collect { characterSheetWithStats ->
                 didLoadCharacter = true
                 _characterSheet.value = characterSheetWithStats.characterSheet
-                val attrList = mutableListOf<Attribute>()
-                characterSheetWithStats.attributes.forEach {
-                    attrList.add(it.attribute)
-                }
-                _attributes.value = attrList
+                _attributes.value = characterSheetWithStats.attributes
             }
         }
     }

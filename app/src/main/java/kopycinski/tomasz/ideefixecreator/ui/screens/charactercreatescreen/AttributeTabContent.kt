@@ -13,9 +13,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kopycinski.tomasz.ideefixecreator.database.entity.Attribute
+import kopycinski.tomasz.ideefixecreator.database.entity.AttributeWithSkillsAndSpecializations
+import kopycinski.tomasz.ideefixecreator.database.entity.SkillWithSpecializations
 import kopycinski.tomasz.ideefixecreator.viewmodel.CharacterCreateViewModel
 
 @Composable
@@ -28,10 +29,10 @@ fun AttributeTabContent(
     Column(modifier = modifier) {
         attributes.forEach { attribute ->
             AttributeGroup(
-                attribute = attribute,
+                attributeWithSkills = attribute,
                 onChange = { viewModel.updateAttribute(it) },
-                onExpand = { viewModel.onExpand(attribute.attributeId) },
-                expanded = attribute.attributeId == viewModel.expandedAttributeId.value
+                onExpand = { viewModel.onExpand(attribute.attribute.attributeId) },
+                expanded = attribute.attribute.attributeId == viewModel.expandedAttributeId.value
             )
         }
     }
@@ -39,28 +40,34 @@ fun AttributeTabContent(
 
 @Composable
 fun AttributeGroup(
-    attribute: Attribute,
+    attributeWithSkills: AttributeWithSkillsAndSpecializations,
     onChange: (Attribute) -> Unit,
     onExpand: () -> Unit,
     expanded: Boolean
 ) {
     Column {
         AttributeHeader(
-            attribute = attribute,
+            attribute = attributeWithSkills.attribute,
             onChange = onChange,
             onExpand = onExpand,
             expanded = expanded
         )
         if (expanded) {
-            SkillList()
+            SkillList(
+                attributeWithSkills.skills
+            )
         }
     }
 }
 
 @Composable
-fun SkillList() {
+fun SkillList(
+    skillsWithSpecializations: List<SkillWithSpecializations>
+) {
     Column {
-        Text(text = "Elo")
+        skillsWithSpecializations.forEach { 
+            Text(text = it.skill.name)
+        }
     }
 }
 
@@ -103,15 +110,4 @@ fun AttributeHeader(
             )
         }
     }
-}
-
-@Composable
-@Preview
-fun AttributeGroupPreview() {
-    AttributeGroup(
-        attribute = Attribute(0, "test", "desc"),
-        onChange = {},
-        onExpand = {},
-        expanded = true
-    )
 }

@@ -55,7 +55,7 @@ fun CharacterSheetList(
         items(characterList) { characterSheet ->
             CharacterListItem(
                 characterSheet = characterSheet,
-                navController = navController
+                onClick = { navController.navigate(Screen.CharacterShowScreen.createRoute(it)) }
             )
         }
     }
@@ -64,19 +64,13 @@ fun CharacterSheetList(
 @Composable
 fun CharacterListItem(
     characterSheet: CharacterSheet,
-    navController: NavController
+    onClick: (Long) -> Unit
 ) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(bottom = 8.dp)
-            .clickable {
-                navController.navigate(
-                    Screen.CharacterShowScreen.createRoute(
-                        characterSheet.characterSheetId
-                    )
-                )
-            },
+            .clickable { onClick(characterSheet.characterSheetId) },
         elevation = 4.dp,
         shape = MaterialTheme.shapes.small
     ) {

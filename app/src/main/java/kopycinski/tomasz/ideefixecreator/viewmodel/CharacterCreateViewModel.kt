@@ -1,5 +1,6 @@
 package kopycinski.tomasz.ideefixecreator.viewmodel
 
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,6 +25,7 @@ class CharacterCreateViewModel @Inject constructor(
     private val _characterSheet = MutableStateFlow(CharacterSheet())
     private val _attributes = MutableStateFlow(listOf<Attribute>())
 
+    val expandedAttributeId = mutableStateOf(-1L)
     val characterSheet = _characterSheet.asStateFlow()
     val attributes = _attributes.asStateFlow()
 
@@ -61,6 +63,14 @@ class CharacterCreateViewModel @Inject constructor(
     fun updateAttribute(attribute: Attribute) {
         viewModelScope.launch {
             attributeRepository.updateAttribute(attribute)
+        }
+    }
+
+    fun onExpand(attributeId: Long) {
+        expandedAttributeId.value = if (expandedAttributeId.value == attributeId) {
+            -1
+        } else {
+            attributeId
         }
     }
 }

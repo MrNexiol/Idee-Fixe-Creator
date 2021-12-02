@@ -47,10 +47,20 @@ fun CharacterCreateScreen(
                         )
                     }
                     ATTRIBUTES_TAB -> {
-                        AttributeTabContent(viewModel = viewModel)
+                        AttributeTabContent(
+                            Modifier
+                                .padding(contentPadding)
+                                .padding(8.dp),
+                            viewModel = viewModel
+                        )
                     }
                     SKILL_TAB -> {
-                        SkillTabContent(viewModel = viewModel)
+                        SkillTabContent(
+                            Modifier
+                                .padding(contentPadding)
+                                .padding(8.dp),
+                            viewModel = viewModel
+                        )
                     }
                     else -> {}
                 }

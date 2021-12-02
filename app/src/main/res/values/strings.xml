@@ -1,5 +1,164 @@
 <resources>
+    <!-- Attribute names -->
     <string name="app_name">Idee Fixe Creator</string>
+    <string name="attribute_physique">Budowa</string>
+    <string name="attribute_determination">Determinacja</string>
+    <string name="attribute_dexterity">Zręczność</string>
+    <string name="attribute_agility">Zwinność</string>
+    <string name="attribute_intelligence">Intelekt</string>
+    <string name="attribute_perception">Percepcja</string>
+
+    <!-- Attribute descriptions -->
+    <string name="attribute_physique_desc">
+        Określa ogólną kondycję fizyczną, siłę, wagę i krzepę postaci, a także odporność organizmu
+        na zatrucia i choroby. Siła – czyli masa i wytrenowanie mięśni – jest przez mechanikę
+        traktowana jak umiejętność. Postać startowo otrzymuje umiejętność siła na poziomie równym
+        budowie.
+    </string>
+    <string name="attribute_determination_desc">
+        Odporność psychiki i siła woli postaci. Określa wrażliwość na stres, panikę czy senność.
+        Determinacja to także poziom samodyscypliny postaci, jej motywacji i uporu. Odporność na ból,
+        czyli aspekt determinacji określający próg bólu i skłonność postaci do ignorowania obrażeń,
+        jest przez mechanikę traktowany jak umiejętność. Postać startowo otrzymuje ją na poziomie
+        równym determinacji.
+    </string>
+    <string name="attribute_dexterity_desc">
+        To koordynacja wzrokowo-ruchowa postaci, zdolność do wykonywania precyzyjnych ruchów i
+        sprawność dłoni. Od zręczności zależy szybkość uczenia się umiejętności wymagających
+        dokładności, dobrego oka i pewnej ręki – prowadzenia pojazdów, majsterkowania i rzemiosła,
+        strzelania z broni palnej.
+    </string>
+    <string name="attribute_agility_desc">
+        Określa sprawność fizyczną całego ciała postaci, szybkość poruszania się, kontrolowania
+        kończyn i ogólną gibkość. Zależą od niej m.in. umiejętności sportowe, walka wręcz i broń
+        biała. Lekkoatletyka, czyli sprawność ogólnoruchowa, to umiejętność, którą każda postać
+        startowo otrzymuje na poziomie równym zwinności.
+    </string>
+    <string name="attribute_intelligence_desc">
+        Zdolność logicznego myślenia, kojarzenia i rozumowania abstrakcyjnego. Od intelektu zależy
+        zdolność zapamiętywania i przywoływania wiedzy. Z tym atrybutem związane są wszystkie
+        umiejętności polegające na przyswajaniu dużej ilości informacji, posługiwaniu się
+        nowoczesnym sprzętem, projektowaniu. Postać startowo otrzymuje umiejętność język ojczysty
+        na poziomie równym intelektowi – każdy wychował się w otoczeniu posługującym się jakimś językiem.
+    </string>
+    <string name="attribute_perception_desc">
+        Określa, jak bardzo postać jest wrażliwa na drobne szczegóły otaczającego ją świata, z jaką
+        szybkością przetwarza bodźce i czy potrafi wyciągnąć wnioski z obserwacji. Od percepcji
+        zależą umiejętności obserwacji otoczenia, artystyczne i interpersonalne. Związane z nią są
+        także umiejętności przetrwania oraz diagnozowania i naprawy wytworów techniki. Postać
+        startowo otrzymuje umiejętność obserwacja na poziomie równym percepcji.
+    </string>
+
+    <!-- Skill names -->
+
+    <!-- Physical skill names -->
+    <string name="skill_physique_strength">Siła</string>
+    <string name="skill_physique_swimming">Pływanie</string>
+    <string name="skill_physique_heavy_lifter">Ciężarowiec</string>
+
+    <!-- Determination skill names -->
+    <string name="skill_determination_pain_resistance">Odporność na ból</string>
+    <string name="skill_determination_fight_sense">Instynkt walki</string>
+    <string name="skill_determination_meditation">Medytacja</string>
+
+    <!-- Dexterity skill names -->
+    <string name="skill_dexterity_long_weapons">Broń długa</string>
+    <string name="skill_dexterity_short_weapons">Broń krótka</string>
+    <string name="skill_dexterity_first_aid">Pierwsza pomoc</string>
+    <string name="skill_dexterity_throwing">Rzucanie</string>
+    <string name="skill_dexterity_cars">Samochody</string>
+    <string name="skill_dexterity_heavy_weaponry">Broń ciężka</string>
+    <string name="skill_dexterity_boats">Łodzie</string>
+    <string name="skill_dexterity_ground_vehicles">Pojazdy naziemne</string>
+    <string name="skill_dexterity_parachutist">Spadochroniarz</string>
+    <string name="skill_dexterity_locksmith">Ślusarz</string>
+    <string name="skill_dexterity_hovercraft">Ziemioloty</string>
+    <string name="skill_dexterity_powered_lift_aircraft">Pionowzloty</string>
+    <string name="skill_dexterity_illusionist">Prestidigitator</string>
+    <string name="skill_dexterity_planes">Samoloty</string>
+    <string name="skill_dexterity_zeppelins">Sterowce</string>
+
+    <!-- Agility skill names -->
+    <string name="skill_agility_quarterstaff">Broń drzewcowa</string>
+    <string name="skill_agility_blunt_weapons">Broń obuchowa</string>
+    <string name="skill_agility_athletics">Lekkoatletyka</string>
+    <string name="skill_agility_swords">Miecze</string>
+    <string name="skill_agility_motorcycles">Motocykle</string>
+    <string name="skill_agility_knifes">Noże</string>
+    <string name="skill_agility_power_armor">Pancerze wspomagane</string>
+    <string name="skill_agility_bikes">Rowery</string>
+    <string name="skill_agility_sneaking">Skradanie</string>
+    <string name="skill_agility_fencing">Szermierka</string>
+    <string name="skill_agility_melee">Walka wręcz</string>
+    <string name="skill_agility_wrestle">Walka w zwarciu</string>
+    <string name="skill_agility_climbing">Wspinaczka</string>
+    <string name="skill_agility_chain_weapons">Broń segmentowa</string>
+    <string name="skill_agility_boards">Deski</string>
+    <string name="skill_agility_exoskeletons">Egzoszkielety</string>
+    <string name="skill_agility_skates">Łyżwy i rolki</string>
+    <string name="skill_agility_quick_draw">Szybkie dobycie</string>
+    <string name="skill_agility_microgravity">Mikrograwitacja</string>
+    <string name="skill_agility_escape">Ucieczka</string>
+
+    <!-- Intelligence skill names -->
+    <string name="skill_intelligence_read_and_write">Czytanie i pisanie</string>
+    <string name="skill_intelligence_native_language">Język ojczysty</string>
+    <string name="skill_intelligence_dressing_up">Przebieranie się</string>
+    <string name="skill_intelligence_electronics_usage">Używanie elektroniki</string>
+    <string name="skill_intelligence_computer_usage">Używanie komputera</string>
+    <string name="skill_intelligence_data_analysis">Analiza danych</string>
+    <string name="skill_intelligence_bioengineering">Bioinżynieria</string>
+    <string name="skill_intelligence_biology">Biologia</string>
+    <string name="skill_intelligence_chemistry">Chemia</string>
+    <string name="skill_intelligence_science">Fizyka</string>
+    <string name="skill_intelligence_it">Informatyka</string>
+    <string name="skill_intelligence_civil_engineering">Inżynieria budowlana</string>
+    <string name="skill_intelligence_electrical_engineering">Inżynieria elektryczna</string>
+    <string name="skill_intelligence_mechanical_engineering">Inżynieria mechaniczna</string>
+    <string name="skill_intelligence_microtronical_engineering">Inżynieria mikrotroniczna</string>
+    <string name="skill_intelligence_nucleonical_engineering">Inżynieria nukleoniczna</string>
+    <string name="skill_intelligence_mathematics">Matematyka</string>
+    <string name="skill_intelligence_medicine">Medycyna</string>
+    <string name="skill_intelligence_nano_engineering">Nanoinżynieria</string>
+    <string name="skill_intelligence_sport">Sport: [dyscyplina]</string>
+    <string name="skill_intelligence_conspiracy_stories">Teorie spiskowe</string>
+    <string name="skill_intelligence_memory_techniques">Techniki pamięciowe</string>
+    <string name="skill_intelligence_web_surfing">Sieciarstwo</string>
+
+    <!-- Perception skill names -->
+    <string name="skill_perception_computer_games">Gry komputerowe</string>
+    <string name="skill_perception_communication">Komunikacja</string>
+    <string name="skill_perception_manipulation">Manipulacja</string>
+    <string name="skill_perception_observation">Obserwacja</string>
+    <string name="skill_perception_remote_control">Teleoperacja</string>
+    <string name="skill_perception_hide_and_search">Ukrycie/szukanie</string>
+    <string name="skill_perception_ars_amandi">Ars amandi</string>
+    <string name="skill_perception_deck_gun">Broń pokładowa</string>
+    <string name="skill_perception_cyber_engineering">Cybertechnika</string>
+    <string name="skill_perception_electrotechnology">Elektrotechnika</string>
+    <string name="skill_perception_mechanics">Mechanika</string>
+    <string name="skill_perception_memetics">Memetyka</string>
+    <string name="skill_perception_microtechnology">Mikrotronika</string>
+    <string name="skill_perception_navigation">Nawigacja</string>
+    <string name="skill_perception_ancient_electronics">Paleoeletronika</string>
+    <string name="skill_perception_paramedic">Paramedyk</string>
+    <string name="skill_perception_city_survival">Przetrwanie w mieście</string>
+    <string name="skill_perception_gunsmith">Rusznikarz</string>
+    <string name="skill_perception_minesweeper">Saper</string>
+    <string name="skill_perception_gray_hat">Sobieradek</string>
+    <string name="skill_perception_security_systems">Systemy zabezpieczeń</string>
+    <string name="skill_perception_survival">Sztuka przetrwania</string>
+    <string name="skill_perception_make_up">Wizaż</string>
+    <string name="skill_perception_knowledge_of_large_area">Znajomość dużego obszaru</string>
+    <string name="skill_perception_knowledge_of_city">Znajomość miasta</string>
+    <string name="skill_perception_knowledge_of_small_area">Znajomość niewielkiego terenu</string>
+    <string name="skill_perception_lip_reading">Czytanie z ust</string>
+    <string name="skill_perception_sewering">Kanalarstwo</string>
+    <string name="skill_perception_kerning">Kerning</string>
+    <string name="skill_perception_connection">Koneksje</string>
+    <string name="skill_perception_survival_in_mutated_areas">Przetrwanie w terenie zmutowanym</string>
+
+    <!-- Screen names -->
     <string name="main_screen" translatable="false">main_screen</string>
     <string name="character_list_screen" translatable="false">character_list_screen</string>
     <string name="character_create_screen" translatable="false">character_create_screen</string>

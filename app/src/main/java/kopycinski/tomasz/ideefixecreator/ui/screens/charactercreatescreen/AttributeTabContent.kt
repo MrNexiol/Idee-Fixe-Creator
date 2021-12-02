@@ -5,6 +5,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.Text
@@ -27,8 +29,8 @@ fun AttributeTabContent(
 ) {
     val attributes by viewModel.attributes.collectAsState()
 
-    Column(modifier = modifier) {
-        attributes.forEach { attribute ->
+    LazyColumn(modifier = modifier) {
+        items(attributes) { attribute ->
             AttributeGroup(
                 attributeWithSkills = attribute,
                 onChangeAttribute = { viewModel.updateAttribute(it) },
@@ -72,7 +74,7 @@ fun SkillView(
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
-            .padding(start = 16.dp)
+            .padding(start = 16.dp, bottom = 4.dp)
             .clip(CutCornerShape(4.dp, 0.dp, 4.dp, 0.dp))
             .background(Color.DarkGray)
             .padding(4.dp)
@@ -94,7 +96,7 @@ fun SkillList(
     onChangeSkill: (Skill) -> Unit
 ) {
     Column(
-        Modifier.padding(bottom = 8.dp)
+        Modifier.padding(bottom = 4.dp)
     ) {
         skillsWithSpecializations.forEach {
             SkillView(
@@ -113,7 +115,7 @@ fun AttributeHeader(
 ) {
     Column(
         modifier = Modifier
-            .padding(bottom = 8.dp)
+            .padding(bottom = 4.dp)
             .clip(CutCornerShape(8.dp, 0.dp, 8.dp, 0.dp))
             .background(Color.Gray)
     ) {
@@ -138,7 +140,8 @@ fun AttributeHeader(
         }
         if (expanded) {
             Text(
-                modifier = Modifier.padding(8.dp),
+                modifier = Modifier
+                    .padding(8.dp),
                 text = attribute.description
             )
         }

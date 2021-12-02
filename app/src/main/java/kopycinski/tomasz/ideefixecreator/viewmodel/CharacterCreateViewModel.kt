@@ -21,7 +21,6 @@ class CharacterCreateViewModel @Inject constructor(
 ) : ViewModel() {
 
     private var didLoadCharacter = false
-    private var didLoadAttributes = false
     private val _characterSheet = MutableStateFlow(CharacterSheet())
     private val _attributes = MutableStateFlow(listOf<Attribute>())
 
@@ -37,19 +36,14 @@ class CharacterCreateViewModel @Inject constructor(
 
     private suspend fun getCharacter() {
         if (!didLoadCharacter) {
-            characterSheetRepository.createCharacter().collect {
+            characterSheetRepository.createCharacter().collect { characterSheetWithStats ->
                 didLoadCharacter = true
-                _characterSheet.value = it
-                getAttributes(it.characterSheetId)
-            }
-        }
-    }
-
-    private suspend fun getAttributes(characterSheetId: Long) {
-        if (!didLoadAttributes) {
-            attributeRepository.createAttributes(characterSheetId).collect {
-                didLoadAttributes = true
-                _attributes.value = it
+                _characterSheet.value = characterSheetWithStats.characterSheet
+                val attrList = mutableListOf<Attribute>()
+                characterSheetWithStats.attributes.forEach {
+                    attrList.add(it.attribute)
+                }
+                _attributes.value = attrList
             }
         }
     }

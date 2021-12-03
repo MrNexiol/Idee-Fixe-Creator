@@ -137,11 +137,17 @@ fun AttributeHeader(
                 text = attribute.name,
                 Modifier.weight(1F)
             )
-            Button(onClick = { onChange(attribute.copy(level = attribute.level - 1)) }) {
+            Button(
+                enabled = attribute.level > 0,
+                onClick = { onChange(attribute.copy(level = attribute.level - 1)) }
+            ) {
                 Text(text = "-")
             }
             Text(text = attribute.level.toString())
-            Button(onClick = { onChange(attribute.copy(level = attribute.level + 1)) }) {
+            Button(
+                enabled = attribute.level < 20,
+                onClick = { onChange(attribute.copy(level = attribute.level + 1)) }
+            ) {
                 Text(text = "+")
             }
         }

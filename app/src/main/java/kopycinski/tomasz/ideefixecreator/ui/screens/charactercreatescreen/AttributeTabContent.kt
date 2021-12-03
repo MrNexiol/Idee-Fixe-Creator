@@ -80,11 +80,17 @@ fun SkillView(
             .padding(4.dp)
     ) {
         Text(text = skill.name, Modifier.weight(1F))
-        Button(onClick = { onChangeSkill(skill.copy(level = skill.level - 1)) }) {
+        Button(
+            enabled = skill.level > 0,
+            onClick = { onChangeSkill(skill.copy(level = skill.level - 1)) }
+        ) {
             Text(text = "-")
         }
         Text(text = skill.level.toString())
-        Button(onClick = { onChangeSkill(skill.copy(level = skill.level + 1)) }) {
+        Button(
+            enabled = skill.level < 25,
+            onClick = { onChangeSkill(skill.copy(level = skill.level + 1)) }
+        ) {
             Text(text = "+")
         }
     }
@@ -101,7 +107,8 @@ fun SkillList(
         skillsWithSpecializations.forEach {
             SkillView(
                 skill = it.skill,
-                onChangeSkill = onChangeSkill)
+                onChangeSkill = onChangeSkill
+            )
         }
     }
 }

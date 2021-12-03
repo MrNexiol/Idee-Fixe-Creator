@@ -10,7 +10,7 @@ data class Attribute(
     val characterSheetId: Long,
     val name: String,
     val description: String,
-    var level: Int = 8,
+    var level: Int = 10,
 
     @PrimaryKey(autoGenerate = true) val attributeId: Long = 0
 ) {

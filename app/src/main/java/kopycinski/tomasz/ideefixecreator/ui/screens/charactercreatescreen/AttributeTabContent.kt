@@ -28,16 +28,21 @@ fun AttributeTabContent(
     viewModel: CharacterCreateViewModel
 ) {
     val attributes by viewModel.attributes.collectAsState()
+    val characterSheet by viewModel.characterSheet.collectAsState()
 
-    LazyColumn(modifier = modifier) {
-        items(attributes) { attribute ->
-            AttributeGroup(
-                attributeWithSkills = attribute,
-                onChangeAttribute = { viewModel.updateAttribute(it) },
-                onChangeSkill = { viewModel.updateSkill(it) },
-                onExpand = { viewModel.onExpand(attribute.attribute.attributeId) },
-                expanded = attribute.attribute.attributeId == viewModel.expandedAttributeId.value
-            )
+    Column {
+        Text(text = characterSheet.experience.toString())
+        LazyColumn(modifier = modifier) {
+            items(attributes) { attribute ->
+                AttributeGroup(
+                    attributeWithSkills = attribute,
+                    onChangeAttribute = { viewModel.updateAttribute(it) },
+                    onIncreaseSkill = { viewModel.increaseSkill(it, attribute.attribute) },
+                    onDecreaseSkill = { viewModel.decreaseSkill(it) },
+                    onExpand = { viewModel.onExpand(attribute.attribute.attributeId) },
+                    expanded = attribute.attribute.attributeId == viewModel.expandedAttributeId.value
+                )
+            }
         }
     }
 }
@@ -46,7 +51,8 @@ fun AttributeTabContent(
 fun AttributeGroup(
     attributeWithSkills: AttributeWithSkillsAndSpecializations,
     onChangeAttribute: (Attribute) -> Unit,
-    onChangeSkill: (Skill) -> Unit,
+    onIncreaseSkill: (Skill) -> Unit,
+    onDecreaseSkill: (Skill) -> Unit,
     onExpand: () -> Unit,
     expanded: Boolean
 ) {
@@ -60,7 +66,8 @@ fun AttributeGroup(
         if (expanded) {
             SkillList(
                 attributeWithSkills.skills,
-                onChangeSkill = onChangeSkill
+                onIncreaseSkill = onIncreaseSkill,
+                onDecreaseSkill = onDecreaseSkill
             )
         }
     }
@@ -69,7 +76,8 @@ fun AttributeGroup(
 @Composable
 fun SkillView(
     skill: Skill,
-    onChangeSkill: (Skill) -> Unit
+    onIncreaseSkill: (Skill) -> Unit,
+    onDecreaseSkill: (Skill) -> Unit,
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -82,14 +90,14 @@ fun SkillView(
         Text(text = skill.name, Modifier.weight(1F))
         Button(
             enabled = skill.level > 0,
-            onClick = { onChangeSkill(skill.copy(level = skill.level - 1)) }
+            onClick = { onDecreaseSkill(skill) }
         ) {
             Text(text = "-")
         }
         Text(text = skill.level.toString())
         Button(
             enabled = skill.level < 25,
-            onClick = { onChangeSkill(skill.copy(level = skill.level + 1)) }
+            onClick = { onIncreaseSkill(skill) }
         ) {
             Text(text = "+")
         }
@@ -99,7 +107,8 @@ fun SkillView(
 @Composable
 fun SkillList(
     skillsWithSpecializations: List<SkillWithSpecializations>,
-    onChangeSkill: (Skill) -> Unit
+    onIncreaseSkill: (Skill) -> Unit,
+    onDecreaseSkill: (Skill) -> Unit
 ) {
     Column(
         Modifier.padding(bottom = 4.dp)
@@ -107,7 +116,8 @@ fun SkillList(
         skillsWithSpecializations.forEach {
             SkillView(
                 skill = it.skill,
-                onChangeSkill = onChangeSkill
+                onIncreaseSkill = onIncreaseSkill,
+                onDecreaseSkill = onDecreaseSkill
             )
         }
     }

@@ -73,4 +73,42 @@ class CharacterCreateViewModel @Inject constructor(
             attributeId
         }
     }
+
+    private suspend fun decreaseExperience(value: Int) {
+        characterSheetRepository.updateCharacterSheet(
+            characterSheet.value.copy(experience = characterSheet.value.experience - value)
+        )
+    }
+
+    private suspend fun increaseExperience(value: Int) {
+        characterSheetRepository.updateCharacterSheet(
+            characterSheet.value.copy(experience = characterSheet.value.experience + value)
+        )
+    }
+
+    fun decreaseSkill(skill: Skill) {
+        val newSkill = skill.copy()
+        newSkill.level--
+        if (newSkill.upgradeCost > 1) {
+            newSkill.upgradeCost--
+        }
+        viewModelScope.launch {
+            updateSkill(newSkill)
+            increaseExperience(newSkill.upgradeCost)
+        }
+    }
+
+    fun increaseSkill(skill: Skill, parentAttribute: Attribute) {
+        val newSkill = skill.copy()
+        newSkill.level++
+        viewModelScope.launch {
+            decreaseExperience(newSkill.upgradeCost)
+        }
+        if (parentAttribute.level <= newSkill.level) {
+            newSkill.upgradeCost++
+        }
+        viewModelScope.launch {
+            updateSkill(newSkill)
+        }
+    }
 }

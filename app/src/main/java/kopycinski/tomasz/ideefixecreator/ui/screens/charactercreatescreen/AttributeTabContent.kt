@@ -37,7 +37,7 @@ fun AttributeTabContent(
                 AttributeGroup(
                     attributeWithSkills = attribute,
                     onChangeAttribute = { viewModel.updateAttribute(it) },
-                    onIncreaseSkill = { viewModel.increaseSkill(it, attribute.attribute) },
+                    onIncreaseSkill = { viewModel.increaseSkill(it, attribute.attribute.level) },
                     onDecreaseSkill = { viewModel.decreaseSkill(it) },
                     onExpand = { viewModel.onExpand(attribute.attribute.attributeId) },
                     expanded = attribute.attribute.attributeId == viewModel.expandedAttributeId.value

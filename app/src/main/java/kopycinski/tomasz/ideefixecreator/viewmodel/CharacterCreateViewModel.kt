@@ -98,13 +98,13 @@ class CharacterCreateViewModel @Inject constructor(
         }
     }
 
-    fun increaseSkill(skill: Skill, parentAttribute: Attribute) {
+    fun increaseSkill(skill: Skill, parentAttributeLevel: Int) {
         val newSkill = skill.copy()
         newSkill.level++
         viewModelScope.launch {
             decreaseExperience(newSkill.upgradeCost)
         }
-        if (parentAttribute.level <= newSkill.level) {
+        if (parentAttributeLevel <= newSkill.level) {
             newSkill.upgradeCost++
         }
         viewModelScope.launch {

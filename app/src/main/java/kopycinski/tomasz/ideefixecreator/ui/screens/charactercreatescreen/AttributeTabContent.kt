@@ -92,7 +92,7 @@ fun SkillView(
     ) {
         Text(text = skill.name, Modifier.weight(1F))
         Button(
-            enabled = skill.level > 0,
+            enabled = skill.level > skill.baseLevel,
             onClick = { onDecreaseSkill(skill) }
         ) {
             Text(text = "-")

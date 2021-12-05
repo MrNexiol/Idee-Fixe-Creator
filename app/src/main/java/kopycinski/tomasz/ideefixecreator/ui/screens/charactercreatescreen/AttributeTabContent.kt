@@ -36,7 +36,8 @@ fun AttributeTabContent(
             items(attributes) { attribute ->
                 AttributeGroup(
                     attributeWithSkills = attribute,
-                    onChangeAttribute = { viewModel.updateAttribute(it) },
+                    onIncreaseAttribute = { viewModel.increaseAttribute(it) },
+                    onDecreaseAttribute = { viewModel.decreaseAttribute(it) },
                     onIncreaseSkill = { viewModel.increaseSkill(it, attribute.attribute.level) },
                     onDecreaseSkill = { viewModel.decreaseSkill(it) },
                     onExpand = { viewModel.onExpand(attribute.attribute.attributeId) },
@@ -50,7 +51,8 @@ fun AttributeTabContent(
 @Composable
 fun AttributeGroup(
     attributeWithSkills: AttributeWithSkillsAndSpecializations,
-    onChangeAttribute: (Attribute) -> Unit,
+    onIncreaseAttribute: (Attribute) -> Unit,
+    onDecreaseAttribute: (Attribute) -> Unit,
     onIncreaseSkill: (Skill) -> Unit,
     onDecreaseSkill: (Skill) -> Unit,
     onExpand: () -> Unit,
@@ -59,7 +61,8 @@ fun AttributeGroup(
     Column {
         AttributeHeader(
             attribute = attributeWithSkills.attribute,
-            onChange = onChangeAttribute,
+            onIncreaseAttribute = onIncreaseAttribute,
+            onDecreaseAttribute = onDecreaseAttribute,
             onExpand = onExpand,
             expanded = expanded
         )
@@ -126,7 +129,8 @@ fun SkillList(
 @Composable
 fun AttributeHeader(
     attribute: Attribute,
-    onChange: (Attribute) -> Unit,
+    onIncreaseAttribute: (Attribute) -> Unit,
+    onDecreaseAttribute: (Attribute) -> Unit,
     onExpand: () -> Unit,
     expanded: Boolean
 ) {
@@ -149,14 +153,14 @@ fun AttributeHeader(
             )
             Button(
                 enabled = attribute.level > 0,
-                onClick = { onChange(attribute.copy(level = attribute.level - 1)) }
+                onClick = { onDecreaseAttribute(attribute) }
             ) {
                 Text(text = "-")
             }
             Text(text = attribute.level.toString())
             Button(
                 enabled = attribute.level < 20,
-                onClick = { onChange(attribute.copy(level = attribute.level + 1)) }
+                onClick = { onIncreaseAttribute(attribute) }
             ) {
                 Text(text = "+")
             }

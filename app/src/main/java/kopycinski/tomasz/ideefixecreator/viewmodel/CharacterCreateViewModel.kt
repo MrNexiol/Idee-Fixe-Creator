@@ -54,12 +54,6 @@ class CharacterCreateViewModel @Inject constructor(
         }
     }
 
-    fun updateAttribute(attribute: Attribute) {
-        viewModelScope.launch {
-            attributeRepository.updateAttribute(attribute)
-        }
-    }
-
     fun onExpand(attributeId: Long) {
         expandedAttributeId.value = if (expandedAttributeId.value == attributeId) {
             -1
@@ -78,6 +72,24 @@ class CharacterCreateViewModel @Inject constructor(
         characterSheetRepository.updateCharacterSheet(
             characterSheet.value.copy(experience = characterSheet.value.experience + value)
         )
+    }
+
+    fun decreaseAttribute(attribute: Attribute) {
+        val attr = attribute.copy()
+        attr.level--
+        viewModelScope.launch {
+            attributeRepository.updateAttribute(attr)
+            increaseExperience(Attribute.UPGRADE_COSTS_FOR_LEVELS[attr.level]!!)
+        }
+    }
+
+    fun increaseAttribute(attribute: Attribute) {
+        val attr = attribute.copy()
+        viewModelScope.launch {
+            decreaseExperience(Attribute.UPGRADE_COSTS_FOR_LEVELS[attr.level]!!)
+            attr.level++
+            attributeRepository.updateAttribute(attr)
+        }
     }
 
     fun decreaseSkill(skill: Skill) {

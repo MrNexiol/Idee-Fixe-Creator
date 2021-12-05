@@ -15,6 +15,13 @@ data class Attribute(
     @PrimaryKey(autoGenerate = true) val attributeId: Long = 0
 ) {
     companion object {
+        val UPGRADE_COSTS_FOR_LEVELS = mapOf(
+            0 to 5, 1 to 5, 2 to 5, 3 to 5, 4 to 5,
+            5 to 5, 6 to 5, 7 to 5, 8 to 5, 9 to 5,
+            10 to 5, 11 to 5, 12 to 5, 13 to 10, 14 to 10,
+            15 to 10, 16 to 15, 17 to 15, 18 to 15, 19 to 20,
+        )
+
         fun attributeList(characterSheetId: Long, context: Context): List<Attribute> {
             return listOf(
                 Attribute(

@@ -60,12 +60,6 @@ class CharacterCreateViewModel @Inject constructor(
         }
     }
 
-    fun updateSkill(skill: Skill) {
-        viewModelScope.launch {
-            skillRepository.updateSkill(skill)
-        }
-    }
-
     fun onExpand(attributeId: Long) {
         expandedAttributeId.value = if (expandedAttributeId.value == attributeId) {
             -1
@@ -93,7 +87,7 @@ class CharacterCreateViewModel @Inject constructor(
             newSkill.upgradeCost--
         }
         viewModelScope.launch {
-            updateSkill(newSkill)
+            skillRepository.updateSkill(newSkill)
             increaseExperience(newSkill.upgradeCost)
         }
     }
@@ -108,7 +102,7 @@ class CharacterCreateViewModel @Inject constructor(
             newSkill.upgradeCost++
         }
         viewModelScope.launch {
-            updateSkill(newSkill)
+            skillRepository.updateSkill(newSkill)
         }
     }
 }

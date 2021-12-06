@@ -37,7 +37,8 @@ fun AttributeTabContent(
                     attribute = attributeWithSkills.attribute,
                     onIncreaseAttribute = { viewModel.increaseAttribute(it) },
                     onDecreaseAttribute = { viewModel.decreaseAttribute(it) },
-                    canIncrease = attributeWithSkills.attribute.level < 20,
+                    canIncrease = attributeWithSkills.attribute.level < 20 &&
+                            Attribute.UPGRADE_COSTS_FOR_LEVELS[attributeWithSkills.attribute.level]!! <= characterSheet.experience,
                     canDecrease = attributeWithSkills.attribute.level > 0,
                     onExpand = { viewModel.onExpand(attributeWithSkills.attribute.attributeId) },
                     expanded = attributeWithSkills.attribute.attributeId == viewModel.expandedAttributeId.value

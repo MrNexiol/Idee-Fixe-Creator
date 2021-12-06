@@ -7,12 +7,13 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import kopycinski.tomasz.ideefixecreator.ui.screens.*
+import kopycinski.tomasz.ideefixecreator.ui.screens.charactercreatescreen.CharacterCreateScreen
 
 @Composable
 fun Navigation() {
     val navController = rememberNavController()
-    
-    NavHost(navController = navController, startDestination = Screen.MainScreen.route ) {
+
+    NavHost(navController = navController, startDestination = Screen.MainScreen.route) {
         composable(route = Screen.MainScreen.route) {
             MainScreen(navController)
         }
@@ -30,7 +31,7 @@ fun Navigation() {
             CharacterListScreen(navController)
         }
         composable(route = Screen.CharacterCreateScreen.route) {
-            CharacterCreateScreen(navController)
+            CharacterCreateScreen()
         }
         composable(route = Screen.CharacterEditScreen.route) {
             CharacterEditScreen(navController)

@@ -9,14 +9,14 @@ class AttributeRepository @Inject constructor(
     private val attributeDao: AttributeDao
 ) {
     suspend fun insertAttribute(attribute: Attribute) =
-        attributeDao.insertAll(attribute)
+        attributeDao.insertOne(attribute)
 
     suspend fun updateAttribute(attribute: Attribute) =
-        attributeDao.updateAll(attribute)
+        attributeDao.updateOne(attribute)
 
     fun getAttributes(): Flow<List<Attribute>> =
         attributeDao.getAll()
 
-    fun getAttributesById(id: Long): Flow<List<Attribute>> =
+    private fun getAttributesById(id: Long): Flow<List<Attribute>> =
         attributeDao.getAllByCharacterSheetId(id)
 }

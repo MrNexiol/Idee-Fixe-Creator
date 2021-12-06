@@ -39,4 +39,8 @@ object HiltModule {
     @Provides
     fun provideAppDatabase(@ApplicationContext context: Context): AppDatabase =
         AppDatabase.getDatabase(context)
+
+    @Provides
+    fun provideContext(@ApplicationContext context: Context): Context =
+        context
 }

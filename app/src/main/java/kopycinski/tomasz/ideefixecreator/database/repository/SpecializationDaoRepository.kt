@@ -9,10 +9,10 @@ class SpecializationDaoRepository @Inject constructor(
     private val specializationDao: SpecializationDao
 ) {
     suspend fun insertSpecialization(specialization: Specialization) =
-        specializationDao.insertAll(specialization)
+        specializationDao.insertOne(specialization)
 
     suspend fun updateSpecialization(specialization: Specialization) =
-        specializationDao.updateAll(specialization)
+        specializationDao.updateOne(specialization)
 
     fun getAll(): Flow<List<Specialization>> =
         specializationDao.getAll()

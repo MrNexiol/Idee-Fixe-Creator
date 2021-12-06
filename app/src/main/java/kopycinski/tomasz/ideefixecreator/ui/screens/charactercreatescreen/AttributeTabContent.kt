@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CutCornerShape
-import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
@@ -152,27 +151,39 @@ fun SkillView(
     canIncrease: Boolean,
     canDecrease: Boolean,
 ) {
+    val border = BorderStroke(1.dp, Color.Black)
+    val shape = MaterialTheme.shapes.parallelogram
+
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .padding(start = 16.dp, bottom = 4.dp)
-            .clip(CutCornerShape(4.dp, 0.dp, 4.dp, 0.dp))
+            .clip(CutCornerShape(8.dp, 0.dp, 8.dp, 0.dp))
             .background(Color.DarkGray)
-            .padding(4.dp)
+            .padding(8.dp)
     ) {
         Text(text = skill.name, Modifier.weight(1F))
-        Button(
-            enabled = canDecrease,
-            onClick = { onDecreaseSkill(skill) }
+        Row(
+            modifier = Modifier.border(border, shape = shape),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(text = "-")
-        }
-        Text(text = skill.level.toString())
-        Button(
-            enabled = canIncrease,
-            onClick = { onIncreaseSkill(skill) }
-        ) {
-            Text(text = "+")
+            TextButton(
+                onClick = { onDecreaseSkill(skill) },
+                enabled = canDecrease,
+                shape = shape,
+                border = border
+            ) {
+                Text("-")
+            }
+            Text(skill.level.toString())
+            TextButton(
+                onClick = { onIncreaseSkill(skill) },
+                enabled = canIncrease,
+                shape = shape,
+                border = border
+            ) {
+                Text("+")
+            }
         }
     }
 }

@@ -55,7 +55,7 @@ fun CharacterCreateScreen(
                         )
                     }
                     SKILL_TAB -> {
-                        SkillTabContent(
+                        AdvantageTabContent(
                             Modifier
                                 .padding(contentPadding)
                                 .padding(8.dp),

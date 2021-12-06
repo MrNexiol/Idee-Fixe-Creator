@@ -6,7 +6,7 @@ import androidx.compose.ui.Modifier
 import kopycinski.tomasz.ideefixecreator.viewmodel.CharacterCreateViewModel
 
 @Composable
-fun SkillTabContent(
+fun AdvantageTabContent(
     modifier: Modifier = Modifier,
     viewModel: CharacterCreateViewModel
 ) {

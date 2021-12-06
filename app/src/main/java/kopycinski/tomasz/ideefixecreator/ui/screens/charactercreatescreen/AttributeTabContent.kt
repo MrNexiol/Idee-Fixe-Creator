@@ -17,7 +17,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import kopycinski.tomasz.ideefixecreator.database.entity.Attribute
-import kopycinski.tomasz.ideefixecreator.database.entity.AttributeWithSkillsAndSpecializations
 import kopycinski.tomasz.ideefixecreator.database.entity.Skill
 import kopycinski.tomasz.ideefixecreator.database.entity.SkillWithSpecializations
 import kopycinski.tomasz.ideefixecreator.viewmodel.CharacterCreateViewModel
@@ -27,52 +26,97 @@ fun AttributeTabContent(
     modifier: Modifier = Modifier,
     viewModel: CharacterCreateViewModel
 ) {
-    val attributes by viewModel.attributes.collectAsState()
+    val attributesWithSkills by viewModel.attributes.collectAsState()
     val characterSheet by viewModel.characterSheet.collectAsState()
 
     Column {
         Text(text = characterSheet.experience.toString())
         LazyColumn(modifier = modifier) {
-            items(attributes) { attribute ->
-                AttributeGroup(
-                    attributeWithSkills = attribute,
+            items(attributesWithSkills) { attributeWithSkills ->
+                AttributeView(
+                    attribute = attributeWithSkills.attribute,
                     onIncreaseAttribute = { viewModel.increaseAttribute(it) },
                     onDecreaseAttribute = { viewModel.decreaseAttribute(it) },
-                    onIncreaseSkill = { viewModel.increaseSkill(it, attribute.attribute.level) },
-                    onDecreaseSkill = { viewModel.decreaseSkill(it) },
-                    onExpand = { viewModel.onExpand(attribute.attribute.attributeId) },
-                    expanded = attribute.attribute.attributeId == viewModel.expandedAttributeId.value
+                    onExpand = { viewModel.onExpand(attributeWithSkills.attribute.attributeId) },
+                    expanded = attributeWithSkills.attribute.attributeId == viewModel.expandedAttributeId.value
                 )
+                if (attributeWithSkills.attribute.attributeId == viewModel.expandedAttributeId.value) {
+                    SkillList(
+                        skillsWithSpecializations = attributeWithSkills.skills,
+                        onIncreaseSkill = {
+                            viewModel.increaseSkill(
+                                it,
+                                attributeWithSkills.attribute.level
+                            )
+                        },
+                        onDecreaseSkill = { viewModel.decreaseSkill(it) }
+                    )
+                }
             }
         }
     }
 }
 
 @Composable
-fun AttributeGroup(
-    attributeWithSkills: AttributeWithSkillsAndSpecializations,
+fun AttributeView(
+    attribute: Attribute,
     onIncreaseAttribute: (Attribute) -> Unit,
     onDecreaseAttribute: (Attribute) -> Unit,
-    onIncreaseSkill: (Skill) -> Unit,
-    onDecreaseSkill: (Skill) -> Unit,
     onExpand: () -> Unit,
     expanded: Boolean
 ) {
-    Column {
-        AttributeHeader(
-            attribute = attributeWithSkills.attribute,
-            onIncreaseAttribute = onIncreaseAttribute,
-            onDecreaseAttribute = onDecreaseAttribute,
-            onExpand = onExpand,
-            expanded = expanded
-        )
+    Column(
+        modifier = Modifier
+            .padding(bottom = 4.dp)
+            .clip(CutCornerShape(8.dp, 0.dp, 8.dp, 0.dp))
+            .background(Color.Gray)
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier
+                .background(Color.LightGray)
+                .clickable { onExpand() }
+                .padding(8.dp)
+        ) {
+            Text(
+                modifier = Modifier.weight(1F),
+                text = attribute.name,
+            )
+            Button(
+                enabled = attribute.level > 0,
+                onClick = { onDecreaseAttribute(attribute) }
+            ) {
+                Text(text = "-")
+            }
+            Text(text = attribute.level.toString())
+            Button(
+                enabled = attribute.level < 20,
+                onClick = { onIncreaseAttribute(attribute) }
+            ) {
+                Text(text = "+")
+            }
+        }
         if (expanded) {
-            SkillList(
-                attributeWithSkills.skills,
-                onIncreaseSkill = onIncreaseSkill,
-                onDecreaseSkill = onDecreaseSkill
+            Text(
+                modifier = Modifier.padding(8.dp),
+                text = attribute.description
             )
         }
+    }
+}
+
+@Composable
+fun SkillList(
+    skillsWithSpecializations: List<SkillWithSpecializations>,
+    onIncreaseSkill: (Skill) -> Unit,
+    onDecreaseSkill: (Skill) -> Unit
+) {
+    skillsWithSpecializations.forEach {
+        SkillView(
+            skill = it.skill,
+            onIncreaseSkill = onIncreaseSkill,
+            onDecreaseSkill = onDecreaseSkill
+        )
     }
 }
 
@@ -103,74 +147,6 @@ fun SkillView(
             onClick = { onIncreaseSkill(skill) }
         ) {
             Text(text = "+")
-        }
-    }
-}
-
-@Composable
-fun SkillList(
-    skillsWithSpecializations: List<SkillWithSpecializations>,
-    onIncreaseSkill: (Skill) -> Unit,
-    onDecreaseSkill: (Skill) -> Unit
-) {
-    Column(
-        Modifier.padding(bottom = 4.dp)
-    ) {
-        skillsWithSpecializations.forEach {
-            SkillView(
-                skill = it.skill,
-                onIncreaseSkill = onIncreaseSkill,
-                onDecreaseSkill = onDecreaseSkill
-            )
-        }
-    }
-}
-
-@Composable
-fun AttributeHeader(
-    attribute: Attribute,
-    onIncreaseAttribute: (Attribute) -> Unit,
-    onDecreaseAttribute: (Attribute) -> Unit,
-    onExpand: () -> Unit,
-    expanded: Boolean
-) {
-    Column(
-        modifier = Modifier
-            .padding(bottom = 4.dp)
-            .clip(CutCornerShape(8.dp, 0.dp, 8.dp, 0.dp))
-            .background(Color.Gray)
-    ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .background(Color.LightGray)
-                .clickable { onExpand() }
-                .padding(8.dp)
-        ) {
-            Text(
-                text = attribute.name,
-                Modifier.weight(1F)
-            )
-            Button(
-                enabled = attribute.level > 0,
-                onClick = { onDecreaseAttribute(attribute) }
-            ) {
-                Text(text = "-")
-            }
-            Text(text = attribute.level.toString())
-            Button(
-                enabled = attribute.level < 20,
-                onClick = { onIncreaseAttribute(attribute) }
-            ) {
-                Text(text = "+")
-            }
-        }
-        if (expanded) {
-            Text(
-                modifier = Modifier
-                    .padding(8.dp),
-                text = attribute.description
-            )
         }
     }
 }

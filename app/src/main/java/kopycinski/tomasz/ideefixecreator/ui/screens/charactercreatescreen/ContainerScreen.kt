@@ -18,7 +18,7 @@ const val SKILL_TAB = 2
 fun CharacterCreateScreen(
     viewModel: CharacterCreateViewModel = hiltViewModel()
 ) {
-    var state by remember { mutableStateOf(0) }
+    var state by remember { mutableStateOf(INFO_TAB) }
     val titles = listOf("Info", "Attributes", "Skills")
     
     LaunchedEffect(false) {

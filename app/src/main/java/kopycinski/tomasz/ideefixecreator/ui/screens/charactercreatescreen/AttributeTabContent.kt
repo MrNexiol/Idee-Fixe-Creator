@@ -38,7 +38,7 @@ fun AttributeTabContent(
                     onIncreaseAttribute = { viewModel.increaseAttribute(it) },
                     onDecreaseAttribute = { viewModel.decreaseAttribute(it) },
                     canIncrease = attributeWithSkills.attribute.level < 20 &&
-                            Attribute.UPGRADE_COSTS_FOR_LEVELS[attributeWithSkills.attribute.level]!! <= characterSheet.experience,
+                            characterSheet.experience >= Attribute.UPGRADE_COSTS_FOR_LEVELS[attributeWithSkills.attribute.level]!!,
                     canDecrease = attributeWithSkills.attribute.level > 0,
                     onExpand = { viewModel.onExpand(attributeWithSkills.attribute.attributeId) },
                     expanded = attributeWithSkills.attribute.attributeId == viewModel.expandedAttributeId.value
@@ -52,7 +52,8 @@ fun AttributeTabContent(
                                 attributeWithSkills.attribute.level
                             )
                         },
-                        onDecreaseSkill = { viewModel.decreaseSkill(it) }
+                        onDecreaseSkill = { viewModel.decreaseSkill(it) },
+                        currentExperience = characterSheet.experience
                     )
                 }
             }
@@ -114,14 +115,15 @@ fun AttributeView(
 fun SkillList(
     skillsWithSpecializations: List<SkillWithSpecializations>,
     onIncreaseSkill: (Skill) -> Unit,
-    onDecreaseSkill: (Skill) -> Unit
+    onDecreaseSkill: (Skill) -> Unit,
+    currentExperience: Int
 ) {
     skillsWithSpecializations.forEach {
         SkillView(
             skill = it.skill,
             onIncreaseSkill = onIncreaseSkill,
             onDecreaseSkill = onDecreaseSkill,
-            canIncrease = it.skill.level < 25,
+            canIncrease = it.skill.level < 25 && currentExperience >= it.skill.upgradeCost,
             canDecrease = it.skill.level > it.skill.baseLevel
         )
     }

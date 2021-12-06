@@ -37,6 +37,8 @@ fun AttributeTabContent(
                     attribute = attributeWithSkills.attribute,
                     onIncreaseAttribute = { viewModel.increaseAttribute(it) },
                     onDecreaseAttribute = { viewModel.decreaseAttribute(it) },
+                    canIncrease = attributeWithSkills.attribute.level < 20,
+                    canDecrease = attributeWithSkills.attribute.level > 0,
                     onExpand = { viewModel.onExpand(attributeWithSkills.attribute.attributeId) },
                     expanded = attributeWithSkills.attribute.attributeId == viewModel.expandedAttributeId.value
                 )
@@ -62,6 +64,8 @@ fun AttributeView(
     attribute: Attribute,
     onIncreaseAttribute: (Attribute) -> Unit,
     onDecreaseAttribute: (Attribute) -> Unit,
+    canIncrease: Boolean,
+    canDecrease: Boolean,
     onExpand: () -> Unit,
     expanded: Boolean
 ) {
@@ -83,14 +87,14 @@ fun AttributeView(
                 text = attribute.name,
             )
             Button(
-                enabled = attribute.level > 0,
+                enabled = canDecrease,
                 onClick = { onDecreaseAttribute(attribute) }
             ) {
                 Text(text = "-")
             }
             Text(text = attribute.level.toString())
             Button(
-                enabled = attribute.level < 20,
+                enabled = canIncrease,
                 onClick = { onIncreaseAttribute(attribute) }
             ) {
                 Text(text = "+")

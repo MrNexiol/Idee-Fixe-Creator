@@ -1,15 +1,17 @@
 package kopycinski.tomasz.ideefixecreator.ui.screens.charactercreatescreen
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.material.Button
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
+import androidx.compose.material.TextButton
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -19,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import kopycinski.tomasz.ideefixecreator.database.entity.Attribute
 import kopycinski.tomasz.ideefixecreator.database.entity.Skill
 import kopycinski.tomasz.ideefixecreator.database.entity.SkillWithSpecializations
+import kopycinski.tomasz.ideefixecreator.ui.theme.parallelogram
 import kopycinski.tomasz.ideefixecreator.viewmodel.CharacterCreateViewModel
 
 @Composable
@@ -77,6 +80,9 @@ fun AttributeView(
             .clip(CutCornerShape(8.dp, 0.dp, 8.dp, 0.dp))
             .background(Color.Gray)
     ) {
+        val border = BorderStroke(1.dp, Color.Black)
+        val shape = MaterialTheme.shapes.parallelogram
+
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
@@ -88,18 +94,27 @@ fun AttributeView(
                 modifier = Modifier.weight(1F),
                 text = attribute.name,
             )
-            Button(
-                enabled = canDecrease,
-                onClick = { onDecreaseAttribute(attribute) }
+            Row(
+                modifier = Modifier.border(border, shape = shape),
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(text = "-")
-            }
-            Text(text = attribute.level.toString())
-            Button(
-                enabled = canIncrease,
-                onClick = { onIncreaseAttribute(attribute) }
-            ) {
-                Text(text = "+")
+                TextButton(
+                    onClick = { onDecreaseAttribute(attribute) },
+                    enabled = canDecrease,
+                    shape = shape,
+                    border = border
+                ) {
+                    Text("-")
+                }
+                Text(attribute.level.toString())
+                TextButton(
+                    onClick = { onIncreaseAttribute(attribute) },
+                    enabled = canIncrease,
+                    shape = shape,
+                    border = border
+                ) {
+                    Text("+")
+                }
             }
         }
         if (expanded) {

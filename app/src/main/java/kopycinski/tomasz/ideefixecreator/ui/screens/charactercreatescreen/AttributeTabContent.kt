@@ -115,7 +115,9 @@ fun SkillList(
         SkillView(
             skill = it.skill,
             onIncreaseSkill = onIncreaseSkill,
-            onDecreaseSkill = onDecreaseSkill
+            onDecreaseSkill = onDecreaseSkill,
+            canIncrease = it.skill.level < 25,
+            canDecrease = it.skill.level > it.skill.baseLevel
         )
     }
 }
@@ -125,6 +127,8 @@ fun SkillView(
     skill: Skill,
     onIncreaseSkill: (Skill) -> Unit,
     onDecreaseSkill: (Skill) -> Unit,
+    canIncrease: Boolean,
+    canDecrease: Boolean,
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -136,14 +140,14 @@ fun SkillView(
     ) {
         Text(text = skill.name, Modifier.weight(1F))
         Button(
-            enabled = skill.level > skill.baseLevel,
+            enabled = canDecrease,
             onClick = { onDecreaseSkill(skill) }
         ) {
             Text(text = "-")
         }
         Text(text = skill.level.toString())
         Button(
-            enabled = skill.level < 25,
+            enabled = canIncrease,
             onClick = { onIncreaseSkill(skill) }
         ) {
             Text(text = "+")

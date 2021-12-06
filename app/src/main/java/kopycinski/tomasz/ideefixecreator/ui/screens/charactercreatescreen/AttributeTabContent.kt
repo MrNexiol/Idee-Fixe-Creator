@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import kopycinski.tomasz.ideefixecreator.database.entity.Attribute
 import kopycinski.tomasz.ideefixecreator.database.entity.Skill
@@ -105,7 +106,11 @@ fun AttributeView(
                 ) {
                     Text("-")
                 }
-                Text(attribute.level.toString())
+                Text(
+                    attribute.level.toString(),
+                    modifier = Modifier.width(20.dp),
+                    textAlign = TextAlign.Center
+                )
                 TextButton(
                     onClick = { onIncreaseAttribute(attribute) },
                     enabled = canIncrease,
@@ -175,7 +180,11 @@ fun SkillView(
             ) {
                 Text("-")
             }
-            Text(skill.level.toString())
+            Text(
+                skill.level.toString(),
+                modifier = Modifier.width(20.dp),
+                textAlign = TextAlign.Center
+            )
             TextButton(
                 onClick = { onIncreaseSkill(skill) },
                 enabled = canIncrease,

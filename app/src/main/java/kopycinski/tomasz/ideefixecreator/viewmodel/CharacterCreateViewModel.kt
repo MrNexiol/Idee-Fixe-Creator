@@ -37,13 +37,14 @@ class CharacterCreateViewModel @Inject constructor(
         viewModelScope.launch {
             getCharacter()
         }
+        viewModelScope.launch {
+            getAdvantages()
+        }
     }
 
     private suspend fun getAdvantages() {
-        viewModelScope.launch {
-            advantageRepository.getAdvantages().collect { advantages ->
-                _advantages.value = advantages
-            }
+        advantageRepository.getAdvantages().collect { advantages ->
+            _advantages.value = advantages
         }
     }
 

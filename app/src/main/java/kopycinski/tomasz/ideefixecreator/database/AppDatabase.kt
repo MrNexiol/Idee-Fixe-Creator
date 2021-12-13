@@ -4,8 +4,12 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.sqlite.db.SupportSQLiteDatabase
 import kopycinski.tomasz.ideefixecreator.database.dao.*
 import kopycinski.tomasz.ideefixecreator.database.entity.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @Database(entities = [
     CharacterSheet::class,
@@ -35,7 +39,13 @@ abstract class AppDatabase : RoomDatabase() {
                         context.applicationContext,
                         AppDatabase::class.java,
                         "app_database"
-                ).build()
+                ).addCallback(object : RoomDatabase.Callback() {
+                    override fun onCreate(db: SupportSQLiteDatabase) {
+                        CoroutineScope(Dispatchers.IO).launch {
+                            getDatabase(context).advantageDao().insertMany(Advantage.advantageList())
+                        }
+                    }
+                }).build()
                 INSTANCE = instance
                 instance
             }

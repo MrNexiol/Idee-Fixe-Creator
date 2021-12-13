@@ -21,8 +21,8 @@ fun AdvantageTabContent(
     Column(modifier = modifier) {
         Text(text = characterSheet.experience.toString())
         LazyColumn {
-            items(advantages) { advatage ->
-                Text(text = advatage.name)
+            items(advantages) { advantage ->
+                Text(text = advantage.name)
             }
         }
     }

@@ -64,6 +64,8 @@ fun AdvantageView(
             .fillMaxWidth()
     ) {
         Text(text = advantage.name, modifier = Modifier.weight(1f))
-        Checkbox(checked = checked, onCheckedChange = onClick)
+        repeat(advantage.levels) {
+            Checkbox(checked = checked, onCheckedChange = onClick)
+        }
     }
 }

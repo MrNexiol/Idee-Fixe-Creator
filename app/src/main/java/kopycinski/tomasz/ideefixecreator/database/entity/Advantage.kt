@@ -22,6 +22,13 @@ data class Advantage(
                     context.getString(R.string.advantage_asexual),
                     context.getString(R.string.advantage_asexual_desc),
                     1,
+                    listOf(2),
+                    true
+                ),
+                Advantage(
+                    context.getString(R.string.advantage_attractive),
+                    context.getString(R.string.advantage_attractive_desc),
+                    3,
                     listOf(3,6,9),
                     true
                 )

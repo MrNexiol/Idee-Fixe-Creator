@@ -8,6 +8,7 @@ class Converters {
         return list.joinToString(",")
     }
 
+    @TypeConverter
     fun stringToList(text: String): List<Int> {
         return text.split(",").map { it.toInt() }
     }

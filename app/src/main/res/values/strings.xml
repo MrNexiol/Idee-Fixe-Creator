@@ -1,6 +1,26 @@
 <resources>
-    <!-- Attribute names -->
     <string name="app_name">Idee Fixe Creator</string>
+
+    <!-- Advantage names -->
+    <string name="advantage_asexual">Aseks</string>
+    <string name="advantage_attractive">Atrakcyjna</string>
+
+    <!-- Advantage names -->
+    <string name="advantage_asexual_desc">
+        W wyniku ingerencji chirurgicznych oraz modyfikacji chemii mózgu postać jest neutralna
+        płciowo. Nie odczuwa pociągu fizycznego do nikogo ani przynależności do żadnej płci, nie
+        posiada cech płciowych. W Polsce bycie aseksem traktowane jest jak choroba. Atrakcyjność ma
+        mniejszy wpływ na aseksów – w czasie kontaktów z nimi należy liczyć tylko połowę
+        modyfikatora. Często łączy się z androgynicznym wyglądem.
+    </string>
+    <string name="advantage_attractive_desc">
+        Postać jest postrzegana jako ładna. Wynikać to może z wrodzonej urody lub dobrego oka
+        biorzeźbiarza. Każdy poziom tej zalety daje postaci modyfikator reakcji +1. Modyfikator ten
+        jest użyteczny tylko wtedy, kiedy rozmówca zna wygląd postaci. Atrakcyjność jest zaletą
+        oczekiwaną u osób o wyższym statusie społecznym.
+    </string>
+
+    <!-- Attribute names -->
     <string name="attribute_physique">Budowa</string>
     <string name="attribute_determination">Determinacja</string>
     <string name="attribute_dexterity">Zręczność</string>

@@ -2,6 +2,7 @@ package kopycinski.tomasz.ideefixecreator.database.repository
 
 import kopycinski.tomasz.ideefixecreator.database.dao.AdvantageDao
 import kopycinski.tomasz.ideefixecreator.database.entity.Advantage
+import kopycinski.tomasz.ideefixecreator.database.entity.CharacterSheetAdvantageCrossRef
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -11,9 +12,18 @@ class AdvantageRepository @Inject constructor(
     suspend fun insertAdvantage(advantage: Advantage) =
         advantageDao.insertOne(advantage)
 
+    suspend fun insertAdvCharCrossRef(characterId: Long, advantageId: Long) =
+        advantageDao.insertAdvCharCrossRef(CharacterSheetAdvantageCrossRef(characterId, advantageId))
+
+    suspend fun removeAdvCharCrossRef(characterId: Long, advantageId: Long) =
+        advantageDao.removeAdvCharCrossRef(advantageId, characterId)
+
     suspend fun updateAdvantage(advantage: Advantage) =
         advantageDao.updateOne(advantage)
 
     fun getAdvantages(): Flow<List<Advantage>> =
         advantageDao.getAll()
+
+    fun getAdvantageIdsByCharacterId(characterId: Long): Flow<List<Long>> =
+        advantageDao.getIdsAddedToCharacterSheet(characterId)
 }

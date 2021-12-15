@@ -27,11 +27,13 @@ class CharacterCreateViewModel @Inject constructor(
     private val _characterSheet = MutableStateFlow(CharacterSheet())
     private val _attributes = MutableStateFlow(listOf<AttributeWithSkillsAndSpecializations>())
     private val _advantages = MutableStateFlow(listOf<Advantage>())
+    private val _addedAdvantageIds = MutableStateFlow(listOf<Long>())
 
     val expandedAttributeId = mutableStateOf(-1L)
     val characterSheet = _characterSheet.asStateFlow()
     val attributes = _attributes.asStateFlow()
     val advantages = _advantages.asStateFlow()
+    val addedAdvantageIds = _addedAdvantageIds.asStateFlow()
 
     fun loadData() {
         viewModelScope.launch {
@@ -39,6 +41,12 @@ class CharacterCreateViewModel @Inject constructor(
         }
         viewModelScope.launch {
             getAdvantages()
+        }
+    }
+
+    private suspend fun getAddedAdvantageIds(characterId: Long) {
+        advantageRepository.getAdvantageIdsByCharacterId(characterId).collect { ids ->
+            _addedAdvantageIds.value = ids
         }
     }
 
@@ -54,6 +62,7 @@ class CharacterCreateViewModel @Inject constructor(
                 didLoadCharacter = true
                 _characterSheet.value = characterSheetWithStats.characterSheet
                 _attributes.value = characterSheetWithStats.attributes
+                getAddedAdvantageIds(characterSheetWithStats.characterSheet.characterSheetId)
             }
         }
     }
@@ -125,6 +134,18 @@ class CharacterCreateViewModel @Inject constructor(
         }
         viewModelScope.launch {
             skillRepository.updateSkill(newSkill)
+        }
+    }
+
+    fun removeAdvantage(advantageId: Long) {
+        viewModelScope.launch {
+            advantageRepository.removeAdvCharCrossRef(characterSheet.value.characterSheetId, advantageId)
+        }
+    }
+
+    fun insertAdvantage(advantageId: Long) {
+        viewModelScope.launch {
+            advantageRepository.insertAdvCharCrossRef(characterSheet.value.characterSheetId, advantageId)
         }
     }
 }

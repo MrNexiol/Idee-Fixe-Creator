@@ -139,15 +139,19 @@ class CharacterCreateViewModel @Inject constructor(
 
     fun modifyAdvantage(advantageId: Long, newCost: Int, newLevel: Int, existingAdv: CharacterSheetAdvantageCrossRef?) {
         if (existingAdv != null) {
-            if (existingAdv.level > newLevel) {
-                updateAdvCrossRef(existingAdv.copy(level = newLevel, cost = newCost))
-                increaseExperience(existingAdv.cost - newCost)
-            } else if (existingAdv.level < newLevel) {
-                updateAdvCrossRef(existingAdv.copy(level = newLevel, cost = newCost))
-                decreaseExperience(newCost - existingAdv.cost)
-            } else {
-                removeAdvantage(advantageId)
-                increaseExperience(newCost)
+            when {
+                existingAdv.level > newLevel -> {
+                    updateAdvCrossRef(existingAdv.copy(level = newLevel, cost = newCost))
+                    increaseExperience(existingAdv.cost - newCost)
+                }
+                existingAdv.level < newLevel -> {
+                    updateAdvCrossRef(existingAdv.copy(level = newLevel, cost = newCost))
+                    decreaseExperience(newCost - existingAdv.cost)
+                }
+                else -> {
+                    removeAdvantage(advantageId)
+                    increaseExperience(newCost)
+                }
             }
         } else {
             insertAdvantage(advantageId, newLevel, newCost)

@@ -1,6 +1,7 @@
 package kopycinski.tomasz.ideefixecreator.ui.screens.charactercreatescreen
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -49,23 +50,37 @@ fun AdvantageView(
     currentExp: Int,
     onClick: (Int, Int) -> Unit
 ) {
-    Row(
-        Modifier
+    var expanded by remember { mutableStateOf(false) }
+
+    Column(
+        modifier = Modifier
             .padding(bottom = 4.dp)
             .clip(CutCornerShape(8.dp, 0.dp, 8.dp, 0.dp))
             .background(Color.Gray)
-            .padding(8.dp)
-            .fillMaxWidth()
     ) {
-        Text(text = advantage.name, modifier = Modifier.weight(1f))
-        var costSum = -1
-        advantage.costs.forEachIndexed { index, cost ->
-            if (costSum >= 0) costSum += cost - advantage.costs[index - 1]
-            val checked = index == level - 1
-            if (checked) costSum = 0
-            val realCost = if (advantage.costs.count() == 1) cost else costSum
-            val enabled = (checked || level - 1 > index) || currentExp > realCost
-            Checkbox(checked = checked, onCheckedChange = { onClick(cost, index + 1) }, enabled = enabled)
+        Row(
+            modifier = Modifier
+                .clickable { expanded = !expanded }
+                .background(Color.LightGray)
+                .padding(8.dp)
+                .fillMaxWidth()
+        ) {
+            Text(text = advantage.name, modifier = Modifier.weight(1f))
+            var costSum = -1
+            advantage.costs.forEachIndexed { index, cost ->
+                if (costSum >= 0) costSum += cost - advantage.costs[index - 1]
+                val checked = index == level - 1
+                if (checked) costSum = 0
+                val realCost = if (advantage.costs.count() == 1) cost else costSum
+                val enabled = (checked || level - 1 > index) || currentExp > realCost
+                Checkbox(checked = checked, onCheckedChange = { onClick(cost, index + 1) }, enabled = enabled)
+            }
+        }
+        if (expanded) {
+            Text(
+                modifier = Modifier.padding(8.dp),
+                text = advantage.description
+            )
         }
     }
 }

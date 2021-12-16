@@ -30,16 +30,11 @@ fun AdvantageTabContent(
     Column(modifier = modifier) {
         Text(text = characterSheet.experience.toString())
         LazyColumn {
-            items(addedAdvantages) { addedAdvantage ->
-                Text(text = addedAdvantage.toString())
-            }
-        }
-        LazyColumn {
             items(advantages) { advantage ->
                 val foundAdv = addedAdvantages.find { it.advantageId == advantage.advantageId }
                 val level = foundAdv?.level ?: 0
 
-                AdvantageView(advantage, level) { cost, newLevel ->
+                AdvantageView(advantage, level, characterSheet.experience) { cost, newLevel ->
                     viewModel.modifyAdvantage(advantage.advantageId, cost, newLevel, foundAdv)
                 }
             }
@@ -51,6 +46,7 @@ fun AdvantageTabContent(
 fun AdvantageView(
     advantage: Advantage,
     level: Int,
+    currentExp: Int,
     onClick: (Int, Int) -> Unit
 ) {
     Row(
@@ -62,9 +58,14 @@ fun AdvantageView(
             .fillMaxWidth()
     ) {
         Text(text = advantage.name, modifier = Modifier.weight(1f))
+        var costSum = -1
         advantage.costs.forEachIndexed { index, cost ->
+            if (costSum >= 0) costSum += cost - advantage.costs[index - 1]
             val checked = index == level - 1
-            Checkbox(checked = checked, onCheckedChange = { onClick(cost, index + 1) })
+            if (checked) costSum = 0
+            val realCost = if (advantage.costs.count() == 1) cost else costSum
+            val enabled = (checked || level - 1 > index) || currentExp > realCost
+            Checkbox(checked = checked, onCheckedChange = { onClick(cost, index + 1) }, enabled = enabled)
         }
     }
 }

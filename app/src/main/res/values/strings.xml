@@ -4,8 +4,15 @@
     <!-- Advantage names -->
     <string name="advantage_asexual">Aseks</string>
     <string name="advantage_attractive">Atrakcyjna</string>
+    <string name="advantage_androgynic">Androgyniczna</string>
+    <string name="advantage_no_allergies">Brak alergii</string>
+    <string name="advantage_intuition">Intuicja @</string>
+    <string name="advantage_dual_wield">Oburęczność</string>
+    <string name="advantage_sense_of_time">Poczucie czasu</string>
+    <string name="advantage_common_sense">Zdrowy rozsądek</string>
+    <string name="advantage_bad_feeling">Złe przeczucia @</string>
 
-    <!-- Advantage names -->
+    <!-- Advantage descriptions -->
     <string name="advantage_asexual_desc">
         W wyniku ingerencji chirurgicznych oraz modyfikacji chemii mózgu postać jest neutralna
         płciowo. Nie odczuwa pociągu fizycznego do nikogo ani przynależności do żadnej płci, nie
@@ -18,6 +25,46 @@
         biorzeźbiarza. Każdy poziom tej zalety daje postaci modyfikator reakcji +1. Modyfikator ten
         jest użyteczny tylko wtedy, kiedy rozmówca zna wygląd postaci. Atrakcyjność jest zaletą
         oczekiwaną u osób o wyższym statusie społecznym.
+    </string>
+    <string name="advantage_androgynic_desc">
+        Postać ma specyficzny typ urody pozwalający jej uchodzić zarówno za mężczyznę, jak i kobietę.
+    </string>
+    <string name="advantage_no_allergies_desc">
+        Postać nie jest absolutnie na nic uczulona (w odróżnieniu od 60 proc. populacji).
+    </string>
+    <string name="advantage_intuition_desc">
+        Postać ma nadzwyczaj silne i często trafne przeczucia. Postawiona przed wyborem może zdać
+        się na instynkt. Gracz mówi wtedy Mistrzowi Gry, między jakimi możliwościami próbuje wybrać,
+        MG zaś wykonuje skomplikowany (20) test determinacji postaci. Udany test oznacza, że postać
+        wie, które wyjście jest dobre, zaś udany o więcej niż 5 – które jest najlepsze. Nieudany
+        test oznacza brak podpowiedzi od instynktu, a nieudany o więcej niż 5 punktów – błędną podpowiedź.
+    </string>
+    <string name="advantage_dual_wield_desc">
+        Ręce postaci są jednakowo sprawne. Postać nie otrzymuje ujemnych modyfikatorów za robienie
+        czegoś „drugą” ręką (ale nie oznacza to bezproblemowego strzelania z dwóch pistoletów naraz).
+    </string>
+    <string name="advantage_sense_of_time_desc">
+        Postać jest doskonale świadoma upływu czasu. Zawsze jest w stanie podać dokładną godzinę i
+        precyzyjnie ustalić, jak długo coś robi. Jeżeli ktoś umyślnie próbuje rozregulować jej zegar
+        (popularna taktyka przesłuchań), zdanie łatwego (10) testu percepcji pozwala utrzymać rachubę
+        czasu.
+    </string>
+    <string name="advantage_common_sense_desc">
+        Postać posiada – niezbyt powszechną – zdolność odróżniania działań sensownych od kretyńskich.
+        Zaleta ta może zadziałać, kiedy postać lub ktoś z jej otoczenia próbuje podjąć działanie
+        idiotyczne z punktu widzenia scenariusza lub zdrowego rozsądku. Mistrz Gry może w takiej
+        sytuacji wykonać łatwy (10) test wyższego z atrybutów – intelektu lub percepcji. Jeśli test
+        będzie udany, graczowi należy się informacja, że planowane właśnie działanie jest głupie,
+        nie przyniesie korzyści lub może być szkodliwe.\n
+        Zdrowy rozsądek ułatwia także opieranie się wadom psychicznym. W sytuacji, kiedy poddanie
+        się wadzie byłoby wybitnie nierozsądne (atak paniki na krawędzi dachu wieżowca), postać
+        dostaje modyfikator +1 do determinacji.
+    </string>
+    <string name="advantage_bad_feeling_desc">
+        Postać „miewa nosa”. Czasami bez wyraźnej przyczyny postanawia pójść inną drogą, dzięki
+        czemu unika wypadku lub napadu. Jeżeli postaci grozi jakieś niebezpieczeństwo, którego jest
+        nieświadoma, Mistrz Gry powinien wykonać przeciętny (15) test determinacji postaci. Sukces
+        oznacza, że postać ma „złe przeczucie”.
     </string>
 
     <!-- Attribute names -->

@@ -12,8 +12,11 @@ class AdvantageRepository @Inject constructor(
     suspend fun insertAdvantage(advantage: Advantage) =
         advantageDao.insertOne(advantage)
 
-    suspend fun insertAdvCharCrossRef(characterId: Long, advantageId: Long) =
-        advantageDao.insertAdvCharCrossRef(CharacterSheetAdvantageCrossRef(characterId, advantageId))
+    suspend fun insertAdvCharCrossRef(characterId: Long, advantageId: Long, level: Int, cost: Int) =
+        advantageDao.insertAdvCharCrossRef(CharacterSheetAdvantageCrossRef(characterId, advantageId, level, cost))
+
+    suspend fun updateAdvCharCrossRef(crossRef: CharacterSheetAdvantageCrossRef) =
+        advantageDao.updateAdvCharCrossRef(crossRef)
 
     suspend fun removeAdvCharCrossRef(characterId: Long, advantageId: Long) =
         advantageDao.removeAdvCharCrossRef(advantageId, characterId)
@@ -24,6 +27,6 @@ class AdvantageRepository @Inject constructor(
     fun getAdvantages(): Flow<List<Advantage>> =
         advantageDao.getAll()
 
-    fun getAdvantageIdsByCharacterId(characterId: Long): Flow<List<Long>> =
+    fun getAdvantageIdsByCharacterId(characterId: Long): Flow<List<CharacterSheetAdvantageCrossRef>> =
         advantageDao.getIdsAddedToCharacterSheet(characterId)
 }

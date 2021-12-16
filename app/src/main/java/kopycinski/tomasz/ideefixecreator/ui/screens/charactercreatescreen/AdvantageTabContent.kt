@@ -25,24 +25,22 @@ fun AdvantageTabContent(
 ) {
     val characterSheet by viewModel.characterSheet.collectAsState()
     val advantages by viewModel.advantages.collectAsState()
-    val ids by viewModel.addedAdvantageIds.collectAsState()
+    val addedAdvantages by viewModel.addedAdvantageIds.collectAsState()
 
     Column(modifier = modifier) {
         Text(text = characterSheet.experience.toString())
         LazyColumn {
-            items(ids) { id ->
-                Text(text = id.toString())
+            items(addedAdvantages) { addedAdvantage ->
+                Text(text = addedAdvantage.toString())
             }
         }
         LazyColumn {
             items(advantages) { advantage ->
-                val checked = ids.contains(advantage.advantageId)
-                AdvantageView(advantage, checked) {
-                    if (checked) {
-                        viewModel.removeAdvantage(advantage.advantageId)
-                    } else {
-                        viewModel.insertAdvantage(advantage.advantageId)
-                    }
+                val foundAdv = addedAdvantages.find { it.advantageId == advantage.advantageId }
+                val level = foundAdv?.level ?: 0
+
+                AdvantageView(advantage, level) { cost, newLevel ->
+                    viewModel.modifyAdvantage(advantage.advantageId, cost, newLevel, foundAdv)
                 }
             }
         }
@@ -52,8 +50,8 @@ fun AdvantageTabContent(
 @Composable
 fun AdvantageView(
     advantage: Advantage,
-    checked: Boolean,
-    onClick: (Boolean) -> Unit
+    level: Int,
+    onClick: (Int, Int) -> Unit
 ) {
     Row(
         Modifier
@@ -64,8 +62,9 @@ fun AdvantageView(
             .fillMaxWidth()
     ) {
         Text(text = advantage.name, modifier = Modifier.weight(1f))
-        repeat(advantage.levels) {
-            Checkbox(checked = checked, onCheckedChange = onClick)
+        advantage.costs.forEachIndexed { index, cost ->
+            val checked = index == level - 1
+            Checkbox(checked = checked, onCheckedChange = { onClick(cost, index + 1) })
         }
     }
 }

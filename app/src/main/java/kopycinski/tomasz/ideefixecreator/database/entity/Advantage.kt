@@ -9,7 +9,6 @@ import kopycinski.tomasz.ideefixecreator.R
 data class Advantage(
     val name: String,
     val description: String,
-    val levels: Int,
     val costs: List<Int>,
     val isPositive: Boolean,
 
@@ -21,14 +20,12 @@ data class Advantage(
                 Advantage(
                     context.getString(R.string.advantage_asexual),
                     context.getString(R.string.advantage_asexual_desc),
-                    1,
                     listOf(2),
                     true
                 ),
                 Advantage(
                     context.getString(R.string.advantage_attractive),
                     context.getString(R.string.advantage_attractive_desc),
-                    3,
                     listOf(3,6,9),
                     true
                 )

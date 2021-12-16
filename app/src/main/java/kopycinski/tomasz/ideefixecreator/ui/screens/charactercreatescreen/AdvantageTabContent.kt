@@ -12,6 +12,7 @@ import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.material.Checkbox
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -59,6 +60,7 @@ fun AdvantageView(
             .background(Color.Gray)
     ) {
         Row(
+            verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .clickable { expanded = !expanded }
                 .background(Color.LightGray)

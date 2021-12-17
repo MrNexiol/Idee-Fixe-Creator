@@ -34,29 +34,19 @@ fun CharacterListScreen(
 
     IdeeFixeCreatorTheme {
         Scaffold { contentPadding ->
-            CharacterSheetList(
-                characterList = characterList,
-                navController = navController,
+            LazyColumn(
                 modifier = Modifier
                     .padding(contentPadding)
                     .padding(8.dp)
-            )
-        }
-    }
-}
-
-@Composable
-fun CharacterSheetList(
-    characterList: List<CharacterSheet>,
-    navController: NavController,
-    modifier: Modifier = Modifier
-) {
-    LazyColumn(modifier = modifier.fillMaxSize()) {
-        items(characterList) { characterSheet ->
-            CharacterListItem(
-                characterSheet = characterSheet,
-                onClick = { navController.navigate(Screen.CharacterShowScreen.createRoute(it)) }
-            )
+                    .fillMaxSize()
+            ) {
+                items(characterList) { characterSheet ->
+                    CharacterListItem(
+                        characterSheet = characterSheet,
+                        onClick = { navController.navigate(Screen.CharacterShowScreen.createRoute(it)) }
+                    )
+                }
+            }
         }
     }
 }
@@ -67,42 +57,34 @@ fun CharacterListItem(
     onClick: (Long) -> Unit
 ) {
     Card(
+        elevation = 4.dp,
+        shape = MaterialTheme.shapes.small,
         modifier = Modifier
             .fillMaxWidth()
             .padding(bottom = 8.dp)
             .clickable { onClick(characterSheet.characterSheetId) },
-        elevation = 4.dp,
-        shape = MaterialTheme.shapes.small
     ) {
         Row(
+            verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .padding(8.dp)
-                .padding(end = 8.dp),
-            verticalAlignment = Alignment.CenterVertically
+                .padding(end = 8.dp)
         ) {
             Box(
-                Modifier
+                modifier = Modifier
                     .size(40.dp)
                     .background(Color.Gray)
             )
             Column(
+                verticalArrangement = Arrangement.Top,
                 modifier = Modifier
                     .weight(1f)
-                    .padding(start = 8.dp),
-                verticalArrangement = Arrangement.Top
+                    .padding(start = 8.dp)
             ) {
-                Text(
-                    text = characterSheet.toString(),
-                    fontWeight = FontWeight.Bold
-                )
-                Text(
-                    text = characterSheet.secondaryData()
-                )
+                Text(text = characterSheet.toString(), fontWeight = FontWeight.Bold)
+                Text(characterSheet.secondaryData())
             }
-            Text(
-                text = characterSheet.experienceString(),
-                fontSize = 30.sp
-            )
+            Text(text = characterSheet.experienceString(), fontSize = 30.sp)
         }
     }
 }

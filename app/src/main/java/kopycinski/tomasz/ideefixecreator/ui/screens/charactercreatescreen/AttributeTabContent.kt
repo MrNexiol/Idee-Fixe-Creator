@@ -32,9 +32,9 @@ fun AttributeTabContent(
     val attributesWithSkills by viewModel.attributes.collectAsState()
     val characterSheet by viewModel.characterSheet.collectAsState()
 
-    Column {
+    Column(modifier = modifier) {
         Text(text = characterSheet.experience.toString())
-        LazyColumn(modifier = modifier) {
+        LazyColumn {
             items(attributesWithSkills) { attributeWithSkills ->
                 AttributeView(
                     attribute = attributeWithSkills.attribute,
@@ -50,10 +50,7 @@ fun AttributeTabContent(
                     SkillList(
                         skillsWithSpecializations = attributeWithSkills.skills,
                         onIncreaseSkill = {
-                            viewModel.increaseSkill(
-                                it,
-                                attributeWithSkills.attribute.level
-                            )
+                            viewModel.increaseSkill(it, attributeWithSkills.attribute.level)
                         },
                         onDecreaseSkill = { viewModel.decreaseSkill(it) },
                         currentExperience = characterSheet.experience
@@ -90,10 +87,7 @@ fun AttributeView(
                 .clickable { onExpand() }
                 .padding(8.dp)
         ) {
-            Text(
-                modifier = Modifier.weight(1F),
-                text = attribute.name,
-            )
+            Text(modifier = Modifier.weight(1F), text = attribute.name)
             Row(
                 modifier = Modifier.border(border, shape = shape),
                 verticalAlignment = Alignment.CenterVertically
@@ -121,12 +115,7 @@ fun AttributeView(
                 }
             }
         }
-        if (expanded) {
-            Text(
-                modifier = Modifier.padding(8.dp),
-                text = attribute.description
-            )
-        }
+        if (expanded) Text(modifier = Modifier.padding(8.dp), text = attribute.description)
     }
 }
 

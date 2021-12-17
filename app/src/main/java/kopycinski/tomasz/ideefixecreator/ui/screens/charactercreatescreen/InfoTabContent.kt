@@ -19,44 +19,28 @@ fun InfoTabContent(
 
     Column(modifier = modifier) {
         OutlinedTextField(
-            value = characterSheet.name,
-            onValueChange = {
-                viewModel.updateCharacterSheet(characterSheet.copy(name = it))
-            },
             modifier = Modifier.fillMaxWidth(),
-            placeholder = {
-                Text(text = "Name")
-            }
+            value = characterSheet.name,
+            onValueChange = { viewModel.updateCharacterSheet(characterSheet.copy(name = it)) },
+            label = { Text(text = "Name") }
         )
         OutlinedTextField(
             value = characterSheet.surname,
-            onValueChange = {
-                viewModel.updateCharacterSheet(characterSheet.copy(surname = it))
-            },
+            onValueChange = { viewModel.updateCharacterSheet(characterSheet.copy(surname = it)) },
             modifier = Modifier.fillMaxWidth(),
-            placeholder = {
-                Text(text = "Surname")
-            }
+            label = { Text(text = "Surname") }
         )
         OutlinedTextField(
             value = characterSheet.gender,
-            onValueChange = {
-                viewModel.updateCharacterSheet(characterSheet.copy(gender = it))
-            },
+            onValueChange = { viewModel.updateCharacterSheet(characterSheet.copy(gender = it)) },
             modifier = Modifier.fillMaxWidth(),
-            placeholder = {
-                Text(text = "Gender")
-            }
+            label = { Text(text = "Gender") }
         )
         OutlinedTextField(
             value = characterSheet.nationality,
-            onValueChange = {
-                viewModel.updateCharacterSheet(characterSheet.copy(nationality = it))
-            },
+            onValueChange = { viewModel.updateCharacterSheet(characterSheet.copy(nationality = it)) },
             modifier = Modifier.fillMaxWidth(),
-            placeholder = {
-                Text(text = "Nationality")
-            }
+            label = { Text(text = "Nationality") }
         )
     }
 }

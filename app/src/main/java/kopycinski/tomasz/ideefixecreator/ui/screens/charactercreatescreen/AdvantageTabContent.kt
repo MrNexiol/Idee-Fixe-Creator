@@ -30,7 +30,7 @@ fun AdvantageTabContent(
     val addedAdvantages by viewModel.addedAdvantageIds.collectAsState()
 
     Column(modifier = modifier) {
-        Text(text = characterSheet.experience.toString())
+        Text(characterSheet.experience.toString())
         LazyColumn {
             items(advantages) { advantage ->
                 val foundAdv = addedAdvantages.find { it.advantageId == advantage.advantageId }
@@ -78,11 +78,6 @@ fun AdvantageView(
                 Checkbox(checked = checked, onCheckedChange = { onClick(cost, index + 1) }, enabled = enabled)
             }
         }
-        if (expanded) {
-            Text(
-                modifier = Modifier.padding(8.dp),
-                text = advantage.description
-            )
-        }
+        if (expanded) Text(modifier = Modifier.padding(8.dp), text = advantage.description)
     }
 }

@@ -14,6 +14,12 @@ data class Advantage(
 
     @PrimaryKey(autoGenerate = true) val advantageId: Long = 0
 ) {
+    fun calculateCost(actualLevel: Int, currentLevel: Int): Int {
+        return if (actualLevel != -1) {
+            if (actualLevel < currentLevel) costs[currentLevel] - costs[actualLevel] else 0
+        } else costs[currentLevel]
+    }
+
     companion object {
         fun advantageList(context: Context): List<Advantage> {
             return listOf(

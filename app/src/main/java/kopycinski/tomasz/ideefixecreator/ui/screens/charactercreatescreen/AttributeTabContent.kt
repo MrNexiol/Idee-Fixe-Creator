@@ -20,7 +20,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import kopycinski.tomasz.ideefixecreator.database.entity.Attribute
 import kopycinski.tomasz.ideefixecreator.database.entity.Skill
-import kopycinski.tomasz.ideefixecreator.database.entity.SkillWithSpecializations
 import kopycinski.tomasz.ideefixecreator.ui.theme.parallelogram
 import kopycinski.tomasz.ideefixecreator.viewmodel.CharacterCreateViewModel
 
@@ -35,26 +34,33 @@ fun AttributeTabContent(
     Column(modifier = modifier) {
         Text(text = characterSheet.experience.toString())
         LazyColumn {
-            items(attributesWithSkills) { attributeWithSkills ->
-                AttributeView(
-                    attribute = attributeWithSkills.attribute,
-                    onIncreaseAttribute = { viewModel.increaseAttribute(it) },
-                    onDecreaseAttribute = { viewModel.decreaseAttribute(it) },
-                    canIncrease = attributeWithSkills.attribute.level < 20 &&
-                            characterSheet.experience >= Attribute.UPGRADE_COSTS_FOR_LEVELS[attributeWithSkills.attribute.level]!!,
-                    canDecrease = attributeWithSkills.attribute.level > 0,
-                    onExpand = { viewModel.onExpand(attributeWithSkills.attribute.attributeId) },
-                    expanded = attributeWithSkills.attribute.attributeId == viewModel.expandedAttributeId.value
-                )
-                if (attributeWithSkills.attribute.attributeId == viewModel.expandedAttributeId.value) {
-                    SkillList(
-                        skillsWithSpecializations = attributeWithSkills.skills,
-                        onIncreaseSkill = {
-                            viewModel.increaseSkill(it, attributeWithSkills.attribute.level)
-                        },
-                        onDecreaseSkill = { viewModel.decreaseSkill(it) },
-                        currentExperience = characterSheet.experience
+            attributesWithSkills.forEach { attributeWithSkills ->
+                item {
+                    AttributeView(
+                        attribute = attributeWithSkills.attribute,
+                        onIncreaseAttribute = { viewModel.increaseAttribute(it) },
+                        onDecreaseAttribute = { viewModel.decreaseAttribute(it) },
+                        canIncrease = attributeWithSkills.attribute.level < 20 &&
+                                characterSheet.experience >= Attribute.UPGRADE_COSTS_FOR_LEVELS[attributeWithSkills.attribute.level]!!,
+                        canDecrease = attributeWithSkills.attribute.level > 0,
+                        onExpand = { viewModel.onExpand(attributeWithSkills.attribute.attributeId) },
+                        expanded = attributeWithSkills.attribute.attributeId == viewModel.expandedAttributeId.value
                     )
+                }
+
+                if (attributeWithSkills.attribute.attributeId == viewModel.expandedAttributeId.value) {
+                    items(attributeWithSkills.skills) { skillWithSpecs ->
+                        SkillView(
+                            skill = skillWithSpecs.skill,
+                            onIncreaseSkill = {
+                                viewModel.increaseSkill(it, attributeWithSkills.attribute.level)
+                            },
+                            onDecreaseSkill = { viewModel.decreaseSkill(it) },
+                            canIncrease = skillWithSpecs.skill.level < 25 &&
+                                    characterSheet.experience >= skillWithSpecs.skill.upgradeCost,
+                            canDecrease = skillWithSpecs.skill.level > skillWithSpecs.skill.baseLevel
+                        )
+                    }
                 }
             }
         }
@@ -116,24 +122,6 @@ fun AttributeView(
             }
         }
         if (expanded) Text(modifier = Modifier.padding(8.dp), text = attribute.description)
-    }
-}
-
-@Composable
-fun SkillList(
-    skillsWithSpecializations: List<SkillWithSpecializations>,
-    onIncreaseSkill: (Skill) -> Unit,
-    onDecreaseSkill: (Skill) -> Unit,
-    currentExperience: Int
-) {
-    skillsWithSpecializations.forEach {
-        SkillView(
-            skill = it.skill,
-            onIncreaseSkill = onIncreaseSkill,
-            onDecreaseSkill = onDecreaseSkill,
-            canIncrease = it.skill.level < 25 && currentExperience >= it.skill.upgradeCost,
-            canDecrease = it.skill.level > it.skill.baseLevel
-        )
     }
 }
 

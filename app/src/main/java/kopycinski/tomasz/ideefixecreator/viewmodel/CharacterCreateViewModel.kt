@@ -33,7 +33,7 @@ class CharacterCreateViewModel @Inject constructor(
     val characterSheet = _characterSheet.asStateFlow()
     val attributes = _attributes.asStateFlow()
     val advantages = _advantages.asStateFlow()
-    val addedAdvantageIds = _addedAdvantageIds.asStateFlow()
+    val addedAdvantages = _addedAdvantageIds.asStateFlow()
 
     fun loadData() {
         viewModelScope.launch {

@@ -27,7 +27,7 @@ fun AdvantageTabContent(
 ) {
     val characterSheet by viewModel.characterSheet.collectAsState()
     val advantages by viewModel.advantages.collectAsState()
-    val addedAdvantages by viewModel.addedAdvantageIds.collectAsState()
+    val addedAdvantages by viewModel.addedAdvantages.collectAsState()
 
     Column(modifier = modifier) {
         Text(characterSheet.experience.toString())

@@ -14,8 +14,13 @@ data class CharacterSheetWithStats(
     val attributes: List<AttributeWithSkillsAndSpecializations>,
     @Relation(
         parentColumn = "characterSheetId",
+        entity = Advantage::class,
         entityColumn = "advantageId",
-        associateBy = Junction(CharacterSheetAdvantageCrossRef::class)
+        associateBy = Junction(
+            value = CharacterSheetAdvantageCrossRef::class,
+            parentColumn = "characterSheetId",
+            entityColumn = "advantageId"
+        )
     )
     val advantages: List<Advantage>
 )

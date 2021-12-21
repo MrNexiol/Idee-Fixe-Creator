@@ -4,7 +4,6 @@ import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Transaction
 import kopycinski.tomasz.ideefixecreator.database.entity.CharacterSheet
-import kopycinski.tomasz.ideefixecreator.database.entity.CharacterSheetWithAttributes
 import kopycinski.tomasz.ideefixecreator.database.entity.CharacterSheetWithStats
 import kotlinx.coroutines.flow.Flow
 
@@ -13,16 +12,8 @@ abstract class CharacterSheetDao : BaseDao<CharacterSheet> {
     @Query("SELECT * FROM charactersheet")
     abstract fun getAll(): Flow<List<CharacterSheet>>
 
-    @Transaction
-    @Query("SELECT * FROM charactersheet")
-    abstract fun getAllWithAttributes(): Flow<List<CharacterSheetWithAttributes>>
-
     @Query("SELECT * FROM charactersheet WHERE characterSheetId=:id LIMIT 1")
     abstract fun getOne(id: Long): Flow<CharacterSheet>
-
-    @Transaction
-    @Query("SELECT * FROM charactersheet WHERE characterSheetId=:id LIMIT 1")
-    abstract fun getOneWithAttributes(id: Long): Flow<CharacterSheetWithAttributes>
 
     @Transaction
     @Query("SELECT * FROM charactersheet WHERE characterSheetId=:id LIMIT 1")

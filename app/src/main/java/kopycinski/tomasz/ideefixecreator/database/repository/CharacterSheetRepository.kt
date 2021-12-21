@@ -35,9 +35,6 @@ class CharacterSheetRepository @Inject constructor(
     private fun getCharacterSheet(id: Long): Flow<CharacterSheet> =
         characterSheetDao.getOne(id)
 
-    fun getCharacterSheetWithAttributes(id: Long): Flow<CharacterSheetWithAttributes> =
-        characterSheetDao.getOneWithAttributes(id)
-
     fun getCharacterSheetWithStats(id: Long): Flow<CharacterSheetWithStats> =
         characterSheetDao.getWithStats(id)
 

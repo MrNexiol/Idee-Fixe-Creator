@@ -12,14 +12,14 @@ import kopycinski.tomasz.ideefixecreator.viewmodel.CharacterCreateViewModel
 
 const val INFO_TAB = 0
 const val ATTRIBUTES_TAB = 1
-const val SKILL_TAB = 2
+const val ADVANTAGE_TAB = 2
 
 @Composable
 fun CharacterCreateScreen(
     viewModel: CharacterCreateViewModel = hiltViewModel()
 ) {
-    var state by remember { mutableStateOf(0) }
-    val titles = listOf("Info", "Attributes", "Skills")
+    var state by remember { mutableStateOf(INFO_TAB) }
+    val titles = listOf("Info", "Attributes", "Advantages")
     
     LaunchedEffect(false) {
         viewModel.loadData()
@@ -54,8 +54,8 @@ fun CharacterCreateScreen(
                             viewModel = viewModel
                         )
                     }
-                    SKILL_TAB -> {
-                        SkillTabContent(
+                    ADVANTAGE_TAB -> {
+                        AdvantageTabContent(
                             Modifier
                                 .padding(contentPadding)
                                 .padding(8.dp),

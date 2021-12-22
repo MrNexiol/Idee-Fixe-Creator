@@ -16,18 +16,15 @@ import kopycinski.tomasz.ideefixecreator.ui.theme.IdeeFixeCreatorTheme
 fun MainScreen(navController: NavController) {
     IdeeFixeCreatorTheme {
         Column(
-            modifier = Modifier
-                .fillMaxSize(),
+            modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Button(onClick = { navController.navigate(Screen.CharacterListScreen.route) }) {
-                Text(text = "List")
+                Text("List")
             }
-            Button(onClick = {
-                navController.navigate(Screen.CharacterCreateScreen.route)
-            }) {
-                Text(text = "Create")
+            Button(onClick = { navController.navigate(Screen.CharacterCreateScreen.route) }) {
+                Text("Create")
             }
         }
     }

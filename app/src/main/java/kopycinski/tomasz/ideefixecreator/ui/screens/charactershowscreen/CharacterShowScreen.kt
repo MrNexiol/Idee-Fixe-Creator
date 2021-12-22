@@ -1,10 +1,9 @@
-package kopycinski.tomasz.ideefixecreator.ui.screens
+package kopycinski.tomasz.ideefixecreator.ui.screens.charactershowscreen
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Button
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -15,7 +14,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import kopycinski.tomasz.ideefixecreator.navigation.Screen
 import kopycinski.tomasz.ideefixecreator.ui.theme.IdeeFixeCreatorTheme
 import kopycinski.tomasz.ideefixecreator.viewmodel.CharacterShowViewModel
 

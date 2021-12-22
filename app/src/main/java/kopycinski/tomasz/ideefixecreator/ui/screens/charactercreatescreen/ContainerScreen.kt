@@ -5,8 +5,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import kopycinski.tomasz.ideefixecreator.R
 import kopycinski.tomasz.ideefixecreator.ui.theme.IdeeFixeCreatorTheme
 import kopycinski.tomasz.ideefixecreator.viewmodel.CharacterCreateViewModel
 
@@ -19,7 +21,11 @@ fun CharacterCreateScreen(
     viewModel: CharacterCreateViewModel = hiltViewModel()
 ) {
     var state by remember { mutableStateOf(INFO_TAB) }
-    val titles = listOf("Info", "Attributes", "Advantages")
+    val titles = listOf(
+        stringResource(R.string.info_tab),
+        stringResource(R.string.attributes_tab),
+        stringResource(R.string.advantages_tab)
+    )
     
     LaunchedEffect(false) {
         viewModel.loadData()

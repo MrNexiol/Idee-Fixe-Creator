@@ -116,8 +116,6 @@
         startowo otrzymuje umiejętność obserwacja na poziomie równym percepcji.
     </string>
 
-    <!-- Skill names -->
-
     <!-- Physical skill names -->
     <string name="skill_physique_strength">Siła</string>
     <string name="skill_physique_swimming">Pływanie</string>
@@ -224,6 +222,12 @@
     <string name="skill_perception_kerning">Kerning</string>
     <string name="skill_perception_connection">Koneksje</string>
     <string name="skill_perception_survival_in_mutated_areas">Przetrwanie w terenie zmutowanym</string>
+
+    <!-- Tab names -->
+    <string name="info_tab">Informacje</string>
+    <string name="stats_tab">Statystyki</string>
+    <string name="attributes_tab">Atrybuty</string>
+    <string name="advantages_tab">Zdolności</string>
 
     <!-- Screen names -->
     <string name="main_screen" translatable="false">main_screen</string>

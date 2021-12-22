@@ -45,7 +45,9 @@ abstract class AppDatabase : RoomDatabase() {
                 ).addCallback(object : RoomDatabase.Callback() {
                     override fun onCreate(db: SupportSQLiteDatabase) {
                         CoroutineScope(Dispatchers.IO).launch {
-                            getDatabase(context).advantageDao().insertMany(Advantage.advantageList(context))
+                            getDatabase(context).advantageDao().insertMany(
+                                Advantage.advantageList(context)
+                            )
                         }
                     }
                 }).build()

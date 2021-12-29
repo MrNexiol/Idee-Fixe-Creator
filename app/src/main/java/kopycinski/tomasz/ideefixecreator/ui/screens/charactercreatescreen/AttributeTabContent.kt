@@ -7,7 +7,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
@@ -80,7 +79,7 @@ fun AttributeView(
     Column(
         modifier = Modifier
             .padding(bottom = 4.dp)
-            .clip(CutCornerShape(8.dp, 0.dp, 8.dp, 0.dp))
+            .clip(MaterialTheme.shapes.medium)
             .background(Color.Gray)
     ) {
         val border = BorderStroke(1.dp, Color.Black)
@@ -140,7 +139,7 @@ fun SkillView(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .padding(start = 16.dp, bottom = 4.dp)
-            .clip(CutCornerShape(8.dp, 0.dp, 8.dp, 0.dp))
+            .clip(MaterialTheme.shapes.medium)
             .background(Color.DarkGray)
             .padding(8.dp)
     ) {

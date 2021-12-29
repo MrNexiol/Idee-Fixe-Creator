@@ -8,8 +8,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.material.Checkbox
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -56,7 +56,7 @@ fun AdvantageView(
     Column(
         modifier = Modifier
             .padding(bottom = 4.dp)
-            .clip(CutCornerShape(8.dp, 0.dp, 8.dp, 0.dp))
+            .clip(MaterialTheme.shapes.medium)
             .background(Color.Gray)
     ) {
         Row(

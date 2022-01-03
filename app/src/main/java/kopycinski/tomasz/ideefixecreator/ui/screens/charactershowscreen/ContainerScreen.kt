@@ -2,10 +2,9 @@ package kopycinski.tomasz.ideefixecreator.ui.screens.charactershowscreen
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Tab
-import androidx.compose.material.TabRow
-import androidx.compose.material.Text
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -13,6 +12,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import kopycinski.tomasz.ideefixecreator.R
+import kopycinski.tomasz.ideefixecreator.navigation.Screen
 import kopycinski.tomasz.ideefixecreator.ui.theme.IdeeFixeCreatorTheme
 import kopycinski.tomasz.ideefixecreator.viewmodel.CharacterShowViewModel
 
@@ -36,7 +36,13 @@ fun CharacterShowScreen(
     }
 
     IdeeFixeCreatorTheme {
-        Scaffold { contentPadding ->
+        Scaffold(
+            floatingActionButton = {
+                FloatingActionButton(onClick = { navController.navigate(Screen.CharacterEditScreen.route) }) {
+                    Icon(Icons.Filled.Edit, contentDescription = "Edycja")
+                }
+            }
+        ) { contentPadding ->
             Column {
                 TabRow(selectedTabIndex = state) {
                     titles.forEachIndexed { index, title ->

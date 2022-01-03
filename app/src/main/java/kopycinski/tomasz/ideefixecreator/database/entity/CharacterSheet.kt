@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class CharacterSheet(
-    var name: String = "",
+    var names: String = "",
     var surname: String = "",
     var age: Int = 21,
     var gender: String = "",
@@ -19,7 +19,7 @@ data class CharacterSheet(
     @PrimaryKey(autoGenerate = true) val characterSheetId: Long = 0
 ) {
     override fun toString(): String {
-        return "$name $surname ($age)"
+        return "$names $surname ($age)"
     }
 
     fun secondaryData(): String {

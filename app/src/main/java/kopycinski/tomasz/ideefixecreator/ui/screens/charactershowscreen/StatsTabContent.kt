@@ -100,7 +100,7 @@ fun AttributeView(attribute: Attribute) {
             modifier = Modifier
                 .width(60.dp)
                 .height(60.dp)
-                .border(1.dp, Color.DarkGray, MaterialTheme.shapes.large),
+                .border(1.dp, Color.LightGray, MaterialTheme.shapes.large),
             contentAlignment = Alignment.Center
         ) {
             Text(

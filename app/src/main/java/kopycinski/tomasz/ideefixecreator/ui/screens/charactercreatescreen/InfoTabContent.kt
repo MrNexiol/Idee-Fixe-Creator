@@ -21,16 +21,16 @@ fun InfoTabContent(
 
     Column(modifier = modifier) {
         OutlinedTextField(
-            modifier = Modifier.fillMaxWidth(),
-            value = characterSheet.names,
-            onValueChange = { viewModel.updateCharacterSheet(characterSheet.copy(names = it)) },
-            label = { Text(stringResource(R.string.names)) }
-        )
-        OutlinedTextField(
             value = characterSheet.surname,
             onValueChange = { viewModel.updateCharacterSheet(characterSheet.copy(surname = it)) },
             modifier = Modifier.fillMaxWidth(),
             label = { Text(stringResource(R.string.surname)) }
+        )
+        OutlinedTextField(
+            modifier = Modifier.fillMaxWidth(),
+            value = characterSheet.names,
+            onValueChange = { viewModel.updateCharacterSheet(characterSheet.copy(names = it)) },
+            label = { Text(stringResource(R.string.names)) }
         )
         OutlinedTextField(
             value = characterSheet.gender,

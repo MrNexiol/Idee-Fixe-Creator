@@ -82,7 +82,7 @@ fun CharacterListItem(
                     .padding(start = 8.dp)
             ) {
                 Text(text = characterSheet.toString(), fontWeight = FontWeight.Bold)
-                Text(characterSheet.secondaryData())
+                Text(characterSheet.genderString())
             }
             Text(text = characterSheet.experienceString(), fontSize = 30.sp)
         }

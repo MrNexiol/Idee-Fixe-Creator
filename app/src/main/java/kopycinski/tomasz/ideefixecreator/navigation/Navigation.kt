@@ -46,8 +46,5 @@ fun Navigation() {
             }
             CharacterCreateScreen(characterSheetId = characterSheetId)
         }
-        composable(route = Screen.CharacterEditScreen.route) {
-            CharacterEditScreen(navController)
-        }
     }
 }

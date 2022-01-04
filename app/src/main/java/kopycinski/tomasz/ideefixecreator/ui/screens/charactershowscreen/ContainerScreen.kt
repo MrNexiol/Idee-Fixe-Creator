@@ -38,7 +38,7 @@ fun CharacterShowScreen(
     IdeeFixeCreatorTheme {
         Scaffold(
             floatingActionButton = {
-                FloatingActionButton(onClick = { navController.navigate(Screen.CharacterEditScreen.route) }) {
+                FloatingActionButton(onClick = { navController.navigate(Screen.CharacterCreateScreen.createRoute(characterSheetId)) }) {
                     Icon(Icons.Filled.Edit, contentDescription = "Edycja")
                 }
             }

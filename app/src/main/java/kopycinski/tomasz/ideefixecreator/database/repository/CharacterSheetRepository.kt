@@ -14,12 +14,16 @@ class CharacterSheetRepository @Inject constructor(
     private val skillDao: SkillDao,
     private val context: Context
 ) {
-    suspend fun createCharacter() : Flow<CharacterSheetWithStats> {
-        characterSheetDao.insertOne(CharacterSheet()).let { characterSheetId ->
-            attributeDao.insertMany(Attribute.attributeList(characterSheetId, context)).let { attributeIdsList ->
-                skillDao.insertMany(Skill.skillList(attributeIdsList, context))
+    suspend fun createOrLoadCharacter(id: Long? = null) : Flow<CharacterSheetWithStats> {
+        if (id != null) {
+            return getCharacterSheetWithStats(id)
+        } else {
+            characterSheetDao.insertOne(CharacterSheet()).let { characterSheetId ->
+                attributeDao.insertMany(Attribute.attributeList(characterSheetId, context)).let { attributeIdsList ->
+                    skillDao.insertMany(Skill.skillList(attributeIdsList, context))
+                }
+                return getCharacterSheetWithStats(characterSheetId)
             }
-            return getCharacterSheetWithStats(characterSheetId)
         }
     }
 

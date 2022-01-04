@@ -6,7 +6,7 @@
     <string name="surname">Nazwisko</string>
     <string name="gender">Płeć</string>
     <string name="age">Wiek</string>
-    <string name="nationality">obywatelstwo</string>
+    <string name="nationality">Obywatelstwo</string>
 
     <!-- Advantage names -->
     <string name="advantage_asexual">Aseks</string>

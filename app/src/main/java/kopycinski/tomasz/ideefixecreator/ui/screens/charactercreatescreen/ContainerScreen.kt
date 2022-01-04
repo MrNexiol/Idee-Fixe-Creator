@@ -18,6 +18,7 @@ const val ADVANTAGE_TAB = 2
 
 @Composable
 fun CharacterCreateScreen(
+    characterSheetId: Long?,
     viewModel: CharacterCreateViewModel = hiltViewModel()
 ) {
     var state by remember { mutableStateOf(INFO_TAB) }
@@ -28,7 +29,7 @@ fun CharacterCreateScreen(
     )
     
     LaunchedEffect(false) {
-        viewModel.loadData()
+        viewModel.loadData(characterSheetId)
     }
 
     IdeeFixeCreatorTheme {

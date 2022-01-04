@@ -35,9 +35,9 @@ class CharacterCreateViewModel @Inject constructor(
     val advantages = _advantages.asStateFlow()
     val addedAdvantages = _addedAdvantageIds.asStateFlow()
 
-    fun loadData() {
+    fun loadData(characterSheetId: Long? = null) {
         viewModelScope.launch {
-            getCharacter()
+            getCharacter(characterSheetId)
         }
         viewModelScope.launch {
             getAdvantages()
@@ -58,9 +58,9 @@ class CharacterCreateViewModel @Inject constructor(
         }
     }
 
-    private suspend fun getCharacter() {
+    private suspend fun getCharacter(id: Long? = null) {
         if (!didLoadCharacter) {
-            characterSheetRepository.createCharacter().collect { characterSheetWithStats ->
+            characterSheetRepository.createOrLoadCharacter(id).collect { characterSheetWithStats ->
                 didLoadCharacter = true
                 _characterSheet.value = characterSheetWithStats.characterSheet
                 _attributes.value = characterSheetWithStats.attributes

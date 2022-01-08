@@ -75,8 +75,8 @@ fun AttributeView(
         modifier = Modifier
             .padding(bottom = 4.dp)
             .border(2.dp, MaterialTheme.colors.primary, MaterialTheme.shapes.large),
-        contentColor = MaterialTheme.colors.primary,
-        backgroundColor = MaterialTheme.colors.background
+        contentColor = if (expanded) MaterialTheme.colors.background else MaterialTheme.colors.primary,
+        backgroundColor = if (expanded) MaterialTheme.colors.primary else MaterialTheme.colors.background
     ) {
         Column {
             Row(

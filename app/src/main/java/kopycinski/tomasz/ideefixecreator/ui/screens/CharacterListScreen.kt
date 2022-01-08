@@ -1,6 +1,7 @@
 package kopycinski.tomasz.ideefixecreator.ui.screens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -32,21 +33,16 @@ fun CharacterListScreen(
 ) {
     val characterList: List<CharacterSheet> by viewModel.getAll().collectAsState(listOf())
 
-    IdeeFixeCreatorTheme {
-        Scaffold { contentPadding ->
-            LazyColumn(
-                modifier = Modifier
-                    .padding(contentPadding)
-                    .padding(8.dp)
-                    .fillMaxSize()
-            ) {
-                items(characterList) { characterSheet ->
-                    CharacterListItem(
-                        characterSheet = characterSheet,
-                        onClick = { navController.navigate(Screen.CharacterShowScreen.createRoute(it)) }
-                    )
-                }
-            }
+    LazyColumn(
+        modifier = Modifier
+            .padding(8.dp)
+            .fillMaxSize()
+    ) {
+        items(characterList) { characterSheet ->
+            CharacterListItem(
+                characterSheet = characterSheet,
+                onClick = { navController.navigate(Screen.CharacterShowScreen.createRoute(it)) }
+            )
         }
     }
 }
@@ -57,29 +53,30 @@ fun CharacterListItem(
     onClick: (Long) -> Unit
 ) {
     Card(
-        elevation = 4.dp,
-        shape = MaterialTheme.shapes.small,
         modifier = Modifier
             .fillMaxWidth()
             .padding(bottom = 8.dp)
+            .border(2.dp, MaterialTheme.colors.primary, MaterialTheme.shapes.medium)
             .clickable { onClick(characterSheet.characterSheetId) },
+        contentColor = MaterialTheme.colors.primary,
+        backgroundColor = MaterialTheme.colors.background
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
-                .padding(8.dp)
                 .padding(end = 8.dp)
         ) {
             Box(
                 modifier = Modifier
-                    .size(40.dp)
-                    .background(Color.Gray)
+                    .width(48.dp)
+                    .height(56.dp)
+                    .border(2.dp, MaterialTheme.colors.primary)
             )
             Column(
                 verticalArrangement = Arrangement.Top,
                 modifier = Modifier
                     .weight(1f)
-                    .padding(start = 8.dp)
+                    .padding(8.dp)
             ) {
                 Text(text = characterSheet.toString(), fontWeight = FontWeight.Bold)
                 Text(characterSheet.genderString())

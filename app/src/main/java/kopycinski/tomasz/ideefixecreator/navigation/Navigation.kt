@@ -14,7 +14,10 @@ import kopycinski.tomasz.ideefixecreator.ui.screens.charactershowscreen.Characte
 fun Navigation() {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = Screen.MainScreen.route) {
+    NavHost(
+        navController = navController,
+        startDestination = Screen.MainScreen.route
+    ) {
         composable(route = Screen.MainScreen.route) {
             MainScreen(navController)
         }

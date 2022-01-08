@@ -230,6 +230,10 @@
     <string name="skill_perception_connection">Koneksje</string>
     <string name="skill_perception_survival_in_mutated_areas">Przetrwanie w terenie zmutowanym</string>
 
+    <!-- Main navigation -->
+    <string name="list_button">Lista postaci</string>
+    <string name="create_button">Utwórz nową postać</string>
+
     <!-- Tab names -->
     <string name="info_tab">Informacje</string>
     <string name="stats_tab">Statystyki</string>

@@ -10,10 +10,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kopycinski.tomasz.ideefixecreator.database.entity.Attribute
+import kopycinski.tomasz.ideefixecreator.ui.SectionContainer
 import kopycinski.tomasz.ideefixecreator.viewmodel.CharacterShowViewModel
 
 @Composable
@@ -30,60 +30,62 @@ fun StatsTabContent(
     ) {
         // Advantages
         item {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 8.dp)
-                    .border(1.dp, Color.LightGray, MaterialTheme.shapes.large)
-                    .padding(8.dp)
+            SectionContainer(
+                modifier = Modifier.padding(top = 8.dp),
+                label = "Zdolności"
             ) {
-                advantages.forEach {
-                    Text(it.name)
+                if (advantages.isNotEmpty()) {
+                    Column {
+                        advantages.forEach {
+                            Text(it.name)
+                        }
+                    }
+                } else {
+                    Text("Nie masz zdolności")
                 }
             }
         }
         // Attributes
         item {
             if (attributes.isNotEmpty()) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(bottom = 8.dp)
-                        .border(1.dp, Color.LightGray, MaterialTheme.shapes.large)
-                        .padding(top = 16.dp, bottom = 8.dp),
-                    horizontalArrangement = Arrangement.SpaceEvenly
+                SectionContainer(
+                    label = "Atrybuty"
                 ) {
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally
+                    Row(
+                        Modifier.padding(top = 8.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        AttributeView(attributes[0])
-                        AttributeView(attributes[3])
-                    }
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        AttributeView(attributes[1])
-                        AttributeView(attributes[4])
-                    }
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        AttributeView(attributes[2])
-                        AttributeView(attributes[5])
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            AttributeView(attributes[0])
+                            AttributeView(attributes[3])
+                        }
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            AttributeView(attributes[1])
+                            AttributeView(attributes[4])
+                        }
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            AttributeView(attributes[2])
+                            AttributeView(attributes[5])
+                        }
                     }
                 }
             }
         }
         // Skills
         item {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .border(1.dp, Color.LightGray, MaterialTheme.shapes.large)
-                    .padding(8.dp)
+            SectionContainer(
+                label = "Umiejętności"
             ) {
-                skills.forEach {
-                    Text("${it.level} - ${it.name}")
+                Column {
+                    skills.forEach {
+                        Text("${it.level} - ${it.name}")
+                    }
                 }
             }
         }
@@ -100,7 +102,7 @@ fun AttributeView(attribute: Attribute) {
             modifier = Modifier
                 .width(60.dp)
                 .height(60.dp)
-                .border(1.dp, Color.LightGray, MaterialTheme.shapes.large),
+                .border(2.dp, MaterialTheme.colors.primary, MaterialTheme.shapes.medium),
             contentAlignment = Alignment.Center
         ) {
             Text(

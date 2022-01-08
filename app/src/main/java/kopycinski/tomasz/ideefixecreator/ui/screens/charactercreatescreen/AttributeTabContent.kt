@@ -1,37 +1,32 @@
 package kopycinski.tomasz.ideefixecreator.ui.screens.charactercreatescreen
 
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
-import androidx.compose.material.TextButton
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Remove
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import kopycinski.tomasz.ideefixecreator.database.entity.Attribute
 import kopycinski.tomasz.ideefixecreator.database.entity.Skill
-import kopycinski.tomasz.ideefixecreator.ui.theme.parallelogram
 import kopycinski.tomasz.ideefixecreator.viewmodel.CharacterCreateViewModel
 
 @Composable
 fun AttributeTabContent(
     modifier: Modifier = Modifier,
-    viewModel: CharacterCreateViewModel
+    viewModel: CharacterCreateViewModel,
+    experience: Int
 ) {
     val attributesWithSkills by viewModel.attributes.collectAsState()
-    val characterSheet by viewModel.characterSheet.collectAsState()
 
     Column(modifier = modifier) {
-        Text(text = characterSheet.experience.toString())
         LazyColumn {
             attributesWithSkills.forEach { attributeWithSkills ->
                 item {
@@ -40,7 +35,7 @@ fun AttributeTabContent(
                         onIncreaseAttribute = { viewModel.increaseAttribute(it) },
                         onDecreaseAttribute = { viewModel.decreaseAttribute(it) },
                         canIncrease = attributeWithSkills.attribute.level < 20 &&
-                                characterSheet.experience >= Attribute.UPGRADE_COSTS_FOR_LEVELS[attributeWithSkills.attribute.level]!!,
+                                experience >= Attribute.UPGRADE_COSTS_FOR_LEVELS[attributeWithSkills.attribute.level]!!,
                         canDecrease = attributeWithSkills.attribute.level > 0,
                         onExpand = { viewModel.onExpand(attributeWithSkills.attribute.attributeId) },
                         expanded = attributeWithSkills.attribute.attributeId == viewModel.expandedAttributeId.value
@@ -56,7 +51,7 @@ fun AttributeTabContent(
                             },
                             onDecreaseSkill = { viewModel.decreaseSkill(it) },
                             canIncrease = skillWithSpecs.skill.level < 25 &&
-                                    characterSheet.experience >= skillWithSpecs.skill.upgradeCost,
+                                    experience >= skillWithSpecs.skill.upgradeCost,
                             canDecrease = skillWithSpecs.skill.level > skillWithSpecs.skill.baseLevel
                         )
                     }
@@ -76,51 +71,46 @@ fun AttributeView(
     onExpand: () -> Unit,
     expanded: Boolean
 ) {
-    Column(
+    Card(
         modifier = Modifier
             .padding(bottom = 4.dp)
-            .clip(MaterialTheme.shapes.medium)
-            .background(Color.Gray)
+            .border(2.dp, MaterialTheme.colors.primary, MaterialTheme.shapes.large),
+        contentColor = MaterialTheme.colors.primary,
+        backgroundColor = MaterialTheme.colors.background
     ) {
-        val border = BorderStroke(1.dp, Color.Black)
-        val shape = MaterialTheme.shapes.parallelogram
-
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .background(Color.LightGray)
-                .clickable { onExpand() }
-                .padding(8.dp)
-        ) {
-            Text(modifier = Modifier.weight(1F), text = attribute.name)
+        Column {
             Row(
-                modifier = Modifier.border(border, shape = shape),
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .clickable { onExpand() }
+                    .padding(start = 8.dp)
             ) {
-                TextButton(
+                Text(modifier = Modifier.weight(1F), text = attribute.name)
+                IconButton(
                     onClick = { onDecreaseAttribute(attribute) },
                     enabled = canDecrease,
-                    shape = shape,
-                    border = border
-                ) {
-                    Text("-")
-                }
+                    content = {
+                        Icon(Icons.Filled.Remove, contentDescription = "Odejmij")
+                    }
+                )
                 Text(
                     attribute.level.toString(),
                     modifier = Modifier.width(20.dp),
                     textAlign = TextAlign.Center
                 )
-                TextButton(
+                IconButton(
                     onClick = { onIncreaseAttribute(attribute) },
                     enabled = canIncrease,
-                    shape = shape,
-                    border = border
-                ) {
-                    Text("+")
-                }
+                    content = {
+                        Icon(Icons.Filled.Add, contentDescription = "Dodaj")
+                    }
+                )
+            }
+            if (expanded) {
+                Divider(color = MaterialTheme.colors.primary)
+                Text(modifier = Modifier.padding(8.dp), text = attribute.description)
             }
         }
-        if (expanded) Text(modifier = Modifier.padding(8.dp), text = attribute.description)
     }
 }
 
@@ -132,43 +122,34 @@ fun SkillView(
     canIncrease: Boolean,
     canDecrease: Boolean,
 ) {
-    val border = BorderStroke(1.dp, Color.Black)
-    val shape = MaterialTheme.shapes.parallelogram
-
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
+    Card(
         modifier = Modifier
-            .padding(start = 16.dp, bottom = 4.dp)
-            .clip(MaterialTheme.shapes.medium)
-            .background(Color.DarkGray)
-            .padding(8.dp)
+            .fillMaxWidth()
+            .padding(bottom = 4.dp, start = 16.dp)
+            .border(2.dp, MaterialTheme.colors.primary, MaterialTheme.shapes.large)
+            .padding(start = 8.dp),
+        contentColor = MaterialTheme.colors.primary,
+        backgroundColor = MaterialTheme.colors.background
     ) {
-        Text(text = skill.name, Modifier.weight(1F))
         Row(
-            modifier = Modifier.border(border, shape = shape),
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
         ) {
-            TextButton(
+            Text(text = skill.name, Modifier.weight(1F))
+            IconButton(
                 onClick = { onDecreaseSkill(skill) },
                 enabled = canDecrease,
-                shape = shape,
-                border = border
-            ) {
-                Text("-")
-            }
-            Text(
-                skill.level.toString(),
-                modifier = Modifier.width(20.dp),
-                textAlign = TextAlign.Center
+                content = {
+                    Icon(Icons.Filled.Remove, contentDescription = "Odejmij")
+                }
             )
-            TextButton(
+            Text(skill.level.toString())
+            IconButton(
                 onClick = { onIncreaseSkill(skill) },
                 enabled = canIncrease,
-                shape = shape,
-                border = border
-            ) {
-                Text("+")
-            }
+                content = {
+                    Icon(Icons.Filled.Add, contentDescription = "Dodaj")
+                }
+            )
         }
     }
 }

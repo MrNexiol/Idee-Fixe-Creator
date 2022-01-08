@@ -13,7 +13,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import kopycinski.tomasz.ideefixecreator.R
 import kopycinski.tomasz.ideefixecreator.navigation.Screen
-import kopycinski.tomasz.ideefixecreator.ui.theme.IdeeFixeCreatorTheme
 import kopycinski.tomasz.ideefixecreator.viewmodel.CharacterShowViewModel
 
 const val STATS_TAB = 0
@@ -35,39 +34,39 @@ fun CharacterShowScreen(
         viewModel.loadData(characterSheetId)
     }
 
-    IdeeFixeCreatorTheme {
-        Scaffold(
-            floatingActionButton = {
-                FloatingActionButton(onClick = { navController.navigate(Screen.CharacterCreateScreen.createRoute(characterSheetId)) }) {
-                    Icon(Icons.Filled.Edit, contentDescription = "Edycja")
+    Scaffold(
+        floatingActionButton = {
+            FloatingActionButton(onClick = { navController.navigate(Screen.CharacterCreateScreen.createRoute(characterSheetId)) }) {
+                Icon(Icons.Filled.Edit, contentDescription = "Edycja")
+            }
+        },
+        topBar = {
+            TabRow(selectedTabIndex = state) {
+                titles.forEachIndexed { index, title ->
+                    Tab(
+                        text = { Text(title) },
+                        selected = state == index,
+                        onClick = { state = index }
+                    )
                 }
             }
-        ) { contentPadding ->
-            Column {
-                TabRow(selectedTabIndex = state) {
-                    titles.forEachIndexed { index, title ->
-                        Tab(
-                            text = { Text(title) },
-                            selected = state == index,
-                            onClick = { state = index }
-                        )
-                    }
-                }
-                when (state) {
-                    STATS_TAB -> StatsTabContent(
-                        Modifier
-                            .padding(contentPadding)
-                            .padding(8.dp),
-                        viewModel = viewModel
-                    )
-                    INFO_TAB -> InfoTabContent(
-                        Modifier
-                            .padding(contentPadding)
-                            .padding(8.dp),
-                        viewModel = viewModel
-                    )
-                    else -> {}
-                }
+        }
+    ) { contentPadding ->
+        Column {
+            when (state) {
+                STATS_TAB -> StatsTabContent(
+                    Modifier
+                        .padding(contentPadding)
+                        .padding(start = 8.dp, end = 8.dp),
+                    viewModel = viewModel
+                )
+                INFO_TAB -> InfoTabContent(
+                    Modifier
+                        .padding(contentPadding)
+                        .padding(8.dp),
+                    viewModel = viewModel
+                )
+                else -> {}
             }
         }
     }

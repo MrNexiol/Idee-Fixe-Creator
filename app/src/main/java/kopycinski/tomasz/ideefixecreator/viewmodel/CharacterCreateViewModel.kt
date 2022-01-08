@@ -25,12 +25,14 @@ class CharacterCreateViewModel @Inject constructor(
 
     private var didLoadCharacter = false
     private val _characterSheet = MutableStateFlow(CharacterSheet())
+    private val _experience = MutableStateFlow(0)
     private val _attributes = MutableStateFlow(listOf<AttributeWithSkillsAndSpecializations>())
     private val _advantages = MutableStateFlow(listOf<Advantage>())
     private val _addedAdvantageIds = MutableStateFlow(listOf<CharacterSheetAdvantageCrossRef>())
 
     val expandedAttributeId = mutableStateOf(-1L)
     val characterSheet = _characterSheet.asStateFlow()
+    val experience = _experience.asStateFlow()
     val attributes = _attributes.asStateFlow()
     val advantages = _advantages.asStateFlow()
     val addedAdvantages = _addedAdvantageIds.asStateFlow()
@@ -63,6 +65,7 @@ class CharacterCreateViewModel @Inject constructor(
             characterSheetRepository.createOrLoadCharacter(id).collect { characterSheetWithStats ->
                 didLoadCharacter = true
                 _characterSheet.value = characterSheetWithStats.characterSheet
+                _experience.value = characterSheetWithStats.characterSheet.experience
                 _attributes.value = characterSheetWithStats.attributes
                 viewModelScope.launch {
                     getAddedAdvantageIds(characterSheetWithStats.characterSheet.characterSheetId)

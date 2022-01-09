@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kopycinski.tomasz.ideefixecreator.database.entity.CharacterSheet
 import kopycinski.tomasz.ideefixecreator.database.entity.CharacterSheetWithStats
-import kopycinski.tomasz.ideefixecreator.database.repository.CharacterSheetRepository
+import kopycinski.tomasz.ideefixecreator.repository.CharacterSheetRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject

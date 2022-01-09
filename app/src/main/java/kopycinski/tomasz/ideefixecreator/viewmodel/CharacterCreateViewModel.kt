@@ -5,10 +5,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kopycinski.tomasz.ideefixecreator.database.entity.*
-import kopycinski.tomasz.ideefixecreator.database.repository.AdvantageRepository
-import kopycinski.tomasz.ideefixecreator.database.repository.AttributeRepository
-import kopycinski.tomasz.ideefixecreator.database.repository.CharacterSheetRepository
-import kopycinski.tomasz.ideefixecreator.database.repository.SkillRepository
+import kopycinski.tomasz.ideefixecreator.repository.AdvantageRepository
+import kopycinski.tomasz.ideefixecreator.repository.AttributeRepository
+import kopycinski.tomasz.ideefixecreator.repository.CharacterSheetRepository
+import kopycinski.tomasz.ideefixecreator.repository.SkillRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collect

@@ -25,10 +25,6 @@ object HiltModule {
         appDatabase.attributeDao()
 
     @Provides
-    fun provideEquipmentDao(appDatabase: AppDatabase): EquipmentDao =
-        appDatabase.equipmentDao()
-
-    @Provides
     fun provideSkillDao(appDatabase: AppDatabase): SkillDao =
         appDatabase.skillDao()
 

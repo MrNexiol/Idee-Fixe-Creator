@@ -1,4 +1,4 @@
-package kopycinski.tomasz.ideefixecreator.database.repository
+package kopycinski.tomasz.ideefixecreator.repository
 
 import android.content.Context
 import kopycinski.tomasz.ideefixecreator.database.dao.AttributeDao
@@ -27,17 +27,8 @@ class CharacterSheetRepository @Inject constructor(
         }
     }
 
-    suspend fun insertCharacterSheet(characterSheet: CharacterSheet) =
-        characterSheetDao.insertOne(characterSheet)
-
     suspend fun updateCharacterSheet(characterSheet: CharacterSheet) =
         characterSheetDao.updateOne(characterSheet)
-
-    suspend fun deleteCharacterSheet(characterSheet: CharacterSheet) =
-        characterSheetDao.deleteOne(characterSheet)
-
-    private fun getCharacterSheet(id: Long): Flow<CharacterSheet> =
-        characterSheetDao.getOne(id)
 
     fun getCharacterSheetWithStats(id: Long): Flow<CharacterSheetWithStats> =
         characterSheetDao.getWithStats(id)

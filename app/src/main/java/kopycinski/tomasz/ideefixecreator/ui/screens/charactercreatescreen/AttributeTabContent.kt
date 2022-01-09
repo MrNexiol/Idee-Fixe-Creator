@@ -107,7 +107,7 @@ fun AttributeView(
                 )
             }
             if (expanded) {
-                Divider(color = MaterialTheme.colors.primary)
+                Divider(color = MaterialTheme.colors.onPrimary)
                 Text(modifier = Modifier.padding(8.dp), text = attribute.description)
             }
         }

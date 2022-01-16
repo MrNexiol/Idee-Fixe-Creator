@@ -26,7 +26,7 @@ fun SectionContainer(
             .padding(bottom = 8.dp)
             .border(2.dp, MaterialTheme.colors.primary, MaterialTheme.shapes.large)
     ) {
-        Column() {
+        Column {
             Text(
                 text = label,
                 color = MaterialTheme.colors.onPrimary,

@@ -64,16 +64,25 @@ fun AdvantageView(
                 var checkedLevel = -1
                 advantage.costs.forEachIndexed { index, cost ->
                     if (index == level) checkedLevel = level
-                    val enabled = (index == level || level > index) || currentExp > advantage.calculateCost(checkedLevel, index)
+                    val enabled =
+                        (index == level || level > index) || currentExp > advantage.calculateCost(
+                            checkedLevel,
+                            index
+                        )
                     Box(
                         modifier = Modifier
                             .width(24.dp)
                             .height(20.dp)
                             .padding(start = 4.dp)
                             .clip(MaterialTheme.shapes.medium)
-                            .background(if(index == level) MaterialTheme.colors.primary else MaterialTheme.colors.background)
-                            .border(2.dp, (if(enabled) MaterialTheme.colors.primary else MaterialTheme.colors.secondary))
-                            .clickable { onClick(cost, index) }
+                            .background(if (index == level) MaterialTheme.colors.primary else MaterialTheme.colors.background)
+                            .border(
+                                2.dp,
+                                (if (enabled) MaterialTheme.colors.primary else MaterialTheme.colors.secondary)
+                            )
+                            .clickable {
+                                if (enabled) onClick(cost, index)
+                            }
                     )
                 }
             }

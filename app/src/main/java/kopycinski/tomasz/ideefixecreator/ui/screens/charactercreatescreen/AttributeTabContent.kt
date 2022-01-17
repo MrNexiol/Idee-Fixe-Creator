@@ -95,7 +95,7 @@ fun AttributeView(
                 )
                 Text(
                     attribute.level.toString(),
-                    modifier = Modifier.width(20.dp),
+                    modifier = Modifier.width(22.dp),
                     textAlign = TextAlign.Center
                 )
                 IconButton(
@@ -126,15 +126,14 @@ fun SkillView(
         modifier = Modifier
             .fillMaxWidth()
             .padding(bottom = 4.dp, start = 16.dp)
-            .border(2.dp, MaterialTheme.colors.primary, MaterialTheme.shapes.large)
-            .padding(start = 8.dp),
+            .border(2.dp, MaterialTheme.colors.primary, MaterialTheme.shapes.large),
         contentColor = MaterialTheme.colors.primary,
         backgroundColor = MaterialTheme.colors.background
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Text(text = skill.name, Modifier.weight(1F))
+            Text(text = skill.name, Modifier.weight(1F).padding(start = 8.dp))
             IconButton(
                 onClick = { onDecreaseSkill(skill) },
                 enabled = canDecrease,

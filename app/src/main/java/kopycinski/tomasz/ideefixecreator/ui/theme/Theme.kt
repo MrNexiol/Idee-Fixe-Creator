@@ -4,7 +4,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 
-private val LightColorPalette = lightColors(
+private val DefaultColorsPalette = lightColors(
     primary = primary,
     onPrimary = black,
     primaryVariant = primaryVariant,
@@ -16,10 +16,8 @@ private val LightColorPalette = lightColors(
 fun IdeeFixeCreatorTheme(
     content: @Composable () -> Unit
 ) {
-    val colors = LightColorPalette
-
     MaterialTheme(
-        colors = colors,
+        colors = DefaultColorsPalette,
         typography = Typography,
         shapes = Shapes,
         content = content

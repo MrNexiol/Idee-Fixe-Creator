@@ -5,10 +5,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kopycinski.tomasz.ideefixecreator.database.entity.*
-import kopycinski.tomasz.ideefixecreator.database.repository.AdvantageRepository
-import kopycinski.tomasz.ideefixecreator.database.repository.AttributeRepository
-import kopycinski.tomasz.ideefixecreator.database.repository.CharacterSheetRepository
-import kopycinski.tomasz.ideefixecreator.database.repository.SkillRepository
+import kopycinski.tomasz.ideefixecreator.repository.AdvantageRepository
+import kopycinski.tomasz.ideefixecreator.repository.AttributeRepository
+import kopycinski.tomasz.ideefixecreator.repository.CharacterSheetRepository
+import kopycinski.tomasz.ideefixecreator.repository.SkillRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collect
@@ -25,19 +25,21 @@ class CharacterCreateViewModel @Inject constructor(
 
     private var didLoadCharacter = false
     private val _characterSheet = MutableStateFlow(CharacterSheet())
+    private val _experience = MutableStateFlow(0)
     private val _attributes = MutableStateFlow(listOf<AttributeWithSkillsAndSpecializations>())
     private val _advantages = MutableStateFlow(listOf<Advantage>())
     private val _addedAdvantageIds = MutableStateFlow(listOf<CharacterSheetAdvantageCrossRef>())
 
     val expandedAttributeId = mutableStateOf(-1L)
     val characterSheet = _characterSheet.asStateFlow()
+    val experience = _experience.asStateFlow()
     val attributes = _attributes.asStateFlow()
     val advantages = _advantages.asStateFlow()
     val addedAdvantages = _addedAdvantageIds.asStateFlow()
 
-    fun loadData() {
+    fun loadData(characterSheetId: Long? = null) {
         viewModelScope.launch {
-            getCharacter()
+            getCharacter(characterSheetId)
         }
         viewModelScope.launch {
             getAdvantages()
@@ -58,11 +60,12 @@ class CharacterCreateViewModel @Inject constructor(
         }
     }
 
-    private suspend fun getCharacter() {
+    private suspend fun getCharacter(id: Long? = null) {
         if (!didLoadCharacter) {
-            characterSheetRepository.createCharacter().collect { characterSheetWithStats ->
+            characterSheetRepository.createOrLoadCharacter(id).collect { characterSheetWithStats ->
                 didLoadCharacter = true
                 _characterSheet.value = characterSheetWithStats.characterSheet
+                _experience.value = characterSheetWithStats.characterSheet.experience
                 _attributes.value = characterSheetWithStats.attributes
                 viewModelScope.launch {
                     getAddedAdvantageIds(characterSheetWithStats.characterSheet.characterSheetId)

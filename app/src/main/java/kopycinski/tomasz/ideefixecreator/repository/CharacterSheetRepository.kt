@@ -1,4 +1,4 @@
-package kopycinski.tomasz.ideefixecreator.database.repository
+package kopycinski.tomasz.ideefixecreator.repository
 
 import android.content.Context
 import kopycinski.tomasz.ideefixecreator.database.dao.AttributeDao
@@ -14,26 +14,21 @@ class CharacterSheetRepository @Inject constructor(
     private val skillDao: SkillDao,
     private val context: Context
 ) {
-    suspend fun createCharacter() : Flow<CharacterSheetWithStats> {
-        characterSheetDao.insertOne(CharacterSheet()).let { characterSheetId ->
-            attributeDao.insertMany(Attribute.attributeList(characterSheetId, context)).let { attributeIdsList ->
-                skillDao.insertMany(Skill.skillList(attributeIdsList, context))
+    suspend fun createOrLoadCharacter(id: Long? = null) : Flow<CharacterSheetWithStats> {
+        if (id != null) {
+            return getCharacterSheetWithStats(id)
+        } else {
+            characterSheetDao.insertOne(CharacterSheet()).let { characterSheetId ->
+                attributeDao.insertMany(Attribute.attributeList(characterSheetId, context)).let { attributeIdsList ->
+                    skillDao.insertMany(Skill.skillList(attributeIdsList, context))
+                }
+                return getCharacterSheetWithStats(characterSheetId)
             }
-            return getCharacterSheetWithStats(characterSheetId)
         }
     }
 
-    suspend fun insertCharacterSheet(characterSheet: CharacterSheet) =
-        characterSheetDao.insertOne(characterSheet)
-
     suspend fun updateCharacterSheet(characterSheet: CharacterSheet) =
         characterSheetDao.updateOne(characterSheet)
-
-    suspend fun deleteCharacterSheet(characterSheet: CharacterSheet) =
-        characterSheetDao.deleteOne(characterSheet)
-
-    private fun getCharacterSheet(id: Long): Flow<CharacterSheet> =
-        characterSheetDao.getOne(id)
 
     fun getCharacterSheetWithStats(id: Long): Flow<CharacterSheetWithStats> =
         characterSheetDao.getWithStats(id)

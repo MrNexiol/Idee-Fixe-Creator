@@ -16,12 +16,10 @@ import kotlinx.coroutines.launch
 @Database(entities = [
     CharacterSheet::class,
     CharacterSheetAdvantageCrossRef::class,
-    CharacterSheetEquipmentCrossRef::class,
     Attribute::class,
     Skill::class,
     Specialization::class,
-    Advantage::class,
-    Equipment::class
+    Advantage::class
 ], version = 1)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
@@ -30,7 +28,6 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun skillDao(): SkillDao
     abstract fun specializationDao(): SpecializationDao
     abstract fun advantageDao(): AdvantageDao
-    abstract fun equipmentDao(): EquipmentDao
 
     companion object {
         @Volatile

@@ -8,12 +8,16 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import kopycinski.tomasz.ideefixecreator.ui.screens.*
 import kopycinski.tomasz.ideefixecreator.ui.screens.charactercreatescreen.CharacterCreateScreen
+import kopycinski.tomasz.ideefixecreator.ui.screens.charactershowscreen.CharacterShowScreen
 
 @Composable
 fun Navigation() {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = Screen.MainScreen.route) {
+    NavHost(
+        navController = navController,
+        startDestination = Screen.MainScreen.route
+    ) {
         composable(route = Screen.MainScreen.route) {
             MainScreen(navController)
         }
@@ -30,11 +34,20 @@ fun Navigation() {
         composable(route = Screen.CharacterListScreen.route) {
             CharacterListScreen(navController)
         }
-        composable(route = Screen.CharacterCreateScreen.route) {
-            CharacterCreateScreen()
-        }
-        composable(route = Screen.CharacterEditScreen.route) {
-            CharacterEditScreen(navController)
+        composable(
+            route = Screen.CharacterCreateScreen.route,
+            arguments = listOf(
+                navArgument("characterSheetId") {
+                    type = NavType.LongType
+                    defaultValue = -1L
+                }
+            )
+        ) { backStackEntry ->
+            var characterSheetId = backStackEntry.arguments?.getLong("characterSheetId")
+            if (characterSheetId == -1L) {
+                characterSheetId = null
+            }
+            CharacterCreateScreen(characterSheetId = characterSheetId)
         }
     }
 }

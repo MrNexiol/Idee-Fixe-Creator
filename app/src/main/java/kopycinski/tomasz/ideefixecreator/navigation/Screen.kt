@@ -9,5 +9,4 @@ sealed class Screen(val route: String) {
     object CharacterCreateScreen : Screen("character_create_screen?characterSheetId={characterSheetId}") {
         fun createRoute(characterSheetId: Long) = "character_create_screen?characterSheetId=$characterSheetId"
     }
-    object CharacterEditScreen : Screen("character_edit_screen")
 }

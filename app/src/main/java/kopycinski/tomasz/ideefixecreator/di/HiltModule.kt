@@ -13,6 +13,7 @@ import kopycinski.tomasz.ideefixecreator.database.dao.AttributeDao
 import kopycinski.tomasz.ideefixecreator.database.dao.CharacterSheetDao
 import kopycinski.tomasz.ideefixecreator.database.dao.SkillDao
 import kopycinski.tomasz.ideefixecreator.database.dao.SpecializationDao
+import kopycinski.tomasz.ideefixecreator.database.dao.recent.AttributeDAONEW
 import javax.inject.Singleton
 
 @Module
@@ -50,4 +51,8 @@ object HiltModule {
     @Provides
     fun provideContext(@ApplicationContext context: Context): Context =
         context
+
+    @Provides
+    fun provideAttributeDaoNew(appDatabase: AppDatabase): AttributeDAONEW =
+        appDatabase.attributeDAONEW()
 }

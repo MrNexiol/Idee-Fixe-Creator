@@ -1,13 +1,16 @@
-package kopycinski.tomasz.ideefixecreator.database.entity.new
+package kopycinski.tomasz.ideefixecreator.database.entity.recent
 
 import android.content.Context
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 import kopycinski.tomasz.ideefixecreator.R
 
 @Entity
 data class AttributeNEW(
     override val name: String,
-    override val description: String
+    override val description: String,
+
+    @PrimaryKey(autoGenerate = true) val attributeID: Long = 0
 ) : Statistic() {
     companion object {
         fun attributeList(context: Context): List<AttributeNEW> {

@@ -9,16 +9,16 @@ import kopycinski.tomasz.ideefixecreator.database.dao.AttributeDao
 import kopycinski.tomasz.ideefixecreator.database.dao.CharacterSheetDao
 import kopycinski.tomasz.ideefixecreator.database.dao.SkillDao
 import kopycinski.tomasz.ideefixecreator.database.dao.SpecializationDao
-import kopycinski.tomasz.ideefixecreator.database.dao.new.AttributeDAONEW
+import kopycinski.tomasz.ideefixecreator.database.dao.recent.AttributeDAONEW
 import kopycinski.tomasz.ideefixecreator.database.entity.Advantage
 import kopycinski.tomasz.ideefixecreator.database.entity.Attribute
 import kopycinski.tomasz.ideefixecreator.database.entity.CharacterSheet
 import kopycinski.tomasz.ideefixecreator.database.entity.CharacterSheetAdvantageCrossRef
 import kopycinski.tomasz.ideefixecreator.database.entity.Skill
 import kopycinski.tomasz.ideefixecreator.database.entity.Specialization
-import kopycinski.tomasz.ideefixecreator.database.entity.new.AdvantageNEW
-import kopycinski.tomasz.ideefixecreator.database.entity.new.AttributeNEW
-import kopycinski.tomasz.ideefixecreator.database.entity.new.SkillNEW
+import kopycinski.tomasz.ideefixecreator.database.entity.recent.AdvantageNEW
+import kopycinski.tomasz.ideefixecreator.database.entity.recent.AttributeNEW
+import kopycinski.tomasz.ideefixecreator.database.entity.recent.SkillNEW
 
 @Database(entities = [
     CharacterSheet::class,

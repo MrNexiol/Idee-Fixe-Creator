@@ -1,4 +1,4 @@
-package kopycinski.tomasz.ideefixecreator.database.entity.new
+package kopycinski.tomasz.ideefixecreator.database.entity.recent
 
 abstract class Statistic {
     abstract val name: String

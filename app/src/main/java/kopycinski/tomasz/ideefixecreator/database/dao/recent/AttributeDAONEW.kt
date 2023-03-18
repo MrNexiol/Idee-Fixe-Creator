@@ -1,9 +1,9 @@
-package kopycinski.tomasz.ideefixecreator.database.dao.new
+package kopycinski.tomasz.ideefixecreator.database.dao.recent
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import kopycinski.tomasz.ideefixecreator.database.entity.new.AttributeNEW
+import kopycinski.tomasz.ideefixecreator.database.entity.recent.AttributeNEW
 
 @Dao
 interface AttributeDAONEW {
@@ -11,5 +11,5 @@ interface AttributeDAONEW {
     fun getAll(): List<AttributeNEW>
 
     @Insert
-    fun insert(items: List<AttributeNEW>)
+    suspend fun insert(items: List<AttributeNEW>)
 }

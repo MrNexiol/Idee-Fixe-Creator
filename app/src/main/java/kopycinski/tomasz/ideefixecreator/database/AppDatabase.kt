@@ -1,17 +1,20 @@
 package kopycinski.tomasz.ideefixecreator.database
 
-import android.content.Context
 import androidx.room.Database
-import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import androidx.sqlite.db.SupportSQLiteDatabase
 import kopycinski.tomasz.ideefixecreator.database.converters.Converters
-import kopycinski.tomasz.ideefixecreator.database.dao.*
-import kopycinski.tomasz.ideefixecreator.database.entity.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kopycinski.tomasz.ideefixecreator.database.dao.AdvantageDao
+import kopycinski.tomasz.ideefixecreator.database.dao.AttributeDao
+import kopycinski.tomasz.ideefixecreator.database.dao.CharacterSheetDao
+import kopycinski.tomasz.ideefixecreator.database.dao.SkillDao
+import kopycinski.tomasz.ideefixecreator.database.dao.SpecializationDao
+import kopycinski.tomasz.ideefixecreator.database.entity.Advantage
+import kopycinski.tomasz.ideefixecreator.database.entity.Attribute
+import kopycinski.tomasz.ideefixecreator.database.entity.CharacterSheet
+import kopycinski.tomasz.ideefixecreator.database.entity.CharacterSheetAdvantageCrossRef
+import kopycinski.tomasz.ideefixecreator.database.entity.Skill
+import kopycinski.tomasz.ideefixecreator.database.entity.Specialization
 
 @Database(entities = [
     CharacterSheet::class,
@@ -28,29 +31,4 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun skillDao(): SkillDao
     abstract fun specializationDao(): SpecializationDao
     abstract fun advantageDao(): AdvantageDao
-
-    companion object {
-        @Volatile
-        private var INSTANCE: AppDatabase? = null
-
-        fun getDatabase(context: Context): AppDatabase {
-            return INSTANCE ?: synchronized(this) {
-                val instance = Room.databaseBuilder(
-                        context.applicationContext,
-                        AppDatabase::class.java,
-                        "app_database"
-                ).addCallback(object : RoomDatabase.Callback() {
-                    override fun onCreate(db: SupportSQLiteDatabase) {
-                        CoroutineScope(Dispatchers.IO).launch {
-                            getDatabase(context).advantageDao().insertMany(
-                                Advantage.advantageList(context)
-                            )
-                        }
-                    }
-                }).build()
-                INSTANCE = instance
-                instance
-            }
-        }
-    }
 }

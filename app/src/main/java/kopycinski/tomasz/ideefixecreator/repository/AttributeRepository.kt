@@ -16,4 +16,7 @@ class AttributeRepository @Inject constructor(
 
     suspend fun insertAttributes(context: Context) =
         attributeDAONEW.insert(AttributeNEW.attributeList(context))
+
+    suspend fun getAll() =
+        attributeDAONEW.getAll()
 }

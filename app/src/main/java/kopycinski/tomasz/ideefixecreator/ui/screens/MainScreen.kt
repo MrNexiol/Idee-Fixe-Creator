@@ -49,6 +49,9 @@ fun MainScreen(navController: NavController) {
             ) {
                 Text(stringResource(R.string.create_button))
             }
+            Button(onClick = { navController.navigate(Screen.AttributesScreen.route) }) {
+                Text(text = "Attributes list")
+            }
         }
     }
 }

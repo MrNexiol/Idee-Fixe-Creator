@@ -8,7 +8,7 @@ import kopycinski.tomasz.ideefixecreator.database.entity.recent.AttributeNEW
 @Dao
 interface AttributeDAONEW {
     @Query("SELECT * FROM attributenew")
-    fun getAll(): List<AttributeNEW>
+    suspend fun getAll(): List<AttributeNEW>
 
     @Insert
     suspend fun insert(items: List<AttributeNEW>)

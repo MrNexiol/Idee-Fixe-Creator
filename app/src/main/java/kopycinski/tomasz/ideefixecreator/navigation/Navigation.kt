@@ -9,6 +9,7 @@ import androidx.navigation.navArgument
 import kopycinski.tomasz.ideefixecreator.ui.screens.*
 import kopycinski.tomasz.ideefixecreator.ui.screens.charactercreatescreen.CharacterCreateScreen
 import kopycinski.tomasz.ideefixecreator.ui.screens.charactershowscreen.CharacterShowScreen
+import kopycinski.tomasz.ideefixecreator.ui.screens.debug.AttributesScreen
 
 @Composable
 fun Navigation() {
@@ -48,6 +49,10 @@ fun Navigation() {
                 characterSheetId = null
             }
             CharacterCreateScreen(characterSheetId = characterSheetId)
+        }
+
+        composable(route = Screen.AttributesScreen.route) {
+            AttributesScreen()
         }
     }
 }

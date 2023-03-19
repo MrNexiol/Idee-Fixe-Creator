@@ -1,16 +1,20 @@
 package kopycinski.tomasz.ideefixecreator.ui.screens
 
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
-import androidx.compose.runtime.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.width
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import kopycinski.tomasz.ideefixecreator.R
 import kopycinski.tomasz.ideefixecreator.navigation.Screen
+import kopycinski.tomasz.ideefixecreator.ui.screens.components.ButtonMain
 
 @Composable
 fun MainScreen(navController: NavController) {
@@ -26,31 +30,16 @@ fun MainScreen(navController: NavController) {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            OutlinedButton(
-                onClick = { navController.navigate(Screen.CharacterListScreen.route) },
-                colors = ButtonDefaults.outlinedButtonColors(
-                    backgroundColor = MaterialTheme.colors.background,
-                    contentColor = MaterialTheme.colors.primary
-                ),
-                border = BorderStroke(2.dp, MaterialTheme.colors.primary),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 4.dp)
-            ) {
-                Text(stringResource(R.string.list_button))
+            ButtonMain(text = stringResource(R.string.list_button)) {
+                navController.navigate(Screen.CharacterListScreen.route)
             }
-            Button(
-                onClick = { navController.navigate(Screen.CharacterCreateScreen.route) },
-                colors = ButtonDefaults.outlinedButtonColors(
-                    backgroundColor = MaterialTheme.colors.background,
-                    contentColor = MaterialTheme.colors.primary
-                ),
-                border = BorderStroke(2.dp, MaterialTheme.colors.primary)
-            ) {
-                Text(stringResource(R.string.create_button))
+
+            ButtonMain(text = stringResource(R.string.create_button)) {
+                navController.navigate(Screen.CharacterCreateScreen.route)
             }
-            Button(onClick = { navController.navigate(Screen.AttributesScreen.route) }) {
-                Text(text = "Attributes list")
+
+            ButtonMain(text = "Lista atrybutów") {
+                navController.navigate(Screen.AttributesScreen.route)
             }
         }
     }

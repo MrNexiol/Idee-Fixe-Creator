@@ -10,6 +10,7 @@ import kopycinski.tomasz.ideefixecreator.database.dao.CharacterSheetDao
 import kopycinski.tomasz.ideefixecreator.database.dao.SkillDao
 import kopycinski.tomasz.ideefixecreator.database.dao.SpecializationDao
 import kopycinski.tomasz.ideefixecreator.database.dao.recent.AttributeDAONEW
+import kopycinski.tomasz.ideefixecreator.database.dao.recent.SkillDAONEW
 import kopycinski.tomasz.ideefixecreator.database.entity.Advantage
 import kopycinski.tomasz.ideefixecreator.database.entity.Attribute
 import kopycinski.tomasz.ideefixecreator.database.entity.CharacterSheet
@@ -40,4 +41,5 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun advantageDao(): AdvantageDao
 
     abstract fun attributeDAONEW(): AttributeDAONEW
+    abstract fun skillDAONEW(): SkillDAONEW
 }

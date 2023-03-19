@@ -3,6 +3,7 @@ package kopycinski.tomasz.ideefixecreator.di
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
 import kopycinski.tomasz.ideefixecreator.repository.AttributeRepository
+import kopycinski.tomasz.ideefixecreator.repository.SkillRepository
 import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
@@ -10,6 +11,7 @@ import javax.inject.Inject
 class HiltApplication : Application() {
 
     @Inject lateinit var attributeRepository: AttributeRepository
+    @Inject lateinit var skillRepository: SkillRepository
 
     override fun onCreate() {
         super.onCreate()
@@ -19,6 +21,7 @@ class HiltApplication : Application() {
         if (isFirstOpen) {
             runBlocking {
                 attributeRepository.insertAttributes(this@HiltApplication)
+                skillRepository.insert(this@HiltApplication)
             }
             with(sharedPref.edit()) {
                 putBoolean(FIRST_OPEN, false)

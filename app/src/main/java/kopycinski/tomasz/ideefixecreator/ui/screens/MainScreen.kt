@@ -41,6 +41,10 @@ fun MainScreen(navController: NavController) {
             ButtonMain(text = "Lista atrybutów") {
                 navController.navigate(Screen.AttributesScreen.route)
             }
+
+            ButtonMain(text = "Lista umiejętności") {
+                navController.navigate(Screen.SkillScreen.route)
+            }
         }
     }
 }

@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 data class AdvantageNEW(
     override val name: String,
     override val description: String,
+    override val baseLevel: Int,
 
     @PrimaryKey(autoGenerate = true) val advantageID: Long = 0
 ) : Statistic()

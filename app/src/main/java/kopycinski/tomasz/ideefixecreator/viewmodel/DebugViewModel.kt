@@ -5,24 +5,20 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kopycinski.tomasz.ideefixecreator.database.entity.recent.AttributeNEW
-import kopycinski.tomasz.ideefixecreator.database.entity.recent.SkillNEW
+import kopycinski.tomasz.ideefixecreator.database.entity.recent.AttributeWithSkillsNEW
 import kopycinski.tomasz.ideefixecreator.repository.AttributeRepository
-import kopycinski.tomasz.ideefixecreator.repository.SkillRepository
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class DebugViewModel @Inject constructor(
-    private val attributeRepository: AttributeRepository,
-    private val skillRepository: SkillRepository
+    private val attributeRepository: AttributeRepository
 ): ViewModel() {
-    var attr: MutableState<List<AttributeNEW>> = mutableStateOf(listOf())
-    var skill: MutableState<List<SkillNEW>> = mutableStateOf(listOf())
+    var attrWithSkills: MutableState<List<AttributeWithSkillsNEW>> = mutableStateOf(listOf())
+
     init {
         viewModelScope.launch {
-            attr.value = attributeRepository.getAll()
-            skill.value = skillRepository.getAllNew()
+            attrWithSkills.value = attributeRepository.getAllWithSkills()
         }
     }
 }

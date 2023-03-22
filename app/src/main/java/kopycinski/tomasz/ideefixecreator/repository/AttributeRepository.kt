@@ -19,4 +19,7 @@ class AttributeRepository @Inject constructor(
 
     suspend fun getAll() =
         attributeDAONEW.getAll()
+
+    suspend fun getAllWithSkills() =
+        attributeDAONEW.getAllWithSkills()
 }

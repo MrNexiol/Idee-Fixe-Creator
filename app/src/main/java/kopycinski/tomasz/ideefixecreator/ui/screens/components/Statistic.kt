@@ -21,7 +21,8 @@ import kopycinski.tomasz.ideefixecreator.database.entity.recent.Statistic
 
 @Composable
 fun Statistic(
-    statistic: Statistic
+    statistic: Statistic,
+    tabLevel: Int = 0
 ) {
     var expanded by remember {
         mutableStateOf(false)
@@ -29,6 +30,7 @@ fun Statistic(
     Card(
         modifier = Modifier
             .padding(bottom = 4.dp)
+            .then(if (tabLevel != 0) Modifier.padding(start = 8.dp) else Modifier)
             .border(2.dp, MaterialTheme.colors.primary, MaterialTheme.shapes.large),
         contentColor = if (expanded) MaterialTheme.colors.background else MaterialTheme.colors.primary,
         backgroundColor = if (expanded) MaterialTheme.colors.primary else MaterialTheme.colors.background

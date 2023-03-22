@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import kopycinski.tomasz.ideefixecreator.database.entity.recent.AttributeNEW
+import kopycinski.tomasz.ideefixecreator.database.entity.recent.AttributeWithSkillsNEW
 
 @Dao
 interface AttributeDAONEW {
@@ -12,4 +13,7 @@ interface AttributeDAONEW {
 
     @Insert
     suspend fun insert(items: List<AttributeNEW>)
+
+    @Query("SELECT * FROM attributenew")
+    suspend fun getAllWithSkills(): List<AttributeWithSkillsNEW>
 }

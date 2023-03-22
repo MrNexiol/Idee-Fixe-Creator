@@ -12,11 +12,17 @@ import kopycinski.tomasz.ideefixecreator.viewmodel.DebugViewModel
 fun AttributesScreen(
     viewModel: DebugViewModel = hiltViewModel()
 ) {
-    val list by viewModel.attr
+    val listOfAll by viewModel.attrWithSkills
 
     LazyColumn {
-        items(list) {
-            Statistic(statistic = it)
+        for (element in listOfAll) {
+            item {
+                Statistic(statistic = element.attributeNEW)
+            }
+
+            items(element.skillList) {
+                Statistic(statistic = it, tabLevel = 1)
+            }
         }
     }
 }

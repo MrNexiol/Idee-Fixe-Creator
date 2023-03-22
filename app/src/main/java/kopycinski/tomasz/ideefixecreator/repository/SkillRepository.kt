@@ -20,7 +20,4 @@ class SkillRepository @Inject constructor(
 
     suspend fun insert(context: Context) =
         skillDAONEW.insert(SkillNEW.skillList(context))
-
-    suspend fun getAllNew() =
-        skillDAONEW.getAll()
 }

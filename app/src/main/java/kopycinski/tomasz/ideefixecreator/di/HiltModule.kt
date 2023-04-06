@@ -14,6 +14,7 @@ import kopycinski.tomasz.ideefixecreator.database.dao.CharacterSheetDao
 import kopycinski.tomasz.ideefixecreator.database.dao.SkillDao
 import kopycinski.tomasz.ideefixecreator.database.dao.SpecializationDao
 import kopycinski.tomasz.ideefixecreator.database.dao.recent.AttributeDAONEW
+import kopycinski.tomasz.ideefixecreator.database.dao.recent.CharacterSheetDAONEW
 import kopycinski.tomasz.ideefixecreator.database.dao.recent.SkillDAONEW
 import javax.inject.Singleton
 
@@ -63,4 +64,8 @@ object HiltModule {
     @Provides
     fun provideSkillDaoNew(appDatabase: AppDatabase): SkillDAONEW =
         appDatabase.skillDAONEW()
+
+    @Provides
+    fun provideCharacterSheetDaoNew(appDatabase: AppDatabase): CharacterSheetDAONEW =
+        appDatabase.characterSheetDAONEW()
 }

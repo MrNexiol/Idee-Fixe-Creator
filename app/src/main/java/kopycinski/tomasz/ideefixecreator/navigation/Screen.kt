@@ -11,5 +11,5 @@ sealed class Screen(val route: String) {
     }
 
     object AttributesScreen : Screen("attributes_screen")
-    object SkillScreen : Screen("skill_screen")
+    object CharacterSheetScreen : Screen("character_sheet_screen")
 }

@@ -10,7 +10,7 @@ import kopycinski.tomasz.ideefixecreator.ui.screens.*
 import kopycinski.tomasz.ideefixecreator.ui.screens.charactercreatescreen.CharacterCreateScreen
 import kopycinski.tomasz.ideefixecreator.ui.screens.charactershowscreen.CharacterShowScreen
 import kopycinski.tomasz.ideefixecreator.ui.screens.debug.AttributesScreen
-import kopycinski.tomasz.ideefixecreator.ui.screens.debug.SkillScreen
+import kopycinski.tomasz.ideefixecreator.ui.screens.debug.CharacterSheetScreen
 
 @Composable
 fun Navigation() {
@@ -56,8 +56,8 @@ fun Navigation() {
             AttributesScreen()
         }
 
-        composable(route = Screen.SkillScreen.route) {
-            SkillScreen()
+        composable(route = Screen.CharacterSheetScreen.route) {
+            CharacterSheetScreen()
         }
     }
 }

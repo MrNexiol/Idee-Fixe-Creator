@@ -10,6 +10,7 @@ import kopycinski.tomasz.ideefixecreator.database.dao.CharacterSheetDao
 import kopycinski.tomasz.ideefixecreator.database.dao.SkillDao
 import kopycinski.tomasz.ideefixecreator.database.dao.SpecializationDao
 import kopycinski.tomasz.ideefixecreator.database.dao.recent.AttributeDAONEW
+import kopycinski.tomasz.ideefixecreator.database.dao.recent.CharacterSheetDAONEW
 import kopycinski.tomasz.ideefixecreator.database.dao.recent.SkillDAONEW
 import kopycinski.tomasz.ideefixecreator.database.entity.Advantage
 import kopycinski.tomasz.ideefixecreator.database.entity.Attribute
@@ -19,6 +20,8 @@ import kopycinski.tomasz.ideefixecreator.database.entity.Skill
 import kopycinski.tomasz.ideefixecreator.database.entity.Specialization
 import kopycinski.tomasz.ideefixecreator.database.entity.recent.AdvantageNEW
 import kopycinski.tomasz.ideefixecreator.database.entity.recent.AttributeNEW
+import kopycinski.tomasz.ideefixecreator.database.entity.recent.CharacterSheetAttributeCrossRef
+import kopycinski.tomasz.ideefixecreator.database.entity.recent.CharacterSheetNEW
 import kopycinski.tomasz.ideefixecreator.database.entity.recent.SkillNEW
 
 @Database(entities = [
@@ -28,9 +31,11 @@ import kopycinski.tomasz.ideefixecreator.database.entity.recent.SkillNEW
     Skill::class,
     Specialization::class,
     Advantage::class,
+    AdvantageNEW::class,
     AttributeNEW::class,
-    SkillNEW::class,
-    AdvantageNEW::class
+    CharacterSheetNEW::class,
+    CharacterSheetAttributeCrossRef::class,
+    SkillNEW::class
 ], version = 1)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
@@ -42,4 +47,5 @@ abstract class AppDatabase : RoomDatabase() {
 
     abstract fun attributeDAONEW(): AttributeDAONEW
     abstract fun skillDAONEW(): SkillDAONEW
+    abstract fun characterSheetDAONEW(): CharacterSheetDAONEW
 }

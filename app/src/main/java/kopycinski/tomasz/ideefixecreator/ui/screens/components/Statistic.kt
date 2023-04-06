@@ -7,8 +7,13 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Card
 import androidx.compose.material.Divider
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -22,7 +27,8 @@ import kopycinski.tomasz.ideefixecreator.database.entity.recent.Statistic
 @Composable
 fun Statistic(
     statistic: Statistic,
-    tabLevel: Int = 0
+    tabLevel: Int = 0,
+    currentLevel: Int = 0
 ) {
     var expanded by remember {
         mutableStateOf(false)
@@ -43,6 +49,13 @@ fun Statistic(
                     .padding(8.dp)
             ) {
                 Text(modifier = Modifier.weight(1F), text = statistic.name)
+                IconButton(onClick = { /*TODO*/ }) {
+                    Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = "")
+                }
+                Text(text = currentLevel.toString())
+                IconButton(onClick = { /*TODO*/ }) {
+                    Icon(imageVector = Icons.Filled.Add, contentDescription = "")
+                }
             }
             if (expanded) {
                 Divider(color = MaterialTheme.colors.onPrimary)

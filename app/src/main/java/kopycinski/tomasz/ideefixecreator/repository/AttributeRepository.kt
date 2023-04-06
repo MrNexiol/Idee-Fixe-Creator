@@ -5,6 +5,7 @@ import kopycinski.tomasz.ideefixecreator.database.dao.AttributeDao
 import kopycinski.tomasz.ideefixecreator.database.dao.recent.AttributeDAONEW
 import kopycinski.tomasz.ideefixecreator.database.entity.Attribute
 import kopycinski.tomasz.ideefixecreator.database.entity.recent.AttributeNEW
+import kopycinski.tomasz.ideefixecreator.database.entity.recent.CharacterSheetAttributeCrossRef
 import javax.inject.Inject
 
 class AttributeRepository @Inject constructor(
@@ -22,4 +23,10 @@ class AttributeRepository @Inject constructor(
 
     suspend fun getAllWithSkills() =
         attributeDAONEW.getAllWithSkills()
+
+
+    suspend fun insertAttributeCharacterSheetCrossRef(item: CharacterSheetAttributeCrossRef) =
+        attributeDAONEW.insertCharacterSheetCrossRef(item)
+
+    suspend fun getAllByCharId(id: Long) = attributeDAONEW.getAllByID(id)
 }
